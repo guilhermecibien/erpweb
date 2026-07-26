@@ -10,7 +10,6 @@ export default defineConfig({
             input: resolve("resources/js/app.js"),
             output: {
                 entryFileNames: "js/app.js",
-                chunkFileNames: "js/chunks/[name]-[hash].js",
                 assetFileNames: (asset) => asset.name === "app.css"
                     ? "css/app.css"
                     : "assets/[name]-[hash][extname]",

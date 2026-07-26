@@ -14,6 +14,12 @@
     @else
     APP.USER_ID = '';
     @endauth
+    // TinyMCE (concatenado dentro de vendor.js) não consegue detectar sozinho
+    // onde estão seus skins/themes/plugins/icons (autodetecção olha a src de um
+    // <script> chamado "tinymce*.js", e vendor.js não bate com isso). Setado
+    // explicitamente antes de vendor.js carregar, apontando para os assets
+    // copiados em public/js/tinymce/ (ver scripts/build-vendor-js.mjs).
+    window.tinyMCEPreInit = { base: base_path + '/js/tinymce', suffix: '.min' };
 </script>
 
 <!--[if lt IE 9]>

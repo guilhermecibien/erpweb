@@ -1,13 +1,13 @@
 {
     "private": true,
     "scripts": {
-        "dev": "vite build --mode development",
+        "dev": "vite build --mode development && vite build --mode development --config vite.vendor.config.js && node scripts/build-vendor-js.mjs",
         "development": "npm run dev",
         "watch": "vite build --watch",
         "watch-poll": "vite build --watch --watcher.poll",
         "prod": "npm run build",
         "production": "npm run build",
-        "build": "vite build"
+        "build": "vite build && vite build --config vite.vendor.config.js && node scripts/build-vendor-js.mjs"
     },
     "devDependencies": {
         "axios": "^1.18.1",

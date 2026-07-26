@@ -1,0 +1,36 @@
+/**
+ * CSS do stack legado, vendorizado como código-fonte em resources/plugins/.
+ * Ver resources/js/vendor.js sobre por que este arquivo agora é gerado por
+ * build em vez de ser um artefato estático congelado.
+ */
+@import "../plugins/bootstrap/css/bootstrap.css";
+@import "../plugins/AdminLTE/css/AdminLTE.css";
+
+@import "../plugins/AdminLTE/plugins/select2/select2.min.css";
+@import "../plugins/AdminLTE/plugins/daterangepicker/daterangepicker.css";
+@import "../plugins/AdminLTE/plugins/datepicker/bootstrap-datepicker.min.css";
+@import "../plugins/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css";
+@import "../plugins/AdminLTE/plugins/seiyria-bootstrap-slider/css/bootstrap-slider.min.css";
+@import "../plugins/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css";
+@import "../plugins/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css";
+@import "../plugins/AdminLTE/plugins/pace/pace.min.css";
+@import "../plugins/AdminLTE/plugins/DataTables/datatables.min.css";
+@import "../plugins/icheck/skins/square/blue.css";
+
+@import "../plugins/jquery-ui/jquery-ui.min.css";
+@import "../plugins/jquery-ui/jquery-ui.theme.min.css";
+@import "../plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.css";
+@import "../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css";
+@import "../plugins/bootstrap-fileinput/fileinput.min.css";
+@import "../plugins/bootstrap-tour/bootstrap-tour.min.css";
+@import "../plugins/calculator/calculator.css";
+@import "../plugins/css-toggle-switch/toggle-switch.css";
+@import "../plugins/dropzone/dropzone.min.css";
+@import "../plugins/jKanban/jKanbanBoard.css";
+@import "../plugins/jquery.steps/jquery.steps.css";
+@import "../plugins/patternlock/patternlock.min.css";
+@import "../plugins/toastr/toastr.min.css";
+@import "../plugins/fullcalendar/fullcalendar.min.css";
+@import "../plugins/fullcalendar/fullcalendar.print.min.css";
+
+@import "../plugins/custom.css";

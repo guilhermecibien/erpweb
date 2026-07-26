@@ -154,8 +154,8 @@ Allows for using regular expressions as a mask
                         cbuffer.splice(pos, 0, chrs);
                         var bufferStr = cbuffer.join('');
                         for (var i = 0; i < opts.regexTokens.length; i++) {
-                            var regexToken = opts.regexTokens[i];
-                            isValid = validateRegexToken(regexToken, regexToken["isGroup"]);
+                            var currentRegexToken = opts.regexTokens[i];
+                            isValid = validateRegexToken(currentRegexToken, currentRegexToken["isGroup"]);
                             if (isValid) break;
                         }
 
