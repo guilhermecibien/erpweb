@@ -1,0 +1,14 @@
+.git
+.github
+.agents
+.codex
+.env
+.env.*
+!.env.example
+node_modules
+vendor
+storage/logs
+storage/framework
+public/uploads
+public/remessas
+bd.sql
