@@ -21,8 +21,10 @@
       <div class="col-md-12">
         <div class="checkbox">
           <label>
-            {!! Form::checkbox('permissions[]', $module_permission['value'], in_array($module_permission['value'], $module_role_permissions), 
-            [ 'class' => 'input-icheck']); !!} {{ $module_permission['label'] }}
+            @php
+            $__f1 = ['name' => 'permissions[]', 'value' => $module_permission['value'], 'checked' => in_array($module_permission['value'], $module_role_permissions), 'options' => [ 'class' => 'input-icheck']];
+            @endphp
+            <x-form.checkbox :name="$__f1['name']" :value="$__f1['value']" :checked="$__f1['checked']" :options="$__f1['options']" /> {{ $module_permission['label'] }}
           </label>
         </div>
       </div>

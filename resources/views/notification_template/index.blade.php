@@ -10,7 +10,10 @@
 
 <!-- Main content -->
 <section class="content">
-    {!! Form::open(['url' => action('NotificationTemplateController@store'), 'method' => 'post' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('NotificationTemplateController@store'), 'method' => 'post' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
 
     <div class="row">
         <div class="col-md-12">
@@ -44,7 +47,7 @@
             <button type="submit" class="btn btn-danger pull-right">@lang('messages.save')</button>
         </div>
     </div>
-    {!! Form::close() !!}
+    <x-form.close />
 
 </section>
 <!-- /.content -->

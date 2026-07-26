@@ -9,9 +9,18 @@
 				<div class="row">
 					<div class="col-xs-12">
 				        <div class="form-group">
-				            {!! Form::label('additional_notes', __('lang_v1.suspend_note') . ':' ) !!}
-				            {!! Form::textarea('additional_notes', !empty($transaction->additional_notes) ? $transaction->additional_notes : null, ['class' => 'form-control','rows' => '4']); !!}
-				            {!! Form::hidden('is_suspend', 0, ['id' => 'is_suspend']); !!}
+				            @php
+				            $__f1 = ['name' => 'additional_notes', 'value' => __('lang_v1.suspend_note') . ':'];
+				            @endphp
+				            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+				            @php
+				            $__f2 = ['name' => 'additional_notes', 'value' => !empty($transaction->additional_notes) ? $transaction->additional_notes : null, 'options' => ['class' => 'form-control','rows' => '4']];
+				            @endphp
+				            <x-form.textarea :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
+				            @php
+				            $__f3 = ['name' => 'is_suspend', 'value' => 0, 'options' => ['id' => 'is_suspend']];
+				            @endphp
+				            <x-form.input type="hidden" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
 				        </div>
 				    </div>
 				</div>

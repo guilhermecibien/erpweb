@@ -10,8 +10,14 @@
       <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          {!! Form::label('exp_date', __( 'product.exp_date' ) . ':*') !!}
-          {!! Form::text('exp_date', @format_date($purchase_line->exp_date), ['class' => 'form-control', 'required', 'id' => 'exp_date_expiry_modal', 'readonly']); !!}
+          @php
+          $__f1 = ['name' => 'exp_date', 'value' => __( 'product.exp_date' ) . ':*'];
+          @endphp
+          <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+          @php
+          $__f2 = ['name' => 'exp_date', 'value' => \Carbon::createFromTimestamp(strtotime($purchase_line->exp_date))->format(session('business.date_format')), 'options' => ['class' => 'form-control', 'required', 'id' => 'exp_date_expiry_modal', 'readonly']];
+          @endphp
+          <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
           <i><p class="help-block">@lang('lang_v1.expiry_date_will_be_changed_in_pl')</p></i>
         </div>
       </div>

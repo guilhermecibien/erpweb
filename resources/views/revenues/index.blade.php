@@ -15,28 +15,51 @@
             @component('components.filters', ['title' => __('report.filters')])
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('location_id',  __('purchase.business_location') . ':') !!}
-                        {!! Form::select('location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%']); !!}
+                        @php
+                        $__f1 = ['name' => 'location_id', 'value' => __('purchase.business_location') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                        @php
+                        $__f2 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%']];
+                        @endphp
+                        <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
                     </div>
                 </div>
                 
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('expense_category_id', 'Categoria:') !!}
-                        {!! Form::select('expense_category_id', $categories, null, ['placeholder' =>
-                        __('report.all'), 'class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'expense_category_id']); !!}
+                        @php
+                        $__f3 = ['name' => 'expense_category_id', 'value' => 'Categoria:'];
+                        @endphp
+                        <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+                        @php
+                        $__f4 = ['name' => 'expense_category_id', 'list' => $categories, 'selected' => null, 'options' => ['placeholder' => __('report.all'), 'class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'expense_category_id']];
+                        @endphp
+                        <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('expense_date_range', __('report.date_range') . ':') !!}
-                        {!! Form::text('date_range', null, ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'expense_date_range', 'readonly']); !!}
+                        @php
+                        $__f5 = ['name' => 'expense_date_range', 'value' => __('report.date_range') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
+                        @php
+                        $__f6 = ['name' => 'date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'expense_date_range', 'readonly']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('expense_payment_status',  __('purchase.payment_status') . ':') !!}
-                        {!! Form::select('expense_payment_status', ['1' => 'Recebido', '-1' => 'Pendente'], null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]); !!}
+                        @php
+                        $__f7 = ['name' => 'expense_payment_status', 'value' => __('purchase.payment_status') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f7['name']" :value="$__f7['value']" />
+                        @php
+                        $__f8 = ['name' => 'expense_payment_status', 'list' => ['1' => 'Recebido', '-1' => 'Pendente'], 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]];
+                        @endphp
+                        <x-form.select :name="$__f8['name']" :list="$__f8['list']" :selected="$__f8['selected']" :options="$__f8['options']" />
                     </div>
                 </div>
             @endcomponent

@@ -5,7 +5,10 @@
 				<span class="input-group-addon">
 					<i class="fa fa-search"></i>
 				</span>
-				{!! Form::text('search_product', null, ['class' => 'form-control mousetrap', 'id' => 'search_product', 'placeholder' => __('lang_v1.search_product_placeholder')]); !!}
+				@php
+				$__f1 = ['name' => 'search_product', 'value' => null, 'options' => ['class' => 'form-control mousetrap', 'id' => 'search_product', 'placeholder' => __('lang_v1.search_product_placeholder')]];
+				@endphp
+				<x-form.input type="text" :name="$__f1['name']" :value="$__f1['value']" :options="$__f1['options']" />
 			</div>
 		</div>
 	</div>
@@ -70,14 +73,29 @@
 		</div>
 		<div class="col-sm-12 col-sm-offset-4">
 			<div class="col-sm-4">
-				{!! Form::label('margin', __('product.profit_percent')) .":" !!}
-				{!! Form::text('profit_percent', @num_format($profit_percent), ['class' => 'form-control input-sm input_number mousetrap', 'id' => 'margin']) !!}
+				@php
+				$__f_margin = ['name' => 'margin', 'value' => __('product.profit_percent')];
+				@endphp
+				<x-form.label :name="$__f_margin['name']" :value="$__f_margin['value']" />:
+				@php
+				$__f2 = ['name' => 'profit_percent', 'value' => number_format($profit_percent, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm input_number mousetrap', 'id' => 'margin']];
+				@endphp
+				<x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
 			</div>
 			<div class="col-sm-4">
-				{!! Form::label('selling_price', __('product.default_selling_price')). ":"!!}
-				{!! Form::text('selling_price', @num_format(0), ['class' => 'form-control input-sm input_number mousetrap']) !!}
+				@php
+				$__f_selling_price = ['name' => 'selling_price', 'value' => __('product.default_selling_price')];
+				@endphp
+				<x-form.label :name="$__f_selling_price['name']" :value="$__f_selling_price['value']" />:
+				@php
+				$__f3 = ['name' => 'selling_price', 'value' => number_format(0, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm input_number mousetrap']];
+				@endphp
+				<x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
 
-				{!! Form::hidden('selling_price_inc_tax', @num_format(0), ['class' => 'input_number mousetrap', 'id' => 'selling_price_inc_tax']) !!}
+				@php
+				$__f4 = ['name' => 'selling_price_inc_tax', 'value' => number_format(0, 2, ',', '.'), 'options' => ['class' => 'input_number mousetrap', 'id' => 'selling_price_inc_tax']];
+				@endphp
+				<x-form.input type="hidden" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 			</div>
 		</div>
 	</div>

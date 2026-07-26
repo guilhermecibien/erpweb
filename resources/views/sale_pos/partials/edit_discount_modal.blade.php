@@ -20,12 +20,18 @@
 					</div>
 					<div class="col-md-6">
 				        <div class="form-group">
-				            {!! Form::label('discount_type_modal', __('sale.discount_type') . ':*' ) !!}
+				            @php
+				            $__f1 = ['name' => 'discount_type_modal', 'value' => __('sale.discount_type') . ':*'];
+				            @endphp
+				            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
 				            <div class="input-group">
 				                <span class="input-group-addon">
 				                    <i class="fa fa-info"></i>
 				                </span>
-				                {!! Form::select('discount_type_modal', ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], $discount_type , ['class' => 'form-control','placeholder' => __('messages.please_select'), 'required']); !!}
+				                @php
+				                $__f2 = ['name' => 'discount_type_modal', 'list' => ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], 'selected' => $discount_type, 'options' => ['class' => 'form-control','placeholder' => __('messages.please_select'), 'required']];
+				                @endphp
+				                <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 				            </div>
 				        </div>
 				    </div>
@@ -37,12 +43,18 @@
 				    @endphp
 				    <div class="col-md-6">
 				        <div class="form-group">
-				            {!! Form::label('discount_amount_modal', __('sale.discount_amount') . ':*' ) !!}
+				            @php
+				            $__f3 = ['name' => 'discount_amount_modal', 'value' => __('sale.discount_amount') . ':*'];
+				            @endphp
+				            <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
 				            <div class="input-group">
 				                <span class="input-group-addon">
 				                    <i class="fa fa-info"></i>
 				                </span>
-				                {!! Form::text('discount_amount_modal', @num_format($sales_discount), ['class' => 'form-control input_number', 'data-max-discount' => $max_discount, 'data-max-discount-error_msg' => __('lang_v1.max_discount_error_msg', ['discount' => $max_discount != '' ? @num_format($max_discount) : '']) ]); !!}
+				                @php
+				                $__f4 = ['name' => 'discount_amount_modal', 'value' => number_format($sales_discount, 2, ',', '.'), 'options' => ['class' => 'form-control input_number', 'data-max-discount' => $max_discount, 'data-max-discount-error_msg' => __('lang_v1.max_discount_error_msg', ['discount' => $max_discount != '' ? number_format($max_discount, 2, ',', '.') : '']) ]];
+				                @endphp
+				                <x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 				            </div>
 				        </div>
 				    </div>
@@ -55,12 +67,18 @@
 					</div>
 					<div class="col-md-6">
 				        <div class="form-group">
-				            {!! Form::label('rp_redeemed_modal', __('lang_v1.redeemed') . ':' ) !!}
+				            @php
+				            $__f5 = ['name' => 'rp_redeemed_modal', 'value' => __('lang_v1.redeemed') . ':'];
+				            @endphp
+				            <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
 				            <div class="input-group">
 				                <span class="input-group-addon">
 				                    <i class="fa fa-gift"></i>
 				                </span>
-				                {!! Form::number('rp_redeemed_modal', $rp_redeemed, ['class' => 'form-control', 'data-amount_per_unit_point' => session('business.redeem_amount_per_unit_rp'), 'data-max_points' => $max_available, 'min' => 0, 'data-min_order_total' => session('business.min_order_total_for_redeem') ]); !!}
+				                @php
+				                $__f6 = ['name' => 'rp_redeemed_modal', 'value' => $rp_redeemed, 'options' => ['class' => 'form-control', 'data-amount_per_unit_point' => session('business.redeem_amount_per_unit_rp'), 'data-max_points' => $max_available, 'min' => 0, 'data-min_order_total' => session('business.min_order_total_for_redeem') ]];
+				                @endphp
+				                <x-form.input type="number" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
 				                <input type="hidden" id="rp_name" value="{{session('business.rp_name')}}">
 				            </div>
 				        </div>

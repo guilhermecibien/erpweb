@@ -21,25 +21,40 @@
 				@endphp
 
 				@if(!empty($discount))
-					{!! Form::hidden("products[$row_count][discount_id]", $discount->id); !!}
+					@php
+					$__f1 = ['name' => "products[$row_count][discount_id]", 'value' => $discount->id];
+					@endphp
+					<x-form.input type="hidden" :name="$__f1['name']" :value="$__f1['value']" />
 				@endif
 				<div class="form-group col-xs-12 col-sm-6 @if(!$edit_discount) hide @endif">
 					<label>Tipo de desconto</label>
-						{!! Form::select("products[$row_count][line_discount_type]", ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], $discount_type , ['class' => 'form-control row_discount_type']); !!}
+						@php
+						$__f2 = ['name' => "products[$row_count][line_discount_type]", 'list' => ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], 'selected' => $discount_type, 'options' => ['class' => 'form-control row_discount_type']];
+						@endphp
+						<x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 					@if(!empty($discount))
 						<p class="help-block">{!! __('lang_v1.applied_discount_text', ['discount_name' => $discount->name, 'starts_at' => $discount->formated_starts_at, 'ends_at' => $discount->formated_ends_at]) !!}</p>
 					@endif
 				</div>
 				<div class="form-group col-xs-12 col-sm-6 @if(!$edit_discount) hide @endif">
 					<label>@lang('sale.discount_amount')</label>
-						{!! Form::text("products[$row_count][line_discount_amount]", @num_format($discount_amount), ['class' => 'form-control input_number row_discount_amount']); !!}
+						@php
+						$__f3 = ['name' => "products[$row_count][line_discount_amount]", 'value' => number_format($discount_amount, 2, ',', '.'), 'options' => ['class' => 'form-control input_number row_discount_amount']];
+						@endphp
+						<x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
 				</div>
 				<div class="form-group col-xs-12 {{$hide_tax}}">
 					<label>@lang('sale.tax')</label>
 
-					{!! Form::hidden("products[$row_count][item_tax]", @num_format($item_tax), ['class' => 'item_tax']); !!}
+					@php
+					$__f4 = ['name' => "products[$row_count][item_tax]", 'value' => number_format($item_tax, 2, ',', '.'), 'options' => ['class' => 'item_tax']];
+					@endphp
+					<x-form.input type="hidden" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 		
-					{!! Form::select("products[$row_count][tax_id]", $tax_dropdown['tax_rates'], $tax_id, ['placeholder' => 'Select', 'class' => 'form-control tax_id'], $tax_dropdown['attributes']); !!}
+					@php
+					$__f5 = ['name' => "products[$row_count][tax_id]", 'list' => $tax_dropdown['tax_rates'], 'selected' => $tax_id, 'options' => ['placeholder' => 'Select', 'class' => 'form-control tax_id'], 'optionsAttributes' => $tax_dropdown['attributes']];
+					@endphp
+					<x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" :options-attributes="$__f5['optionsAttributes']" />
 				</div>
 				@php
 					$warranty_id = !empty($action) && $action == 'edit' && !empty($product->warranties->first())  ? $product->warranties->first()->id : $product->warranty_id;
@@ -47,7 +62,10 @@
 				@if(!empty($warranties))
 					<div class="form-group col-xs-12">
 						<label>@lang('lang_v1.warranty')</label>
-						{!! Form::select("products[$row_count][warranty_id]", $warranties, $warranty_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control']); !!}
+						@php
+						$__f6 = ['name' => "products[$row_count][warranty_id]", 'list' => $warranties, 'selected' => $warranty_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control']];
+						@endphp
+						<x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
 					</div>
 				@endif
 				<div class="form-group col-xs-12">

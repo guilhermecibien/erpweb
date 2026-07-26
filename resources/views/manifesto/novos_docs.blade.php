@@ -40,7 +40,10 @@
         <div class="col-sm-2 col-lg-3">
             <br>
             <div class="form-group" style="margin-top: 8px;">
-                {!! Form::select('select_location_id', $business_locations, $select_location_id, ['class' => 'form-control input-sm', 'placeholder' => 'Selecione o local','id' => 'select_location_id', '', 'autofocus'], $bl_attributes); !!}
+                @php
+                $__f1 = ['name' => 'select_location_id', 'list' => $business_locations, 'selected' => $select_location_id, 'options' => ['class' => 'form-control input-sm', 'placeholder' => 'Selecione o local','id' => 'select_location_id', '', 'autofocus'], 'optionsAttributes' => $bl_attributes];
+                @endphp
+                <x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" :options-attributes="$__f1['optionsAttributes']" />
 
             </div>
 

@@ -10,12 +10,18 @@
 				<div class="row">
 					<div class="col-md-6">
 				        <div class="form-group">
-				            {!! Form::label('order_tax_modal', __('sale.order_tax') . ':*' ) !!}
+				            @php
+				            $__f1 = ['name' => 'order_tax_modal', 'value' => __('sale.order_tax') . ':*'];
+				            @endphp
+				            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
 				            <div class="input-group">
 				                <span class="input-group-addon">
 				                    <i class="fa fa-info"></i>
 				                </span>
-				                {!! Form::select('order_tax_modal', $taxes['tax_rates'], $selected_tax, ['placeholder' => __('messages.please_select'), 'class' => 'form-control'], $taxes['attributes']); !!}
+				                @php
+				                $__f2 = ['name' => 'order_tax_modal', 'list' => $taxes['tax_rates'], 'selected' => $selected_tax, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control'], 'optionsAttributes' => $taxes['attributes']];
+				                @endphp
+				                <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" :options-attributes="$__f2['optionsAttributes']" />
 				            </div>
 				        </div>
 				    </div>

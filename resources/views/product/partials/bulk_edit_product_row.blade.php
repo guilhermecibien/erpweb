@@ -2,19 +2,34 @@
 	<tr class="bg-green">
 		<td>{{$product->name}} ({{$product->sku}})</td>
 		<td>
-			{!! Form::select('products[' . $product->id . '][category_id]', $categories, $product->category_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm category_id', 'style' => 'width: 100%;']); !!}
+			@php
+			$__f1 = ['name' => 'products[' . $product->id . '][category_id]', 'list' => $categories, 'selected' => $product->category_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm category_id', 'style' => 'width: 100%;']];
+			@endphp
+			<x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
 		</td>
 		<td>
-			{!! Form::select('products[' . $product->id . '][sub_category_id]', !empty($sub_categories[$product->category_id]) ? $sub_categories[$product->category_id] : [], $product->sub_category_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm sub_category_id', 'style' => 'width: 100%;']); !!}
+			@php
+			$__f2 = ['name' => 'products[' . $product->id . '][sub_category_id]', 'list' => !empty($sub_categories[$product->category_id]) ? $sub_categories[$product->category_id] : [], 'selected' => $product->sub_category_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm sub_category_id', 'style' => 'width: 100%;']];
+			@endphp
+			<x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 		</td>
 		<td>
-			{!! Form::select('products[' . $product->id . '][brand_id]', $brands, $product->brand_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm', 'style' => 'width: 100%;']); !!}
+			@php
+			$__f3 = ['name' => 'products[' . $product->id . '][brand_id]', 'list' => $brands, 'selected' => $product->brand_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm', 'style' => 'width: 100%;']];
+			@endphp
+			<x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
 		</td>
 		<td>
-			{!! Form::select('products[' . $product->id . '][tax]', $taxes, $product->tax, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm row_tax', 'style' => 'width: 100%;'],$tax_attributes); !!}
+			@php
+			$__f4 = ['name' => 'products[' . $product->id . '][tax]', 'list' => $taxes, 'selected' => $product->tax, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2 input-sm row_tax', 'style' => 'width: 100%;'], 'optionsAttributes' => $tax_attributes];
+			@endphp
+			<x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" :options-attributes="$__f4['optionsAttributes']" />
 		</td>
 		<td>
-			{!! Form::select('products[' . $product->id . '][product_locations][]', $business_locations, $product->product_locations->pluck('id'), ['class' => 'form-control select2', 'multiple']); !!}
+			@php
+			$__f5 = ['name' => 'products[' . $product->id . '][product_locations][]', 'list' => $business_locations, 'selected' => $product->product_locations->pluck('id'), 'options' => ['class' => 'form-control select2', 'multiple']];
+			@endphp
+			<x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
 		</td>
 	<tr>
 	<tr>

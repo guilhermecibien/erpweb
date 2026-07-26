@@ -13,59 +13,92 @@
     <div class="row">
         <div class="col-md-12">
            @component('components.filters', ['title' => __('report.filters')])
-              {!! Form::open(['url' => '#', 'method' => 'get', 'id' => 'sell_payment_report_form' ]) !!}
+              @php
+              $__f1 = ['options' => ['url' => '#', 'method' => 'get', 'id' => 'sell_payment_report_form' ]];
+              @endphp
+              <x-form.open :options="$__f1['options']" />
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('customer_id', __('contact.customer') . ':') !!}
+                        @php
+                        $__f2 = ['name' => 'customer_id', 'value' => __('contact.customer') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-user"></i>
                             </span>
-                            {!! Form::select('customer_id', $customers, null, ['class' => 'form-control select2', 'placeholder' => __('messages.all'), 'required']); !!}
+                            @php
+                            $__f3 = ['name' => 'customer_id', 'list' => $customers, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.all'), 'required']];
+                            @endphp
+                            <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('location_id', __('purchase.business_location').':') !!}
+                        @php
+                        $__f4 = ['name' => 'location_id', 'value' => __('purchase.business_location').':'];
+                        @endphp
+                        <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-map-marker"></i>
                             </span>
-                            {!! Form::select('location_id', $business_locations, null, ['class' => 'form-control select2', 'placeholder' => __('messages.all'), 'required']); !!}
+                            @php
+                            $__f5 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.all'), 'required']];
+                            @endphp
+                            <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('payment_types', __('lang_v1.payment_method').':') !!}
+                        @php
+                        $__f6 = ['name' => 'payment_types', 'value' => __('lang_v1.payment_method').':'];
+                        @endphp
+                        <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fas fa-money-bill-alt"></i>
                             </span>
-                            {!! Form::select('payment_types', $payment_types, null, ['class' => 'form-control select2', 'placeholder' => __('messages.all'), 'required']); !!}
+                            @php
+                            $__f7 = ['name' => 'payment_types', 'list' => $payment_types, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.all'), 'required']];
+                            @endphp
+                            <x-form.select :name="$__f7['name']" :list="$__f7['list']" :selected="$__f7['selected']" :options="$__f7['options']" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('customer_group_filter', __('lang_v1.customer_group').':') !!}
+                        @php
+                        $__f8 = ['name' => 'customer_group_filter', 'value' => __('lang_v1.customer_group').':'];
+                        @endphp
+                        <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
                             </span>
-                            {!! Form::select('customer_group_filter', $customer_groups, null, ['class' => 'form-control select2']); !!}
+                            @php
+                            $__f9 = ['name' => 'customer_group_filter', 'list' => $customer_groups, 'selected' => null, 'options' => ['class' => 'form-control select2']];
+                            @endphp
+                            <x-form.select :name="$__f9['name']" :list="$__f9['list']" :selected="$__f9['selected']" :options="$__f9['options']" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
 
-                        {!! Form::label('spr_date_filter', __('report.date_range') . ':') !!}
-                        {!! Form::text('date_range', null, ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'spr_date_filter', 'readonly']); !!}
+                        @php
+                        $__f10 = ['name' => 'spr_date_filter', 'value' => __('report.date_range') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f10['name']" :value="$__f10['value']" />
+                        @php
+                        $__f11 = ['name' => 'date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'spr_date_filter', 'readonly']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f11['name']" :value="$__f11['value']" :options="$__f11['options']" />
                     </div>
                 </div>
-                {!! Form::close() !!}
+                <x-form.close />
             @endcomponent
         </div>
     </div>

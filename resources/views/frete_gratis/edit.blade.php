@@ -11,7 +11,10 @@
 
 <!-- Main content -->
 <section class="content">
-  {!! Form::open(['url' => action('CidadeFreteGratisController@update'), 'method' => 'post', 'id' => 'natureza_add_form' ]) !!}
+  @php
+  $__f1 = ['options' => ['url' => action('CidadeFreteGratisController@update'), 'method' => 'post', 'id' => 'natureza_add_form' ]];
+  @endphp
+  <x-form.open :options="$__f1['options']" />
   <div class="row">
     <div class="col-md-12">
       @component('components.widget')
@@ -20,16 +23,28 @@
       
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('nome', 'Cidade' . ':*') !!}
-          {!! Form::text('nome', $city->nome, ['class' => 'form-control', 'required', 'placeholder' => 'Cidade' ]); !!}
+          @php
+          $__f2 = ['name' => 'nome', 'value' => 'Cidade' . ':*'];
+          @endphp
+          <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+          @php
+          $__f3 = ['name' => 'nome', 'value' => $city->nome, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Cidade' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
         </div>
       </div>
 
       <div class="col-md-2 customer_fields">
         <div class="form-group">
 
-          {!! Form::label('uf', 'UF' . ':') !!}
-          {!! Form::select('uf', App\Models\City::ufs(), $city->uf, ['id' => 'uf', 'class' => 'form-control select2', 'required']); !!}
+          @php
+          $__f4 = ['name' => 'uf', 'value' => 'UF' . ':'];
+          @endphp
+          <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+          @php
+          $__f5 = ['name' => 'uf', 'list' => App\Models\City::ufs(), 'selected' => $city->uf, 'options' => ['id' => 'uf', 'class' => 'form-control select2', 'required']];
+          @endphp
+          <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
         </div>
       </div>
 
@@ -50,7 +65,7 @@
       <button type="submit" class="btn btn-primary pull-right" id="submit_user_button">@lang( 'messages.save' )</button>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
   @stop
   @section('javascript')
   <script type="text/javascript">

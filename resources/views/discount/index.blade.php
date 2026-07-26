@@ -46,10 +46,19 @@
                     <tr>
                         <td colspan="9">
                         <div style="display: flex; width: 100%;">
-                            {!! Form::open(['url' => action('DiscountController@massDeactivate'), 'method' => 'post', 'id' => 'mass_deactivate_form' ]) !!}
-                            {!! Form::hidden('selected_discounts', null, ['id' => 'selected_discounts']); !!}
-                            {!! Form::submit(__('lang_v1.deactivate_selected'), array('class' => 'btn btn-xs btn-warning', 'id' => 'deactivate-selected')) !!}
-                            {!! Form::close() !!}
+                            @php
+                            $__f1 = ['options' => ['url' => action('DiscountController@massDeactivate'), 'method' => 'post', 'id' => 'mass_deactivate_form' ]];
+                            @endphp
+                            <x-form.open :options="$__f1['options']" />
+                            @php
+                            $__f2 = ['name' => 'selected_discounts', 'value' => null, 'options' => ['id' => 'selected_discounts']];
+                            @endphp
+                            <x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
+                            @php
+                            $__f3 = ['value' => __('lang_v1.deactivate_selected'), 'options' => array('class' => 'btn btn-xs btn-warning', 'id' => 'deactivate-selected')];
+                            @endphp
+                            <x-form.submit :value="$__f3['value']" :options="$__f3['options']" />
+                            <x-form.close />
                             </div>
                         </td>
                     </tr>

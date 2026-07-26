@@ -33,9 +33,15 @@
 					</div>
 					<input type="hidden" id="item_addition_method" value="{{$business_details->item_addition_method}}">
 				@endslot
-				{!! Form::open(['url' => action('SellPosController@store'), 'method' => 'post', 'id' => 'add_pos_sell_form' ]) !!}
+				@php
+				$__f1 = ['options' => ['url' => action('SellPosController@store'), 'method' => 'post', 'id' => 'add_pos_sell_form' ]];
+				@endphp
+				<x-form.open :options="$__f1['options']" />
 
-				{!! Form::hidden('location_id', $default_location->id, ['id' => 'location_id', 'data-receipt_printer_type' => !empty($default_location->receipt_printer_type) ? $default_location->receipt_printer_type : 'browser', 'data-default_accounts' => $default_location->default_payment_accounts]); !!}
+				@php
+				$__f2 = ['name' => 'location_id', 'value' => $default_location->id, 'options' => ['id' => 'location_id', 'data-receipt_printer_type' => !empty($default_location->receipt_printer_type) ? $default_location->receipt_printer_type : 'browser', 'data-default_accounts' => $default_location->default_payment_accounts]];
+				@endphp
+				<x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
 
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -43,12 +49,18 @@
 						@if(!empty($pos_settings['enable_transaction_date']))
 							<div class="col-md-4 col-sm-6">
 								<div class="form-group">
-									{!! Form::label('transaction_date', __('sale.sale_date') . ':*') !!}
+									@php
+									$__f3 = ['name' => 'transaction_date', 'value' => __('sale.sale_date') . ':*'];
+									@endphp
+									<x-form.label :name="$__f3['name']" :value="$__f3['value']" />
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</span>
-										{!! Form::text('transaction_date', $default_datetime, ['class' => 'form-control', 'readonly', 'required']); !!}
+										@php
+										$__f4 = ['name' => 'transaction_date', 'value' => $default_datetime, 'options' => ['class' => 'form-control', 'readonly', 'required']];
+										@endphp
+										<x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 									</div>
 								</div>
 							</div>
@@ -60,7 +72,10 @@
 										<span class="input-group-addon">
 											<i class="fas fa-exchange-alt"></i>
 										</span>
-										{!! Form::text('exchange_rate', config('constants.currency_exchange_rate'), ['class' => 'form-control input-sm input_number', 'placeholder' => __('lang_v1.currency_exchange_rate'), 'id' => 'exchange_rate']); !!}
+										@php
+										$__f5 = ['name' => 'exchange_rate', 'value' => config('constants.currency_exchange_rate'), 'options' => ['class' => 'form-control input-sm input_number', 'placeholder' => __('lang_v1.currency_exchange_rate'), 'id' => 'exchange_rate']];
+										@endphp
+										<x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
 									</div>
 								</div>
 							</div>
@@ -76,8 +91,14 @@
 											reset($price_groups);
 											$selected_price_group = !empty($default_price_group_id) && array_key_exists($default_price_group_id, $price_groups) ? $default_price_group_id : null;
 										@endphp
-										{!! Form::hidden('hidden_price_group', key($price_groups), ['id' => 'hidden_price_group']) !!}
-										{!! Form::select('price_group', $price_groups, $selected_price_group, ['class' => 'form-control select2', 'id' => 'price_group', 'style' => 'width: 100%;']); !!}
+										@php
+										$__f6 = ['name' => 'hidden_price_group', 'value' => key($price_groups), 'options' => ['id' => 'hidden_price_group']];
+										@endphp
+										<x-form.input type="hidden" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
+										@php
+										$__f7 = ['name' => 'price_group', 'list' => $price_groups, 'selected' => $selected_price_group, 'options' => ['class' => 'form-control select2', 'id' => 'price_group', 'style' => 'width: 100%;']];
+										@endphp
+										<x-form.select :name="$__f7['name']" :list="$__f7['list']" :selected="$__f7['selected']" :options="$__f7['options']" />
 										<span class="input-group-addon">
 											@show_tooltip(__('lang_v1.price_group_help_text'))
 										</span> 
@@ -88,10 +109,16 @@
 							@php
 								reset($price_groups);
 							@endphp
-							{!! Form::hidden('price_group', key($price_groups), ['id' => 'price_group']) !!}
+							@php
+							$__f8 = ['name' => 'price_group', 'value' => key($price_groups), 'options' => ['id' => 'price_group']];
+							@endphp
+							<x-form.input type="hidden" :name="$__f8['name']" :value="$__f8['value']" :options="$__f8['options']" />
 						@endif
 						@if(!empty($default_price_group_id))
-							{!! Form::hidden('default_price_group', $default_price_group_id, ['id' => 'default_price_group']) !!}
+							@php
+							$__f9 = ['name' => 'default_price_group', 'value' => $default_price_group_id, 'options' => ['id' => 'default_price_group']];
+							@endphp
+							<x-form.input type="hidden" :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
 						@endif
 
 						@if(in_array('types_of_service', $enabled_modules) && !empty($types_of_service))
@@ -101,9 +128,15 @@
 										<span class="input-group-addon">
 											<i class="fa fa-external-link text-primary service_modal_btn"></i>
 										</span>
-										{!! Form::select('types_of_service_id', $types_of_service, null, ['class' => 'form-control', 'id' => 'types_of_service_id', 'style' => 'width: 100%;', 'placeholder' => __('lang_v1.select_types_of_service')]); !!}
+										@php
+										$__f10 = ['name' => 'types_of_service_id', 'list' => $types_of_service, 'selected' => null, 'options' => ['class' => 'form-control', 'id' => 'types_of_service_id', 'style' => 'width: 100%;', 'placeholder' => __('lang_v1.select_types_of_service')]];
+										@endphp
+										<x-form.select :name="$__f10['name']" :list="$__f10['list']" :selected="$__f10['selected']" :options="$__f10['options']" />
 
-										{!! Form::hidden('types_of_service_price_group', null, ['id' => 'types_of_service_price_group']) !!}
+										@php
+										$__f11 = ['name' => 'types_of_service_price_group', 'value' => null, 'options' => ['id' => 'types_of_service_price_group']];
+										@endphp
+										<x-form.input type="hidden" :name="$__f11['name']" :value="$__f11['value']" :options="$__f11['options']" />
 
 										<span class="input-group-addon">
 											@show_tooltip(__('lang_v1.types_of_service_help'))
@@ -119,7 +152,10 @@
 							<div class="col-md-4 pull-right col-sm-6">
 								<div class="checkbox">
 									<label>
-						              {!! Form::checkbox('is_recurring', 1, false, ['class' => 'input-icheck', 'id' => 'is_recurring']); !!} @lang('lang_v1.subscribe')?
+						              @php
+						              $__f12 = ['name' => 'is_recurring', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck', 'id' => 'is_recurring']];
+						              @endphp
+						              <x-form.checkbox :name="$__f12['name']" :value="$__f12['value']" :checked="$__f12['checked']" :options="$__f12['options']" /> @lang('lang_v1.subscribe')?
 						            </label><button type="button" data-toggle="modal" data-target="#recurringInvoiceModal" class="btn btn-link"><i class="fa fa-external-link"></i></button>@show_tooltip(__('lang_v1.recurring_invoice_help'))
 								</div>
 							</div>
@@ -136,8 +172,10 @@
 									value="{{ $walk_in_customer['id']}}" >
 									<input type="hidden" id="default_customer_name" 
 									value="{{ $walk_in_customer['name']}}" >
-									{!! Form::select('contact_id', 
-										[], null, ['class' => 'form-control mousetrap', 'id' => 'customer_id', 'placeholder' => 'Enter Customer name / phone', 'required', 'style' => 'width: 100%;']); !!}
+									@php
+									$__f13 = ['name' => 'contact_id', 'list' => [], 'selected' => null, 'options' => ['class' => 'form-control mousetrap', 'id' => 'customer_id', 'placeholder' => 'Enter Customer name / phone', 'required', 'style' => 'width: 100%;']];
+									@endphp
+									<x-form.select :name="$__f13['name']" :list="$__f13['list']" :selected="$__f13['selected']" :options="$__f13['options']" />
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default bg-white btn-flat add_new_customer" data-name=""  @if(!auth()->user()->can('customer.create')) disabled @endif><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
 									</span>
@@ -150,8 +188,10 @@
 						@if(!empty($commission_agent))
 							<div class="col-sm-4">
 								<div class="form-group">
-								{!! Form::select('commission_agent', 
-											$commission_agent, null, ['class' => 'form-control select2', 'placeholder' => __('lang_v1.commission_agent')]); !!}
+								@php
+								$__f14 = ['name' => 'commission_agent', 'list' => $commission_agent, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('lang_v1.commission_agent')]];
+								@endphp
+								<x-form.select :name="$__f14['name']" :list="$__f14['list']" :selected="$__f14['selected']" :options="$__f14['options']" />
 								</div>
 							</div>
 						@endif
@@ -162,10 +202,10 @@
 									<div class="input-group-btn">
 										<button type="button" class="btn btn-default bg-white btn-flat" data-toggle="modal" data-target="#configure_search_modal" title="{{__('lang_v1.configure_product_search')}}"><i class="fa fa-barcode"></i></button>
 									</div>
-									{!! Form::text('search_product', null, ['class' => 'form-control mousetrap', 'id' => 'search_product', 'placeholder' => __('lang_v1.search_product_placeholder'),
-									'disabled' => is_null($default_location)? true : false,
-									'autofocus' => is_null($default_location)? false : true,
-									]); !!}
+									@php
+									$__f15 = ['name' => 'search_product', 'value' => null, 'options' => ['class' => 'form-control mousetrap', 'id' => 'search_product', 'placeholder' => __('lang_v1.search_product_placeholder'), 'disabled' => is_null($default_location)? true : false, 'autofocus' => is_null($default_location)? false : true, ]];
+									@endphp
+									<x-form.input type="text" :name="$__f15['name']" :value="$__f15['value']" :options="$__f15['options']" />
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default bg-white btn-flat pos_add_quick_product" data-href="{{action('ProductController@quickAdd')}}" data-container=".quick_add_product_modal"><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
 									</span>
@@ -235,7 +275,7 @@
 					@endif
 				</div>
 				<!-- /.box-body -->
-				{!! Form::close() !!}
+				<x-form.close />
 			@endcomponent
 		</div>
 

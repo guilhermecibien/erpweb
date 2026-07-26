@@ -13,31 +13,55 @@
 
     <div class="col-sm-3">
         <div class="form-group">
-            {!! Form::label('label_prefix', __('lang_v1.weighing_barcode_prefix') . ':') !!}
-             {!! Form::text('weighing_scale_setting[label_prefix]', isset($weighing_scale_setting['label_prefix']) ? $weighing_scale_setting['label_prefix'] : null, ['class' => 'form-control', 'id' => 'label_prefix']); !!}
+            @php
+            $__f1 = ['name' => 'label_prefix', 'value' => __('lang_v1.weighing_barcode_prefix') . ':'];
+            @endphp
+            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+             @php
+             $__f2 = ['name' => 'weighing_scale_setting[label_prefix]', 'value' => isset($weighing_scale_setting['label_prefix']) ? $weighing_scale_setting['label_prefix'] : null, 'options' => ['class' => 'form-control', 'id' => 'label_prefix']];
+             @endphp
+             <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
         </div>
     </div>
 
     <div class="col-sm-3">
         <div class="form-group">
-            {!! Form::label('product_sku_length', __('lang_v1.weighing_product_sku_length') . ':') !!}
+            @php
+            $__f3 = ['name' => 'product_sku_length', 'value' => __('lang_v1.weighing_product_sku_length') . ':'];
+            @endphp
+            <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
             
-            {!! Form::select('weighing_scale_setting[product_sku_length]', [1,2,3,4,5,6,7,8,9], isset($weighing_scale_setting['product_sku_length']) ? $weighing_scale_setting['product_sku_length'] : 4, ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'product_sku_length']); !!}
+            @php
+            $__f4 = ['name' => 'weighing_scale_setting[product_sku_length]', 'list' => [1,2,3,4,5,6,7,8,9], 'selected' => isset($weighing_scale_setting['product_sku_length']) ? $weighing_scale_setting['product_sku_length'] : 4, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'product_sku_length']];
+            @endphp
+            <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
         </div>
     </div>
 
     <div class="col-sm-3">
         <div class="form-group">
-            {!! Form::label('qty_length', __('lang_v1.weighing_qty_integer_part_length') . ':') !!}
+            @php
+            $__f5 = ['name' => 'qty_length', 'value' => __('lang_v1.weighing_qty_integer_part_length') . ':'];
+            @endphp
+            <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
             
-            {!! Form::select('weighing_scale_setting[qty_length]', [1,2,3,4,5], isset($weighing_scale_setting['qty_length']) ? $weighing_scale_setting['qty_length'] : 3, ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'qty_length']); !!}
+            @php
+            $__f6 = ['name' => 'weighing_scale_setting[qty_length]', 'list' => [1,2,3,4,5], 'selected' => isset($weighing_scale_setting['qty_length']) ? $weighing_scale_setting['qty_length'] : 3, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'qty_length']];
+            @endphp
+            <x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
         </div>
     </div>
 
     <div class="col-sm-3">
         <div class="form-group">
-            {!! Form::label('qty_length_decimal', __('lang_v1.weighing_qty_fractional_part_length') . ':') !!}
-            {!! Form::select('weighing_scale_setting[qty_length_decimal]', [1,2,3,4], isset($weighing_scale_setting['qty_length_decimal']) ? $weighing_scale_setting['qty_length_decimal'] : 2, ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'qty_length_decimal']); !!}
+            @php
+            $__f7 = ['name' => 'qty_length_decimal', 'value' => __('lang_v1.weighing_qty_fractional_part_length') . ':'];
+            @endphp
+            <x-form.label :name="$__f7['name']" :value="$__f7['value']" />
+            @php
+            $__f8 = ['name' => 'weighing_scale_setting[qty_length_decimal]', 'list' => [1,2,3,4], 'selected' => isset($weighing_scale_setting['qty_length_decimal']) ? $weighing_scale_setting['qty_length_decimal'] : 2, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'qty_length_decimal']];
+            @endphp
+            <x-form.select :name="$__f8['name']" :list="$__f8['list']" :selected="$__f8['selected']" :options="$__f8['options']" />
         </div>
     </div>
 </div>

@@ -10,20 +10,38 @@
 
 <!-- Main content -->
 <section class="content">
-    {!! Form::open(['url' => action('ImportSalesController@import'), 'method' => 'post', 'id' => 'import_sale_form']) !!}
-    {!! Form::hidden('file_name', $file_name); !!}
+    @php
+    $__f1 = ['options' => ['url' => action('ImportSalesController@import'), 'method' => 'post', 'id' => 'import_sale_form']];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
+    @php
+    $__f2 = ['name' => 'file_name', 'value' => $file_name];
+    @endphp
+    <x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" />
     @component('components.widget')
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                {!! Form::label('group_by', __('lang_v1.group_sale_line_by') . ':*') !!} @show_tooltip(__('lang_v1.group_by_tooltip'))
-                {!! Form::select('group_by', $parsed_array[0], null, ['class' => 'form-control select2', 'required', 'placeholder' => __('messages.please_select')]); !!}
+                @php
+                $__f3 = ['name' => 'group_by', 'value' => __('lang_v1.group_sale_line_by') . ':*'];
+                @endphp
+                <x-form.label :name="$__f3['name']" :value="$__f3['value']" /> @show_tooltip(__('lang_v1.group_by_tooltip'))
+                @php
+                $__f4 = ['name' => 'group_by', 'list' => $parsed_array[0], 'selected' => null, 'options' => ['class' => 'form-control select2', 'required', 'placeholder' => __('messages.please_select')]];
+                @endphp
+                <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {!! Form::label('location_id', __('business.business_location') . ':*') !!}
-                {!! Form::select('location_id', $business_locations, null, ['class' => 'form-control', 'required', 'placeholder' => __('messages.please_select')]); !!}
+                @php
+                $__f5 = ['name' => 'location_id', 'value' => __('business.business_location') . ':*'];
+                @endphp
+                <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
+                @php
+                $__f6 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __('messages.please_select')]];
+                @endphp
+                <x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
             </div>
         </div>
     </div>
@@ -49,7 +67,10 @@
                             <td>@if($loop->index > 0 ){{$loop->index}}@endif</td>
                             @foreach($row as $k => $v)
                                 <td>
-                                    {!! Form::select('import_fields[' . $k . ']', $import_fields, $match_array[$k], ['class' => 'form-control import_fields select2', 'placeholder' => __('lang_v1.skip'), 'style' => 'width: 100%;']); !!}
+                                    @php
+                                    $__f7 = ['name' => 'import_fields[' . $k . ']', 'list' => $import_fields, 'selected' => $match_array[$k], 'options' => ['class' => 'form-control import_fields select2', 'placeholder' => __('lang_v1.skip'), 'style' => 'width: 100%;']];
+                                    @endphp
+                                    <x-form.select :name="$__f7['name']" :list="$__f7['list']" :selected="$__f7['selected']" :options="$__f7['options']" />
                                 </td>
                             @endforeach
                             </tr>
@@ -65,7 +86,7 @@
             <button type="submit" class="btn btn-primary pull-right">@lang('messages.submit')</button>
         </div>
     </div>
-    {!! Form::close() !!}
+    <x-form.close />
 </section>
 @stop
 @section('javascript')

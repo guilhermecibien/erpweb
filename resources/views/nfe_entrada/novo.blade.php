@@ -168,15 +168,27 @@
 
 							<div class="col-sm-3">
 								<div class="form-group">
-									{!! Form::label('natureza_id', 'Natureza de Operação'. ':*') !!}
-									{!! Form::select('natureza_id', $naturezas, null, ['id' => 'natureza_id', 'class' => 'form-control select2', 'placeholder' => __('messages.please_select')]); !!}
+									@php
+									$__f1 = ['name' => 'natureza_id', 'value' => 'Natureza de Operação'. ':*'];
+									@endphp
+									<x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+									@php
+									$__f2 = ['name' => 'natureza_id', 'list' => $naturezas, 'selected' => null, 'options' => ['id' => 'natureza_id', 'class' => 'form-control select2', 'placeholder' => __('messages.please_select')]];
+									@endphp
+									<x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 								</div>
 							</div>
 
 							<div class="col-sm-3">
 								<div class="form-group">
-									{!! Form::label('tipo_pagamento', 'Tipo de Pagamento'. ':*') !!}
-									{!! Form::select('tipo_pagamento', $tiposPagamento, null, ['id' => 'tipo_pagamento', 'class' => 'form-control select2', 'placeholder' => __('messages.please_select')]); !!}
+									@php
+									$__f3 = ['name' => 'tipo_pagamento', 'value' => 'Tipo de Pagamento'. ':*'];
+									@endphp
+									<x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+									@php
+									$__f4 = ['name' => 'tipo_pagamento', 'list' => $tiposPagamento, 'selected' => null, 'options' => ['id' => 'tipo_pagamento', 'class' => 'form-control select2', 'placeholder' => __('messages.please_select')]];
+									@endphp
+									<x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
 								</div>
 							</div>
 

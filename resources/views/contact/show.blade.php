@@ -10,7 +10,10 @@
             <h3>@lang('contact.view_contact')</h3>
         </div>
         <div class="col-md-4 col-xs-12 mt-15 pull-right">
-            {!! Form::select('contact_id', $contact_dropdown, $contact->id , ['class' => 'form-control select2', 'id' => 'contact_id']); !!}
+            @php
+            $__f1 = ['name' => 'contact_id', 'list' => $contact_dropdown, 'selected' => $contact->id, 'options' => ['class' => 'form-control select2', 'id' => 'contact_id']];
+            @endphp
+            <x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
         </div>
     </div>
     <div class="hide print_table_part">
@@ -158,8 +161,14 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        {!! Form::label('purchase_list_filter_date_range', __('report.date_range') . ':') !!}
-                                        {!! Form::text('purchase_list_filter_date_range', null, ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'readonly']); !!}
+                                        @php
+                                        $__f2 = ['name' => 'purchase_list_filter_date_range', 'value' => __('report.date_range') . ':'];
+                                        @endphp
+                                        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+                                        @php
+                                        $__f3 = ['name' => 'purchase_list_filter_date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'readonly']];
+                                        @endphp
+                                        <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
                                     </div>
                                 </div>
                                 <div class="col-md-12">

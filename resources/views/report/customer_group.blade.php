@@ -14,29 +14,50 @@
         <div class="col-md-12">
             @component('components.filters', ['title' => __('report.filters')])
 
-              {!! Form::open(['url' => action('ReportController@getCustomerGroup'), 'method' => 'get', 'id' => 'cg_report_filter_form' ]) !!}
+              @php
+              $__f1 = ['options' => ['url' => action('ReportController@getCustomerGroup'), 'method' => 'get', 'id' => 'cg_report_filter_form' ]];
+              @endphp
+              <x-form.open :options="$__f1['options']" />
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('cg_customer_group_id', __( 'lang_v1.customer_group_name' ) . ':') !!}
-                        {!! Form::select('cg_customer_group_id', $customer_group, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'cg_customer_group_id']); !!}
+                        @php
+                        $__f2 = ['name' => 'cg_customer_group_id', 'value' => __( 'lang_v1.customer_group_name' ) . ':'];
+                        @endphp
+                        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+                        @php
+                        $__f3 = ['name' => 'cg_customer_group_id', 'list' => $customer_group, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'cg_customer_group_id']];
+                        @endphp
+                        <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('cg_location_id',  __('purchase.business_location') . ':') !!}
-                        {!! Form::select('cg_location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%']); !!}
+                        @php
+                        $__f4 = ['name' => 'cg_location_id', 'value' => __('purchase.business_location') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+                        @php
+                        $__f5 = ['name' => 'cg_location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%']];
+                        @endphp
+                        <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('cg_date_range', __('report.date_range') . ':') !!}
-                        {!! Form::text('date_range', null, ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'cg_date_range', 'readonly']); !!}
+                        @php
+                        $__f6 = ['name' => 'cg_date_range', 'value' => __('report.date_range') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+                        @php
+                        $__f7 = ['name' => 'date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'cg_date_range', 'readonly']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
                     </div>
                 </div>
 
-                {!! Form::close() !!}
+                <x-form.close />
             @endcomponent
         </div>
     </div>

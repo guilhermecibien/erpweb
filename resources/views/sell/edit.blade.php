@@ -18,9 +18,15 @@
 	<input type="hidden" id="reward_point_enabled">
 	@endif
 	<input type="hidden" id="item_addition_method" value="{{$business_details->item_addition_method}}">
-	{!! Form::open(['url' => action('SellPosController@update', [$transaction->id, 'id' => $transaction->id ]), 'method' => 'put', 'id' => 'edit_sell_form' ]) !!}
+	@php
+	$__f1 = ['options' => ['url' => action('SellPosController@update', [$transaction->id, 'id' => $transaction->id ]), 'method' => 'put', 'id' => 'edit_sell_form' ]];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
 
-	{!! Form::hidden('location_id', $transaction->location_id, ['id' => 'location_id', 'data-receipt_printer_type' => !empty($location_printer_type) ? $location_printer_type : 'browser']); !!}
+	@php
+	$__f2 = ['name' => 'location_id', 'value' => $transaction->location_id, 'options' => ['id' => 'location_id', 'data-receipt_printer_type' => !empty($location_printer_type) ? $location_printer_type : 'browser']];
+	@endphp
+	<x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			@component('components.widget', ['class' => 'box-primary'])
@@ -31,8 +37,14 @@
 						<span class="input-group-addon">
 							<i class="fas fa-money-bill-alt"></i>
 						</span>
-						{!! Form::hidden('price_group', $transaction->selling_price_group_id, ['id' => 'price_group']) !!}
-						{!! Form::text('price_group_text', $transaction->price_group->name, ['class' => 'form-control', 'readonly']); !!}
+						@php
+						$__f3 = ['name' => 'price_group', 'value' => $transaction->selling_price_group_id, 'options' => ['id' => 'price_group']];
+						@endphp
+						<x-form.input type="hidden" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
+						@php
+						$__f4 = ['name' => 'price_group_text', 'value' => $transaction->price_group->name, 'options' => ['class' => 'form-control', 'readonly']];
+						@endphp
+						<x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 						<span class="input-group-addon">
 							@show_tooltip(__('lang_v1.price_group_help_text'))
 						</span> 
@@ -48,9 +60,15 @@
 						<span class="input-group-addon">
 							<i class="fas fa-external-link-square-alt text-primary service_modal_btn"></i>
 						</span>
-						{!! Form::text('types_of_service_text', $transaction->types_of_service->name, ['class' => 'form-control', 'readonly']); !!}
+						@php
+						$__f5 = ['name' => 'types_of_service_text', 'value' => $transaction->types_of_service->name, 'options' => ['class' => 'form-control', 'readonly']];
+						@endphp
+						<x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
 
-						{!! Form::hidden('types_of_service_id', $transaction->types_of_service_id, ['id' => 'types_of_service_id']) !!}
+						@php
+						$__f6 = ['name' => 'types_of_service_id', 'value' => $transaction->types_of_service_id, 'options' => ['id' => 'types_of_service_id']];
+						@endphp
+						<x-form.input type="hidden" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
 
 						<span class="input-group-addon">
 							@show_tooltip(__('lang_v1.types_of_service_help'))
@@ -70,7 +88,10 @@
 			<div class="col-md-4 pull-right col-sm-6">
 				<div class="checkbox">
 					<label>
-						{!! Form::checkbox('is_recurring', 1, $transaction->is_recurring, ['class' => 'input-icheck', 'id' => 'is_recurring']); !!} @lang('lang_v1.subscribe')?
+						@php
+						$__f7 = ['name' => 'is_recurring', 'value' => 1, 'checked' => $transaction->is_recurring, 'options' => ['class' => 'input-icheck', 'id' => 'is_recurring']];
+						@endphp
+						<x-form.checkbox :name="$__f7['name']" :value="$__f7['value']" :checked="$__f7['checked']" :options="$__f7['options']" /> @lang('lang_v1.subscribe')?
 					</label><button type="button" data-toggle="modal" data-target="#recurringInvoiceModal" class="btn btn-link"><i class="fa fa-external-link"></i></button>@show_tooltip(__('lang_v1.recurring_invoice_help'))
 				</div>
 			</div>
@@ -78,7 +99,10 @@
 			<div class="clearfix"></div>
 			<div class="@if(!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
 				<div class="form-group">
-					{!! Form::label('contact_id', __('contact.customer') . ':*') !!}
+					@php
+					$__f8 = ['name' => 'contact_id', 'value' => __('contact.customer') . ':*'];
+					@endphp
+					<x-form.label :name="$__f8['name']" :value="$__f8['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-user"></i>
@@ -87,8 +111,10 @@
 						value="{{ $transaction->contact->id }}" >
 						<input type="hidden" id="default_customer_name" 
 						value="{{ $transaction->contact->name }}" >
-						{!! Form::select('contact_id', 
-						[], null, ['class' => 'form-control mousetrap', 'id' => 'customer_id', 'placeholder' => 'Enter Customer name / phone', 'required']); !!}
+						@php
+						$__f9 = ['name' => 'contact_id', 'list' => [], 'selected' => null, 'options' => ['class' => 'form-control mousetrap', 'id' => 'customer_id', 'placeholder' => 'Enter Customer name / phone', 'required']];
+						@endphp
+						<x-form.select :name="$__f9['name']" :list="$__f9['list']" :selected="$__f9['selected']" :options="$__f9['options']" />
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default bg-white btn-flat add_new_customer" data-name=""><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
 						</span>
@@ -99,20 +125,31 @@
 			@if(!empty($commission_agent))
 			<div class="col-sm-3">
 				<div class="form-group">
-					{!! Form::label('commission_agent', __('lang_v1.commission_agent') . ':') !!}
-					{!! Form::select('commission_agent', 
-					$commission_agent, $transaction->commission_agent, ['class' => 'form-control select2']); !!}
+					@php
+					$__f10 = ['name' => 'commission_agent', 'value' => __('lang_v1.commission_agent') . ':'];
+					@endphp
+					<x-form.label :name="$__f10['name']" :value="$__f10['value']" />
+					@php
+					$__f11 = ['name' => 'commission_agent', 'list' => $commission_agent, 'selected' => $transaction->commission_agent, 'options' => ['class' => 'form-control select2']];
+					@endphp
+					<x-form.select :name="$__f11['name']" :list="$__f11['list']" :selected="$__f11['selected']" :options="$__f11['options']" />
 				</div>
 			</div>
 			@endif
 			<div class="@if(!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
 				<div class="form-group">
-					{!! Form::label('transaction_date', __('sale.sale_date') . ':*') !!}
+					@php
+					$__f12 = ['name' => 'transaction_date', 'value' => __('sale.sale_date') . ':*'];
+					@endphp
+					<x-form.label :name="$__f12['name']" :value="$__f12['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</span>
-						{!! Form::text('transaction_date', $transaction->transaction_date, ['class' => 'form-control', 'readonly', 'required']); !!}
+						@php
+						$__f13 = ['name' => 'transaction_date', 'value' => $transaction->transaction_date, 'options' => ['class' => 'form-control', 'readonly', 'required']];
+						@endphp
+						<x-form.input type="text" :name="$__f13['name']" :value="$__f13['value']" :options="$__f13['options']" />
 					</div>
 				</div>
 			</div>
@@ -125,38 +162,61 @@
 	@endphp
 	<div class="@if(!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
 		<div class="form-group">
-			{!! Form::label('status', __('sale.status') . ':*') !!}
-			{!! Form::select('status', ['final' => 'Final', 'draft' => __('sale.draft'), 'quotation' => __('lang_v1.quotation')], $status, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+			@php
+			$__f14 = ['name' => 'status', 'value' => __('sale.status') . ':*'];
+			@endphp
+			<x-form.label :name="$__f14['name']" :value="$__f14['value']" />
+			@php
+			$__f15 = ['name' => 'status', 'list' => ['final' => 'Final', 'draft' => __('sale.draft'), 'quotation' => __('lang_v1.quotation')], 'selected' => $status, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']];
+			@endphp
+			<x-form.select :name="$__f15['name']" :list="$__f15['list']" :selected="$__f15['selected']" :options="$__f15['options']" />
 		</div>
 	</div>
 
 	<div class="col-sm-4">
 		<div class="form-group">
-			{!! Form::label('natureza_id', 'Natureza de Operação'. ':*') !!}
-			{!! Form::select('natureza_id', $naturezas, $transaction->natureza_id, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+			@php
+			$__f16 = ['name' => 'natureza_id', 'value' => 'Natureza de Operação'. ':*'];
+			@endphp
+			<x-form.label :name="$__f16['name']" :value="$__f16['value']" />
+			@php
+			$__f17 = ['name' => 'natureza_id', 'list' => $naturezas, 'selected' => $transaction->natureza_id, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']];
+			@endphp
+			<x-form.select :name="$__f17['name']" :list="$__f17['list']" :selected="$__f17['selected']" :options="$__f17['options']" />
 		</div>
 	</div>
 
 	<div class="col-md-3" style="visibility: hidden;">
 		<div class="form-group">
 			<div class="multi-input">
-				{!! Form::label('pay_term_number', __('contact.pay_term') . ':') !!} @show_tooltip(__('tooltip.pay_term'))
+				@php
+				$__f18 = ['name' => 'pay_term_number', 'value' => __('contact.pay_term') . ':'];
+				@endphp
+				<x-form.label :name="$__f18['name']" :value="$__f18['value']" /> @show_tooltip(__('tooltip.pay_term'))
 				<br/>
-				{!! Form::number('pay_term_number', $transaction->pay_term_number, ['class' => 'form-control width-40 pull-left', 'placeholder' => __('contact.pay_term')]); !!}
+				@php
+				$__f19 = ['name' => 'pay_term_number', 'value' => $transaction->pay_term_number, 'options' => ['class' => 'form-control width-40 pull-left', 'placeholder' => __('contact.pay_term')]];
+				@endphp
+				<x-form.input type="number" :name="$__f19['name']" :value="$__f19['value']" :options="$__f19['options']" />
 
-				{!! Form::select('pay_term_type', 
-				['months' => __('lang_v1.months'), 
-				'days' => __('lang_v1.days')], 
-				$transaction->pay_term_type, 
-				['class' => 'form-control width-60 pull-left','placeholder' => __('messages.please_select')]); !!}
+				@php
+				$__f20 = ['name' => 'pay_term_type', 'list' => ['months' => __('lang_v1.months'), 'days' => __('lang_v1.days')], 'selected' => $transaction->pay_term_type, 'options' => ['class' => 'form-control width-60 pull-left','placeholder' => __('messages.please_select')]];
+				@endphp
+				<x-form.select :name="$__f20['name']" :list="$__f20['list']" :selected="$__f20['selected']" :options="$__f20['options']" />
 			</div>
 		</div>
 	</div>
 	@if($transaction->status == 'draft')
 	<div class="col-sm-3">
 		<div class="form-group">
-			{!! Form::label('invoice_scheme_id', __('invoice.invoice_scheme') . ':') !!}
-			{!! Form::select('invoice_scheme_id', $invoice_schemes, $default_invoice_schemes->id, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select')]); !!}
+			@php
+			$__f21 = ['name' => 'invoice_scheme_id', 'value' => __('invoice.invoice_scheme') . ':'];
+			@endphp
+			<x-form.label :name="$__f21['name']" :value="$__f21['value']" />
+			@php
+			$__f22 = ['name' => 'invoice_scheme_id', 'list' => $invoice_schemes, 'selected' => $default_invoice_schemes->id, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select')]];
+			@endphp
+			<x-form.select :name="$__f22['name']" :list="$__f22['list']" :selected="$__f22['selected']" :options="$__f22['options']" />
 		</div>
 	</div>
 	@endif
@@ -177,9 +237,10 @@
 			<div class="input-group-btn">
 				<button type="button" class="btn btn-default bg-white btn-flat" data-toggle="modal" data-target="#configure_search_modal" title="{{__('lang_v1.configure_product_search')}}"><i class="fa fa-barcode"></i></button>
 			</div>
-			{!! Form::text('search_product', null, ['class' => 'form-control mousetrap', 'id' => 'search_product', 'placeholder' => __('lang_v1.search_product_placeholder'),
-			'autofocus' => true,
-			]); !!}
+			@php
+			$__f23 = ['name' => 'search_product', 'value' => null, 'options' => ['class' => 'form-control mousetrap', 'id' => 'search_product', 'placeholder' => __('lang_v1.search_product_placeholder'), 'autofocus' => true, ]];
+			@endphp
+			<x-form.input type="text" :name="$__f23['name']" :value="$__f23['value']" :options="$__f23['options']" />
 			<span class="input-group-btn">
 				<button type="button" class="btn btn-default bg-white btn-flat pos_add_quick_product" data-href="{{action('ProductController@quickAdd')}}" data-container=".quick_add_product_modal"><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
 			</span>
@@ -261,12 +322,18 @@
 		<div class="box-body">
 			<div class="col-md-4">
 				<div class="form-group">
-					{!! Form::label('discount_type', __('sale.discount_type') . ':*' ) !!}
+					@php
+					$__f24 = ['name' => 'discount_type', 'value' => __('sale.discount_type') . ':*'];
+					@endphp
+					<x-form.label :name="$__f24['name']" :value="$__f24['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-info"></i>
 						</span>
-						{!! Form::select('discount_type', ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], $transaction->discount_type , ['class' => 'form-control','placeholder' => __('messages.please_select'), 'required', 'data-default' => 'percentage']); !!}
+						@php
+						$__f25 = ['name' => 'discount_type', 'list' => ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], 'selected' => $transaction->discount_type, 'options' => ['class' => 'form-control','placeholder' => __('messages.please_select'), 'required', 'data-default' => 'percentage']];
+						@endphp
+						<x-form.select :name="$__f25['name']" :list="$__f25['list']" :selected="$__f25['selected']" :options="$__f25['options']" />
 					</div>
 				</div>
 			</div>
@@ -275,12 +342,18 @@
 			@endphp
 			<div class="col-md-4">
 				<div class="form-group">
-					{!! Form::label('discount_amount', __('sale.discount_amount') . ':*' ) !!}
+					@php
+					$__f26 = ['name' => 'discount_amount', 'value' => __('sale.discount_amount') . ':*'];
+					@endphp
+					<x-form.label :name="$__f26['name']" :value="$__f26['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-info"></i>
 						</span>
-						{!! Form::text('discount_amount', @num_format($transaction->discount_amount), ['class' => 'form-control input_number', 'data-default' => $business_details->default_sales_discount, 'data-max-discount' => $max_discount, 'data-max-discount-error_msg' => __('lang_v1.max_discount_error_msg', ['discount' => $max_discount != '' ? @num_format($max_discount) : '']) ]); !!}
+						@php
+						$__f27 = ['name' => 'discount_amount', 'value' => number_format($transaction->discount_amount, 2, ',', '.'), 'options' => ['class' => 'form-control input_number', 'data-default' => $business_details->default_sales_discount, 'data-max-discount' => $max_discount, 'data-max-discount-error_msg' => __('lang_v1.max_discount_error_msg', ['discount' => $max_discount != '' ? number_format($max_discount, 2, ',', '.') : '']) ]];
+						@endphp
+						<x-form.input type="text" :name="$__f27['name']" :value="$__f27['value']" :options="$__f27['options']" />
 					</div>
 				</div>
 			</div>
@@ -295,12 +368,18 @@
 				<div class="col-md-12"><h4>{{session('business.rp_name')}}</h4></div>
 				<div class="col-md-4">
 					<div class="form-group">
-						{!! Form::label('rp_redeemed_modal', __('lang_v1.redeemed') . ':' ) !!}
+						@php
+						$__f28 = ['name' => 'rp_redeemed_modal', 'value' => __('lang_v1.redeemed') . ':'];
+						@endphp
+						<x-form.label :name="$__f28['name']" :value="$__f28['value']" />
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="fa fa-gift"></i>
 							</span>
-							{!! Form::number('rp_redeemed_modal', $transaction->rp_redeemed, ['class' => 'form-control direct_sell_rp_input', 'data-amount_per_unit_point' => session('business.redeem_amount_per_unit_rp'), 'min' => 0, 'data-max_points' => !empty($redeem_details['points']) ? $redeem_details['points'] : 0, 'data-min_order_total' => session('business.min_order_total_for_redeem') ]); !!}
+							@php
+							$__f29 = ['name' => 'rp_redeemed_modal', 'value' => $transaction->rp_redeemed, 'options' => ['class' => 'form-control direct_sell_rp_input', 'data-amount_per_unit_point' => session('business.redeem_amount_per_unit_rp'), 'min' => 0, 'data-max_points' => !empty($redeem_details['points']) ? $redeem_details['points'] : 0, 'data-min_order_total' => session('business.min_order_total_for_redeem') ]];
+							@endphp
+							<x-form.input type="number" :name="$__f29['name']" :value="$__f29['value']" :options="$__f29['options']" />
 							<input type="hidden" id="rp_name" value="{{session('business.rp_name')}}">
 						</div>
 					</div>
@@ -315,12 +394,18 @@
 			<div class="clearfix"></div>
 			<div class="col-md-4">
 				<div class="form-group">
-					{!! Form::label('tax_rate_id', __('sale.order_tax') . ':*' ) !!}
+					@php
+					$__f30 = ['name' => 'tax_rate_id', 'value' => __('sale.order_tax') . ':*'];
+					@endphp
+					<x-form.label :name="$__f30['name']" :value="$__f30['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-info"></i>
 						</span>
-						{!! Form::select('tax_rate_id', $taxes['tax_rates'], $transaction->tax_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control', 'data-default'=> $business_details->default_sales_tax], $taxes['attributes']); !!}
+						@php
+						$__f31 = ['name' => 'tax_rate_id', 'list' => $taxes['tax_rates'], 'selected' => $transaction->tax_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control', 'data-default'=> $business_details->default_sales_tax], 'optionsAttributes' => $taxes['attributes']];
+						@endphp
+						<x-form.select :name="$__f31['name']" :list="$__f31['list']" :selected="$__f31['selected']" :options="$__f31['options']" :options-attributes="$__f31['optionsAttributes']" />
 
 						<input type="hidden" name="tax_calculation_amount" id="tax_calculation_amount" 
 						value="{{@num_format(optional($transaction->tax)->amount)}}" data-default="{{$business_details->tax_calculation_amount}}">
@@ -334,47 +419,77 @@
 			<div class="clearfix"></div>
 			<div class="col-md-4">
 				<div class="form-group">
-					{!! Form::label('shipping_details', 'Detalhes de envio') !!}
+					@php
+					$__f32 = ['name' => 'shipping_details', 'value' => 'Detalhes de envio'];
+					@endphp
+					<x-form.label :name="$__f32['name']" :value="$__f32['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-info"></i>
 						</span>
-						{!! Form::textarea('shipping_details',$transaction->shipping_details, ['class' => 'form-control','placeholder' => 'Detalhes de envio' ,'rows' => '1', 'cols'=>'30']); !!}
+						@php
+						$__f33 = ['name' => 'shipping_details', 'value' => $transaction->shipping_details, 'options' => ['class' => 'form-control','placeholder' => 'Detalhes de envio' ,'rows' => '1', 'cols'=>'30']];
+						@endphp
+						<x-form.textarea :name="$__f33['name']" :value="$__f33['value']" :options="$__f33['options']" />
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					{!! Form::label('shipping_address', __('lang_v1.shipping_address')) !!}
+					@php
+					$__f34 = ['name' => 'shipping_address', 'value' => __('lang_v1.shipping_address')];
+					@endphp
+					<x-form.label :name="$__f34['name']" :value="$__f34['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-map-marker"></i>
 						</span>
-						{!! Form::textarea('shipping_address', $transaction->shipping_address, ['class' => 'form-control','placeholder' => __('lang_v1.shipping_address') ,'rows' => '1', 'cols'=>'30']); !!}
+						@php
+						$__f35 = ['name' => 'shipping_address', 'value' => $transaction->shipping_address, 'options' => ['class' => 'form-control','placeholder' => __('lang_v1.shipping_address') ,'rows' => '1', 'cols'=>'30']];
+						@endphp
+						<x-form.textarea :name="$__f35['name']" :value="$__f35['value']" :options="$__f35['options']" />
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					{!!Form::label('shipping_charges', 'Custos de envio')!!}
+					@php
+					$__f36 = ['name' => 'shipping_charges', 'value' => 'Custos de envio'];
+					@endphp
+					<x-form.label :name="$__f36['name']" :value="$__f36['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-info"></i>
 						</span>
-						{!!Form::text('shipping_charges',@num_format($transaction->shipping_charges),['class'=>'form-control input_number','placeholder'=> 'Custos de envio']);!!}
+						@php
+						$__f37 = ['name' => 'shipping_charges', 'value' => number_format($transaction->shipping_charges, 2, ',', '.'), 'options' => ['class'=>'form-control input_number','placeholder'=> 'Custos de envio']];
+						@endphp
+						<x-form.input type="text" :name="$__f37['name']" :value="$__f37['value']" :options="$__f37['options']" />
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					{!! Form::label('shipping_status', __('lang_v1.shipping_status')) !!}
-					{!! Form::select('shipping_status',$shipping_statuses, $transaction->shipping_status, ['class' => 'form-control','placeholder' => __('messages.please_select')]); !!}
+					@php
+					$__f38 = ['name' => 'shipping_status', 'value' => __('lang_v1.shipping_status')];
+					@endphp
+					<x-form.label :name="$__f38['name']" :value="$__f38['value']" />
+					@php
+					$__f39 = ['name' => 'shipping_status', 'list' => $shipping_statuses, 'selected' => $transaction->shipping_status, 'options' => ['class' => 'form-control','placeholder' => __('messages.please_select')]];
+					@endphp
+					<x-form.select :name="$__f39['name']" :list="$__f39['list']" :selected="$__f39['selected']" :options="$__f39['options']" />
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					{!! Form::label('delivered_to', __('lang_v1.delivered_to') . ':' ) !!}
-					{!! Form::text('delivered_to', $transaction->delivered_to, ['class' => 'form-control','placeholder' => __('lang_v1.delivered_to')]); !!}
+					@php
+					$__f40 = ['name' => 'delivered_to', 'value' => __('lang_v1.delivered_to') . ':'];
+					@endphp
+					<x-form.label :name="$__f40['name']" :value="$__f40['value']" />
+					@php
+					$__f41 = ['name' => 'delivered_to', 'value' => $transaction->delivered_to, 'options' => ['class' => 'form-control','placeholder' => __('lang_v1.delivered_to')]];
+					@endphp
+					<x-form.input type="text" :name="$__f41['name']" :value="$__f41['value']" :options="$__f41['options']" />
 				</div>
 			</div>
 			<div class="col-md-4 col-md-offset-8">
@@ -407,41 +522,70 @@
 		<div class="box-body">
 			<div class="col-md-2">
 				<div class="form-group">
-					{!! Form::label('placa',  'Placa:' ) !!}
-					{!! Form::text('placa', $transaction->placa, ['class' => 'form-control','placeholder' => 'placa', 
-					'data-mask="AAA-AAAA"', 'data-mask-reverse="true"']); !!}
+					@php
+					$__f42 = ['name' => 'placa', 'value' => 'Placa:'];
+					@endphp
+					<x-form.label :name="$__f42['name']" :value="$__f42['value']" />
+					@php
+					$__f43 = ['name' => 'placa', 'value' => $transaction->placa, 'options' => ['class' => 'form-control','placeholder' => 'placa', 'data-mask="AAA-AAAA"', 'data-mask-reverse="true"']];
+					@endphp
+					<x-form.input type="text" :name="$__f43['name']" :value="$__f43['value']" :options="$__f43['options']" />
 				</div>
 			</div>
 
 			<div class="col-md-1">
 				<div class="form-group">
-					{!! Form::label('uf', 'UF:' ) !!}
+					@php
+					$__f44 = ['name' => 'uf', 'value' => 'UF:'];
+					@endphp
+					<x-form.label :name="$__f44['name']" :value="$__f44['value']" />
 
-					{!! Form::select('uf', $ufs, $transaction->ud, ['class' => 'form-control select2','placeholder' => 'UF', 'data-default' => 'percentage']); !!}
+					@php
+					$__f45 = ['name' => 'uf', 'list' => $ufs, 'selected' => $transaction->ud, 'options' => ['class' => 'form-control select2','placeholder' => 'UF', 'data-default' => 'percentage']];
+					@endphp
+					<x-form.select :name="$__f45['name']" :list="$__f45['list']" :selected="$__f45['selected']" :options="$__f45['options']" />
 
 				</div>
 			</div>
 
 			<div class="col-md-2 col-sm-2">
 				<div class="form-group">
-					{!! Form::label('tipo', 'Tipo do frete:' ) !!}
+					@php
+					$__f46 = ['name' => 'tipo', 'value' => 'Tipo do frete:'];
+					@endphp
+					<x-form.label :name="$__f46['name']" :value="$__f46['value']" />
 
-					{!! Form::select('tipo', $tiposFrete, $transaction->tipo, ['class' => 'form-control select2', 'data-default' => 'percentage']); !!}
+					@php
+					$__f47 = ['name' => 'tipo', 'list' => $tiposFrete, 'selected' => $transaction->tipo, 'options' => ['class' => 'form-control select2', 'data-default' => 'percentage']];
+					@endphp
+					<x-form.select :name="$__f47['name']" :list="$__f47['list']" :selected="$__f47['selected']" :options="$__f47['options']" />
 
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
-					{!! Form::label('peso_liquido',  'Peso liquido:' ) !!}
-					{!! Form::text('peso_liquido', $transaction->peso_liquido, ['class' => 'form-control','placeholder' => 'Peso liquido', 'data-mask="00000000.000"', 'data-mask-reverse="true"']); !!}
+					@php
+					$__f48 = ['name' => 'peso_liquido', 'value' => 'Peso liquido:'];
+					@endphp
+					<x-form.label :name="$__f48['name']" :value="$__f48['value']" />
+					@php
+					$__f49 = ['name' => 'peso_liquido', 'value' => $transaction->peso_liquido, 'options' => ['class' => 'form-control','placeholder' => 'Peso liquido', 'data-mask="00000000.000"', 'data-mask-reverse="true"']];
+					@endphp
+					<x-form.input type="text" :name="$__f49['name']" :value="$__f49['value']" :options="$__f49['options']" />
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
-					{!! Form::label('peso_bruto',  'Peso bruto:' ) !!}
-					{!! Form::text('peso_bruto', $transaction->peso_bruto, ['class' => 'form-control','placeholder' => 'Peso bruto', 'data-mask="00000000.000"', 'data-mask-reverse="true"']); !!}
+					@php
+					$__f50 = ['name' => 'peso_bruto', 'value' => 'Peso bruto:'];
+					@endphp
+					<x-form.label :name="$__f50['name']" :value="$__f50['value']" />
+					@php
+					$__f51 = ['name' => 'peso_bruto', 'value' => $transaction->peso_bruto, 'options' => ['class' => 'form-control','placeholder' => 'Peso bruto', 'data-mask="00000000.000"', 'data-mask-reverse="true"']];
+					@endphp
+					<x-form.input type="text" :name="$__f51['name']" :value="$__f51['value']" :options="$__f51['options']" />
 				</div>
 			</div>
 
@@ -450,21 +594,39 @@
 
 			<div class="col-md-3">
 				<div class="form-group">
-					{!! Form::label('especie',  'Espécie:' ) !!}
-					{!! Form::text('especie', $transaction->especie, ['class' => 'form-control','placeholder' => 'Espécie']); !!}
+					@php
+					$__f52 = ['name' => 'especie', 'value' => 'Espécie:'];
+					@endphp
+					<x-form.label :name="$__f52['name']" :value="$__f52['value']" />
+					@php
+					$__f53 = ['name' => 'especie', 'value' => $transaction->especie, 'options' => ['class' => 'form-control','placeholder' => 'Espécie']];
+					@endphp
+					<x-form.input type="text" :name="$__f53['name']" :value="$__f53['value']" :options="$__f53['options']" />
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					{!! Form::label('qtd_volumes',  'Quantidade de volumes:' ) !!}
-					{!! Form::text('qtd_volumes', $transaction->qtd_volumes, ['class' => 'form-control','placeholder' => 'Quantidade de volumes']); !!}
+					@php
+					$__f54 = ['name' => 'qtd_volumes', 'value' => 'Quantidade de volumes:'];
+					@endphp
+					<x-form.label :name="$__f54['name']" :value="$__f54['value']" />
+					@php
+					$__f55 = ['name' => 'qtd_volumes', 'value' => $transaction->qtd_volumes, 'options' => ['class' => 'form-control','placeholder' => 'Quantidade de volumes']];
+					@endphp
+					<x-form.input type="text" :name="$__f55['name']" :value="$__f55['value']" :options="$__f55['options']" />
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					{!! Form::label('numeracao_volumes',  'Numeração de volumes:' ) !!}
-					{!! Form::text('numeracao_volumes', $transaction->numeracao_volumes, ['class' => 'form-control','placeholder' => 'Numeração de volumes']); !!}
+					@php
+					$__f56 = ['name' => 'numeracao_volumes', 'value' => 'Numeração de volumes:'];
+					@endphp
+					<x-form.label :name="$__f56['name']" :value="$__f56['value']" />
+					@php
+					$__f57 = ['name' => 'numeracao_volumes', 'value' => $transaction->numeracao_volumes, 'options' => ['class' => 'form-control','placeholder' => 'Numeração de volumes']];
+					@endphp
+					<x-form.input type="text" :name="$__f57['name']" :value="$__f57['value']" :options="$__f57['options']" />
 				</div>
 			</div>
 
@@ -473,16 +635,28 @@
 
 			<div class="col-md-2">
 				<div class="form-group">
-					{!! Form::label('valor_frete',  'Valor do frete:' ) !!}
-					{!! Form::text('valor_frete', $transaction->valor_frete, ['id' => 'valor_frete', 'class' => 'form-control','placeholder' => 'Valor do frete', 'data-mask="00000000.00"', 'data-mask-reverse="true"']); !!}
+					@php
+					$__f58 = ['name' => 'valor_frete', 'value' => 'Valor do frete:'];
+					@endphp
+					<x-form.label :name="$__f58['name']" :value="$__f58['value']" />
+					@php
+					$__f59 = ['name' => 'valor_frete', 'value' => $transaction->valor_frete, 'options' => ['id' => 'valor_frete', 'class' => 'form-control','placeholder' => 'Valor do frete', 'data-mask="00000000.00"', 'data-mask-reverse="true"']];
+					@endphp
+					<x-form.input type="text" :name="$__f59['name']" :value="$__f59['value']" :options="$__f59['options']" />
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					{!! Form::label('transportadora_id', 'Transportadora:' ) !!}
+					@php
+					$__f60 = ['name' => 'transportadora_id', 'value' => 'Transportadora:'];
+					@endphp
+					<x-form.label :name="$__f60['name']" :value="$__f60['value']" />
 
-					{!! Form::select('transportadora_id', $transportadoras, $transaction->transportadora_id , ['class' => 'form-control select2','placeholder' => 'Transportadora', 'data-default' => 'percentage', 'style' => 'width: 100%']); !!}
+					@php
+					$__f61 = ['name' => 'transportadora_id', 'list' => $transportadoras, 'selected' => $transaction->transportadora_id, 'options' => ['class' => 'form-control select2','placeholder' => 'Transportadora', 'data-default' => 'percentage', 'style' => 'width: 100%']];
+					@endphp
+					<x-form.select :name="$__f61['name']" :list="$__f61['list']" :selected="$__f61['selected']" :options="$__f61['options']" />
 
 				</div>
 			</div>
@@ -495,15 +669,27 @@
 @component('components.widget', ['class' => 'box-primary'])
 <div class="col-md-12">
 	<div class="form-group">
-		{!! Form::label('additional_notes', 'Informação complementar') !!}
-		{!! Form::textarea('additional_notes', $transaction->additional_notes, ['class' => 'form-control', 'rows' => 3]); !!}
+		@php
+		$__f62 = ['name' => 'additional_notes', 'value' => 'Informação complementar'];
+		@endphp
+		<x-form.label :name="$__f62['name']" :value="$__f62['value']" />
+		@php
+		$__f63 = ['name' => 'additional_notes', 'value' => $transaction->additional_notes, 'options' => ['class' => 'form-control', 'rows' => 3]];
+		@endphp
+		<x-form.textarea :name="$__f63['name']" :value="$__f63['value']" :options="$__f63['options']" />
 	</div>
 </div>
 
 <div class="col-sm-6">
 	<div class="form-group">
-		{!! Form::label('referencia_nfe', 'Referência NF-e' . ':' ) !!}
-		{!! Form::text('referencia_nfe', $transaction->referencia_nfe, ['class' => 'form-control','placeholder' => 'Referência NF-e', 'data-mask="00000000000000000000000000000000000000000000"', 'data-mask-reverse="true"']); !!}
+		@php
+		$__f64 = ['name' => 'referencia_nfe', 'value' => 'Referência NF-e' . ':'];
+		@endphp
+		<x-form.label :name="$__f64['name']" :value="$__f64['value']" />
+		@php
+		$__f65 = ['name' => 'referencia_nfe', 'value' => $transaction->referencia_nfe, 'options' => ['class' => 'form-control','placeholder' => 'Referência NF-e', 'data-mask="00000000000000000000000000000000000000000000"', 'data-mask-reverse="true"']];
+		@endphp
+		<x-form.input type="text" :name="$__f65['name']" :value="$__f65['value']" :options="$__f65['options']" />
 	</div>
 </div>
 @endcomponent
@@ -515,7 +701,10 @@
 
 
 <div class="col-md-12 text-right">
-	{!! Form::hidden('is_save_and_print', 0, ['id' => 'is_save_and_print']); !!}
+	@php
+	$__f66 = ['name' => 'is_save_and_print', 'value' => 0, 'options' => ['id' => 'is_save_and_print']];
+	@endphp
+	<x-form.input type="hidden" :name="$__f66['name']" :value="$__f66['value']" :options="$__f66['options']" />
 	<button type="button" class="btn btn-primary" id="submit-sell">@lang('messages.update')</button>
 	<button type="button" id="save-and-print" class="btn btn-primary btn-flat">@lang('lang_v1.update_and_print')</button>
 </div>
@@ -526,7 +715,7 @@
 @if(in_array('subscription', $enabled_modules))
 @include('sale_pos.partials.recurring_invoice_modal')
 @endif
-{!! Form::close() !!}
+<x-form.close />
 </section>
 
 <div class="modal fade contact_modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">

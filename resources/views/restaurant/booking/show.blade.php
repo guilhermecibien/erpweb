@@ -32,15 +32,21 @@
 				<br>
 				<div class="row">
 					<div class="col-sm-9">
-						{!! Form::open(['url' => action('Restaurant\BookingController@update', [$booking->id]), 'method' => 'PUT', 'id' => 'edit_booking_form' ]) !!}
+						@php
+						$__f1 = ['options' => ['url' => action('Restaurant\BookingController@update', [$booking->id]), 'method' => 'PUT', 'id' => 'edit_booking_form' ]];
+						@endphp
+						<x-form.open :options="$__f1['options']" />
 							<div class="input-group">
 				                <!-- /btn-group -->
-				                {!! Form::select('booking_status', $booking_statuses, $booking->booking_status, ['class' => 'form-control', 'placeholder' => __('restaurant.change_booking_status'), 'required']); !!}
+				                @php
+				                $__f2 = ['name' => 'booking_status', 'list' => $booking_statuses, 'selected' => $booking->booking_status, 'options' => ['class' => 'form-control', 'placeholder' => __('restaurant.change_booking_status'), 'required']];
+				                @endphp
+				                <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 				                <div class="input-group-btn">
 				                  <button type="submit" class="btn btn-primary">@lang('messages.update')</button>
 				                </div>
 				             </div>
-						{!! Form::close() !!}
+						<x-form.close />
 					</div>
 					<div class="col-sm-3 text-center">
 						<button type="button" class="btn btn-danger" id="delete_booking" data-href="{{action('Restaurant\BookingController@destroy', [$booking->id])}}">Remover reserva</button>

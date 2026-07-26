@@ -11,7 +11,10 @@
 
 <!-- Main content -->
 <section class="content">
-  {!! Form::open(['url' => action('CupomController@save'), 'method' => 'post', 'id' => 'natureza_add_form' ]) !!}
+  @php
+  $__f1 = ['options' => ['url' => action('CupomController@save'), 'method' => 'post', 'id' => 'natureza_add_form' ]];
+  @endphp
+  <x-form.open :options="$__f1['options']" />
   <div class="row">
     <div class="col-md-12">
       @component('components.widget')
@@ -19,10 +22,16 @@
       
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('codigo', 'Código' . ':*') !!}
+          @php
+          $__f2 = ['name' => 'codigo', 'value' => 'Código' . ':*'];
+          @endphp
+          <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
           <div class="input-group">
 
-            {!! Form::text('codigo', '', ['class' => 'form-control', 'required', 'placeholder' => 'Código', 'data-mask="AAAAAA"', 'data-mask-reverse="true"' ]); !!}
+            @php
+            $__f3 = ['name' => 'codigo', 'value' => '', 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Código', 'data-mask="AAAAAA"', 'data-mask-reverse="true"' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
             <span class="input-group-btn">
               <button type="button" id="btn_codigo" class="btn btn-default bg-white btn-flat add_new_customer" data-name=""><i class="fa fa-code text-danger fa-lg"></i></button>
             </span>
@@ -32,15 +41,27 @@
 
       <div class="col-sm-2">
         <div class="form-group">
-          {!! Form::label('valor',  'Valor' . ':') !!}
-          {!! Form::text('valor', null, ['class' => 'form-control', 'placeholder' => 'Valor', 'required',  'data-mask="000000,00"', 'data-mask-reverse="true"']); !!}
+          @php
+          $__f4 = ['name' => 'valor', 'value' => 'Valor' . ':'];
+          @endphp
+          <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+          @php
+          $__f5 = ['name' => 'valor', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => 'Valor', 'required',  'data-mask="000000,00"', 'data-mask-reverse="true"']];
+          @endphp
+          <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
         </div>
       </div>
 
       <div class="col-sm-2">
         <div class="form-group">
-          {!! Form::label('tipo', 'Tipo de desconto' . ':*') !!}
-          {!! Form::select('tipo', ['percentual' => 'Percentual', 'valor' => 'Valor'], null, ['class' => 'form-control']); !!}
+          @php
+          $__f6 = ['name' => 'tipo', 'value' => 'Tipo de desconto' . ':*'];
+          @endphp
+          <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+          @php
+          $__f7 = ['name' => 'tipo', 'list' => ['percentual' => 'Percentual', 'valor' => 'Valor'], 'selected' => null, 'options' => ['class' => 'form-control']];
+          @endphp
+          <x-form.select :name="$__f7['name']" :list="$__f7['list']" :selected="$__f7['selected']" :options="$__f7['options']" />
         </div>
       </div>
 
@@ -48,7 +69,10 @@
         <div class="form-group">
           <br>
           <label style="margin-top: 5px;">
-            {!! Form::checkbox('status', 1, 1, ['class' => 'input-icheck', 'id' => 'status']); !!} <strong>Ativo</strong>
+            @php
+            $__f8 = ['name' => 'status', 'value' => 1, 'checked' => 1, 'options' => ['class' => 'input-icheck', 'id' => 'status']];
+            @endphp
+            <x-form.checkbox :name="$__f8['name']" :value="$__f8['value']" :checked="$__f8['checked']" :options="$__f8['options']" /> <strong>Ativo</strong>
           </label>
         </div>
       </div>
@@ -69,7 +93,7 @@
       <button type="submit" class="btn btn-primary pull-right" id="submit_user_button">@lang( 'messages.save' )</button>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
   @stop
   @section('javascript')
   <script type="text/javascript">

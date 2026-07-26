@@ -35,15 +35,24 @@
                     <a href="{{action('SellingPriceGroupController@export')}}" class="btn btn-primary">@lang('lang_v1.export_selling_price_group_prices')</a>
                 </div>
                 <div class="col-sm-6">
-                    {!! Form::open(['url' => action('SellingPriceGroupController@import'), 'method' => 'post', 'enctype' => 'multipart/form-data' ]) !!}
+                    @php
+                    $__f1 = ['options' => ['url' => action('SellingPriceGroupController@import'), 'method' => 'post', 'enctype' => 'multipart/form-data' ]];
+                    @endphp
+                    <x-form.open :options="$__f1['options']" />
                     <div class="form-group">
-                        {!! Form::label('name', __( 'product.file_to_import' ) . ':') !!}
-                        {!! Form::file('product_group_prices', ['required' => 'required']); !!}
+                        @php
+                        $__f2 = ['name' => 'name', 'value' => __( 'product.file_to_import' ) . ':'];
+                        @endphp
+                        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+                        @php
+                        $__f3 = ['name' => 'product_group_prices', 'options' => ['required' => 'required']];
+                        @endphp
+                        <x-form.input type="file" :name="$__f3['name']" :options="$__f3['options']" />
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">@lang('messages.submit')</button>
                     </div>
-                    {!! Form::close() !!}
+                    <x-form.close />
                 </div>
                 <div class="col-sm-12">
                     <h4>@lang('lang_v1.instructions'):</h4>

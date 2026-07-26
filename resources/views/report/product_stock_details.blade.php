@@ -23,27 +23,42 @@
               <div id="collapseFilter" class="panel-collapse active collapse in" aria-expanded="true">
                 <div class="box-body">
                     <div class="row">
-                        {!! Form::open(['url' => action('ReportController@productStockDetails'), 'method' => 'get' ]) !!}
+                        @php
+                        $__f1 = ['options' => ['url' => action('ReportController@productStockDetails'), 'method' => 'get' ]];
+                        @endphp
+                        <x-form.open :options="$__f1['options']" />
                         <div class="col-md-4">
                             <div class="form-group">
-                            {!! Form::label('search_product', __('lang_v1.search_product') . ':') !!}
+                            @php
+                            $__f2 = ['name' => 'search_product', 'value' => __('lang_v1.search_product') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-search"></i>
                                     </span>
-                                    {!! Form::select('variation_id', [], null, ['class' => 'form-control', 'id' => 'variation_id', 'placeholder' => __('lang_v1.search_product_placeholder')]); !!}
+                                    @php
+                                    $__f3 = ['name' => 'variation_id', 'list' => [], 'selected' => null, 'options' => ['class' => 'form-control', 'id' => 'variation_id', 'placeholder' => __('lang_v1.search_product_placeholder')]];
+                                    @endphp
+                                    <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
                                 </div>
                             </div>
                         </div>
                         
                         <div class="col-md-4">
                             <div class="form-group">
-                                {!! Form::label('location_id', __('purchase.business_location').':') !!}
+                                @php
+                                $__f4 = ['name' => 'location_id', 'value' => __('purchase.business_location').':'];
+                                @endphp
+                                <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-map-marker"></i>
                                     </span>
-                                    {!! Form::select('location_id', $business_locations, null, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+                                    @php
+                                    $__f5 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']];
+                                    @endphp
+                                    <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
                                 </div>
                             </div>
                         </div>
@@ -53,7 +68,7 @@
                                 <button type="submit" class="btn btn-primary">@lang('lang_v1.search')</button>
                             </div>
                         </div>
-                        {!! Form::close() !!}
+                        <x-form.close />
                     </div>
 
                     @if(!empty($stock_details))

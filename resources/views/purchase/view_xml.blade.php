@@ -8,7 +8,10 @@
 <!-- Main content -->
 <section class="content">
 
-	{!! Form::open(['url' => '/purchase-xml/save', 'method' => 'post', 'id' => 'add_purchase_form', 'files' => true ]) !!}
+	@php
+	$__f1 = ['options' => ['url' => '/purchase-xml/save', 'method' => 'post', 'id' => 'add_purchase_form', 'files' => true ]];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
 	@component('components.widget', ['class' => 'box-primary'])
 
 	@if(count($business_locations) == 1)
@@ -23,9 +26,15 @@
 	@endif
 	<div class="col-sm-3">
 		<div class="form-group">
-			{!! Form::label('location_id', __('purchase.business_location').':*') !!}
+			@php
+			$__f2 = ['name' => 'location_id', 'value' => __('purchase.business_location').':*'];
+			@endphp
+			<x-form.label :name="$__f2['name']" :value="$__f2['value']" />
 			@show_tooltip(__('tooltip.purchase_location'))
-			{!! Form::select('location_id', $business_locations, $default_location, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+			@php
+			$__f3 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => $default_location, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']];
+			@endphp
+			<x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
 		</div>
 	</div>
 
@@ -152,8 +161,14 @@
 											<div class="row">
 												<div class="col-sm-3">
 													<div class="form-group">
-														{!! Form::label('perc_venda', '% de acrescimo para valor de venda, sobre o valor de compra' . ':') !!}
-														{!! Form::text('perc_venda', $lucro, ['id' => 'perc_venda', 'class' => 'form-control']); !!}
+														@php
+														$__f4 = ['name' => 'perc_venda', 'value' => '% de acrescimo para valor de venda, sobre o valor de compra' . ':'];
+														@endphp
+														<x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+														@php
+														$__f5 = ['name' => 'perc_venda', 'value' => $lucro, 'options' => ['id' => 'perc_venda', 'class' => 'form-control']];
+														@endphp
+														<x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
 													</div>
 												</div>
 											</div>
@@ -247,7 +262,7 @@
 	</div>
 
 	@endcomponent
-	{!! Form::close() !!}
+	<x-form.close />
 
 	
 </section>

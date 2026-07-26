@@ -18,8 +18,10 @@
         <div class="form-group">
             <div class="checkbox">
                 <label>
-                    {!! Form::checkbox('only_woocommerce_sells', 1, false, 
-                    [ 'class' => 'input-icheck', 'id' => 'synced_from_woocommerce']); !!} {{ __('lang_v1.synced_from_woocommerce') }}
+                    @php
+                    $__f1 = ['name' => 'only_woocommerce_sells', 'value' => 1, 'checked' => false, 'options' => [ 'class' => 'input-icheck', 'id' => 'synced_from_woocommerce']];
+                    @endphp
+                    <x-form.checkbox :name="$__f1['name']" :value="$__f1['value']" :checked="$__f1['checked']" :options="$__f1['options']" /> {{ __('lang_v1.synced_from_woocommerce') }}
                 </label>
             </div>
         </div>

@@ -11,49 +11,82 @@
 
 <!-- Main content -->
 <section class="content no-print">
-	{!! Form::open(['url' => action('CombinedPurchaseReturnController@save'), 'method' => 'post', 'id' => 'purchase_return_form', 'files' => true ]) !!}
+	@php
+	$__f1 = ['options' => ['url' => action('CombinedPurchaseReturnController@save'), 'method' => 'post', 'id' => 'purchase_return_form', 'files' => true ]];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
 	<div class="box box-solid">
 		<div class="box-body">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('supplier_id', __('purchase.supplier') . ':*') !!}
+						@php
+						$__f2 = ['name' => 'supplier_id', 'value' => __('purchase.supplier') . ':*'];
+						@endphp
+						<x-form.label :name="$__f2['name']" :value="$__f2['value']" />
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="fa fa-user"></i>
 							</span>
-							{!! Form::select('contact_id', [], null, ['class' => 'form-control', 'placeholder' => __('messages.please_select'), 'required', 'id' => 'supplier_id']); !!}
+							@php
+							$__f3 = ['name' => 'contact_id', 'list' => [], 'selected' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('messages.please_select'), 'required', 'id' => 'supplier_id']];
+							@endphp
+							<x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
 						</div>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('location_id', __('purchase.business_location').':*') !!}
-						{!! Form::select('location_id', $business_locations, null, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+						@php
+						$__f4 = ['name' => 'location_id', 'value' => __('purchase.business_location').':*'];
+						@endphp
+						<x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+						@php
+						$__f5 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']];
+						@endphp
+						<x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('ref_no', __('purchase.ref_no').':') !!}
-						{!! Form::text('ref_no', null, ['class' => 'form-control']); !!}
+						@php
+						$__f6 = ['name' => 'ref_no', 'value' => __('purchase.ref_no').':'];
+						@endphp
+						<x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+						@php
+						$__f7 = ['name' => 'ref_no', 'value' => null, 'options' => ['class' => 'form-control']];
+						@endphp
+						<x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('transaction_date', __('messages.date') . ':*') !!}
+						@php
+						$__f8 = ['name' => 'transaction_date', 'value' => __('messages.date') . ':*'];
+						@endphp
+						<x-form.label :name="$__f8['name']" :value="$__f8['value']" />
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</span>
-							{!! Form::text('transaction_date', @format_datetime('now'), ['class' => 'form-control', 'readonly', 'required']); !!}
+							@php
+							$__f9 = ['name' => 'transaction_date', 'value' => \Carbon::createFromTimestamp(strtotime('now'))->format(session('business.date_format') . ' ' . (session('business.time_format') == 24 ? 'H:i' : 'h:i A')), 'options' => ['class' => 'form-control', 'readonly', 'required']];
+							@endphp
+							<x-form.input type="text" :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
 						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class="col-sm-3">
 	                <div class="form-group">
-	                    {!! Form::label('document', __('purchase.attach_document') . ':') !!}
-	                    {!! Form::file('document', ['id' => 'upload_document', 'accept' => implode(',', array_keys(config('constants.document_upload_mimes_types')))]); !!}
+	                    @php
+	                    $__f10 = ['name' => 'document', 'value' => __('purchase.attach_document') . ':'];
+	                    @endphp
+	                    <x-form.label :name="$__f10['name']" :value="$__f10['value']" />
+	                    @php
+	                    $__f11 = ['name' => 'document', 'options' => ['id' => 'upload_document', 'accept' => implode(',', array_keys(config('constants.document_upload_mimes_types')))]];
+	                    @endphp
+	                    <x-form.input type="file" :name="$__f11['name']" :options="$__f11['options']" />
 	                    <p class="help-block">@lang('purchase.max_file_size', ['size' => (config('constants.document_size_limit') / 1000000)])
 	                    @includeIf('components.document_help_text')</p>
 	                </div>
@@ -73,7 +106,10 @@
 							<span class="input-group-addon">
 								<i class="fa fa-search"></i>
 							</span>
-							{!! Form::text('search_product', null, ['class' => 'form-control', 'id' => 'search_product_for_purchase_return', 'placeholder' => __('stock_adjustment.search_products'), 'disabled']); !!}
+							@php
+							$__f12 = ['name' => 'search_product', 'value' => null, 'options' => ['class' => 'form-control', 'id' => 'search_product_for_purchase_return', 'placeholder' => __('stock_adjustment.search_products'), 'disabled']];
+							@endphp
+							<x-form.input type="text" :name="$__f12['name']" :value="$__f12['value']" :options="$__f12['options']" />
 						</div>
 					</div>
 				</div>
@@ -120,14 +156,20 @@
 				<div class="clearfix"></div>
 				<div class="col-md-4">
 					<div class="form-group">
-						{!! Form::label('tax_id', __('purchase.purchase_tax') . ':') !!}
+						@php
+						$__f13 = ['name' => 'tax_id', 'value' => __('purchase.purchase_tax') . ':'];
+						@endphp
+						<x-form.label :name="$__f13['name']" :value="$__f13['value']" />
 						<select name="tax_id" id="tax_id" class="form-control select2" placeholder="'Please Select'">
 							<option value="" data-tax_amount="0" data-tax_type="fixed" selected>@lang('lang_v1.none')</option>
 							@foreach($taxes as $tax)
 								<option value="{{ $tax->id }}" data-tax_amount="{{ $tax->amount }}" data-tax_type="{{ $tax->calculation_type }}">{{ $tax->name }}</option>
 							@endforeach
 						</select>
-						{!! Form::hidden('tax_amount', 0, ['id' => 'tax_amount']); !!}
+						@php
+						$__f14 = ['name' => 'tax_amount', 'value' => 0, 'options' => ['id' => 'tax_amount']];
+						@endphp
+						<x-form.input type="hidden" :name="$__f14['name']" :value="$__f14['value']" :options="$__f14['options']" />
 					</div>
 				</div>
 				<div class="col-md-8">
@@ -141,7 +183,7 @@
 			<button type="button" id="submit_purchase_return_form" class="btn btn-primary pull-right btn-flat">@lang('messages.submit')</button>
 		</div>
 	</div>
-	{!! Form::close() !!}
+	<x-form.close />
 </section>
 @stop
 @section('javascript')

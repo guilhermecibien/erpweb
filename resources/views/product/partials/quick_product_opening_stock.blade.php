@@ -22,16 +22,28 @@
 		@foreach($locations as $key => $value)
 			<tr>
 				<td>{{$value}}</td>
-				<td>{!! Form::text('opening_stock[' . $key . '][quantity]', 0, ['class' => 'form-control input-sm input_number purchase_quantity', 'required']); !!}</td>
-				<td>{!! Form::text('opening_stock[' . $key . '][purchase_price]', null , ['class' => 'form-control input-sm input_number unit_price', 'required']); !!}</td>
+				<td>@php
+				<td>$__f1 = ['name' => 'opening_stock[' . $key . '][quantity]', 'value' => 0, 'options' => ['class' => 'form-control input-sm input_number purchase_quantity', 'required']];
+				<td>@endphp
+				<td><x-form.input type="text" :name="$__f1['name']" :value="$__f1['value']" :options="$__f1['options']" /></td>
+				<td>@php
+				<td>$__f2 = ['name' => 'opening_stock[' . $key . '][purchase_price]', 'value' => null, 'options' => ['class' => 'form-control input-sm input_number unit_price', 'required']];
+				<td>@endphp
+				<td><x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" /></td>
 				@if($enable_expiry)
 					<td>
-						{!! Form::text('opening_stock[' . $key . '][exp_date]', null , ['class' => 'form-control input-sm os_exp_date', 'readonly']); !!}
+						@php
+						$__f3 = ['name' => 'opening_stock[' . $key . '][exp_date]', 'value' => null, 'options' => ['class' => 'form-control input-sm os_exp_date', 'readonly']];
+						@endphp
+						<x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
 					</td>
 				@endif
 				@if($enable_lot)
 					<td>
-						{!! Form::text('opening_stock[' . $key . '][lot_number]', null , ['class' => 'form-control input-sm']); !!}
+						@php
+						$__f4 = ['name' => 'opening_stock[' . $key . '][lot_number]', 'value' => null, 'options' => ['class' => 'form-control input-sm']];
+						@endphp
+						<x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 					</td>
 				@endif
 				<td>

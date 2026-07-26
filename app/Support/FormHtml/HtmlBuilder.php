@@ -2,12 +2,9 @@
 
 namespace App\Support\FormHtml;
 
-use Illuminate\Support\HtmlString;
-
 /**
- * Substituto local, mínimo, do Collective\Html\HtmlBuilder (laravelcollective/html,
- * abandonado e sem versão compatível com Laravel 11+). Mantém só o que o FormBuilder
- * abaixo realmente usa: montagem de string de atributos HTML e escape de entidades.
+ * Montagem de string de atributos HTML e escape de entidades, usado pelo
+ * FormFieldResolver e pelos componentes em resources/views/components/form/.
  */
 class HtmlBuilder
 {
@@ -21,18 +18,6 @@ class HtmlBuilder
     public function entities($value)
     {
         return htmlentities($value, ENT_QUOTES, 'UTF-8', false);
-    }
-
-    /**
-     * Convert entities to HTML characters.
-     *
-     * @param string $value
-     *
-     * @return string
-     */
-    public function decode($value)
-    {
-        return html_entity_decode($value, ENT_QUOTES, 'UTF-8');
     }
 
     /**
@@ -84,17 +69,5 @@ class HtmlBuilder
         }
 
         return null;
-    }
-
-    /**
-     * Transform the string to an Html serializable object.
-     *
-     * @param string $html
-     *
-     * @return \Illuminate\Support\HtmlString
-     */
-    protected function toHtmlString($html)
-    {
-        return new HtmlString($html);
     }
 }

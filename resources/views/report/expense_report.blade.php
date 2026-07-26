@@ -13,30 +13,50 @@
     <div class="row no-print">
         <div class="col-md-12">
             @component('components.filters', ['title' => __('report.filters')])
-              {!! Form::open(['url' => action('ReportController@getExpenseReport'), 'method' => 'get' ]) !!}
+              @php
+              $__f1 = ['options' => ['url' => action('ReportController@getExpenseReport'), 'method' => 'get' ]];
+              @endphp
+              <x-form.open :options="$__f1['options']" />
                 <div class="col-md-4">
                     <div class="form-group">
-                        {!! Form::label('location_id',  __('purchase.business_location') . ':') !!}
-                        {!! Form::select('location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%']); !!}
+                        @php
+                        $__f2 = ['name' => 'location_id', 'value' => __('purchase.business_location') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+                        @php
+                        $__f3 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%']];
+                        @endphp
+                        <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        {!! Form::label('category_id', __('category.category').':') !!}
-                        {!! Form::select('category', $categories, null, ['placeholder' =>
-                        __('report.all'), 'class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'category_id']); !!}
+                        @php
+                        $__f4 = ['name' => 'category_id', 'value' => __('category.category').':'];
+                        @endphp
+                        <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+                        @php
+                        $__f5 = ['name' => 'category', 'list' => $categories, 'selected' => null, 'options' => ['placeholder' => __('report.all'), 'class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'category_id']];
+                        @endphp
+                        <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        {!! Form::label('trending_product_date_range', __('report.date_range') . ':') !!}
-                        {!! Form::text('date_range', null , ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'trending_product_date_range', 'readonly']); !!}
+                        @php
+                        $__f6 = ['name' => 'trending_product_date_range', 'value' => __('report.date_range') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+                        @php
+                        $__f7 = ['name' => 'date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'trending_product_date_range', 'readonly']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
                     </div>
                 </div>
                 <div class="col-sm-12">
                   <button type="submit" class="btn btn-primary pull-right">@lang('report.apply_filters')</button>
                 </div> 
-                {!! Form::close() !!}
+                <x-form.close />
             @endcomponent
         </div>
     </div>

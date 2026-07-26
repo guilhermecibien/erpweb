@@ -26,27 +26,48 @@
                         <input type="hidden" name="single_variation_id" value="{{$variation->id}}">
 
                         <div class="col-sm-6">
-                          {!! Form::label('single_dpp', trans('product.exc_of_tax') . ':*') !!}
+                          @php
+                          $__f1 = ['name' => 'single_dpp', 'value' => trans('product.exc_of_tax') . ':*'];
+                          @endphp
+                          <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
 
-                          {!! Form::text('single_dpp', number_format($variation->default_purchase_price, 2, ',', ''), ['class' => 'form-control input-sm dpp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']); !!}
+                          @php
+                          $__f2 = ['name' => 'single_dpp', 'value' => number_format($variation->default_purchase_price, 2, ',', ''), 'options' => ['class' => 'form-control input-sm dpp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']];
+                          @endphp
+                          <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
                         </div>
 
                         <div class="col-sm-6">
-                          {!! Form::label('single_dpp_inc_tax', trans('product.inc_of_tax') . ':*') !!}
+                          @php
+                          $__f3 = ['name' => 'single_dpp_inc_tax', 'value' => trans('product.inc_of_tax') . ':*'];
+                          @endphp
+                          <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
                         
-                          {!! Form::text('single_dpp_inc_tax', number_format($variation->dpp_inc_tax, 2, ',', ''), ['class' => 'form-control input-sm dpp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']); !!}
+                          @php
+                          $__f4 = ['name' => 'single_dpp_inc_tax', 'value' => number_format($variation->dpp_inc_tax, 2, ',', ''), 'options' => ['class' => 'form-control input-sm dpp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']];
+                          @endphp
+                          <x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
                         </div>
                     </td>
 
                     <td>
                         <br/>
-                        {!! Form::text('profit_percent', @num_format($variation->profit_percent), ['class' => 'form-control input-sm input_number', 'id' => 'profit_percent', 'required']); !!}
+                        @php
+                        $__f5 = ['name' => 'profit_percent', 'value' => number_format($variation->profit_percent, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm input_number', 'id' => 'profit_percent', 'required']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
                     </td>
                     <td>
                         <label><span class="dsp_label"></span></label>
-                        {!! Form::text('single_dsp', ($variation->default_sell_price), ['class' => 'form-control input-sm', 'placeholder' => __('product.exc_of_tax'), 'id' => 'single_dsp', 'required']); !!}
+                        @php
+                        $__f6 = ['name' => 'single_dsp', 'value' => ($variation->default_sell_price), 'options' => ['class' => 'form-control input-sm', 'placeholder' => __('product.exc_of_tax'), 'id' => 'single_dsp', 'required']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
 
-                        {!! Form::text('single_dsp_inc_tax', @num_format($variation->sell_price_inc_tax), ['class' => 'form-control input-sm hide input_number', 'placeholder' => __('product.inc_of_tax'), 'id' => 'single_dsp_inc_tax', 'required']); !!}
+                        @php
+                        $__f7 = ['name' => 'single_dsp_inc_tax', 'value' => number_format($variation->sell_price_inc_tax, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm hide input_number', 'placeholder' => __('product.inc_of_tax'), 'id' => 'single_dsp_inc_tax', 'required']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
                     </td>
                     <td>
                         @php 
@@ -61,8 +82,14 @@
                             @endforeach
                         @endif
                         <div class="form-group">
-                            {!! Form::label('variation_images', __('lang_v1.product_image') . ':') !!}
-                            {!! Form::file('variation_images[]', ['class' => 'variation_images', 'accept' => 'image/*', 'multiple']); !!}
+                            @php
+                            $__f8 = ['name' => 'variation_images', 'value' => __('lang_v1.product_image') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+                            @php
+                            $__f9 = ['name' => 'variation_images[]', 'options' => ['class' => 'variation_images', 'accept' => 'image/*', 'multiple']];
+                            @endphp
+                            <x-form.input type="file" :name="$__f9['name']" :options="$__f9['options']" />
                             <small><p class="help-block">@lang('purchase.max_file_size', ['size' => (config('constants.document_size_limit') / 1000000)]) <br> @lang('lang_v1.aspect_ratio_should_be_1_1')</p></small>
                         </div>
                     </td>

@@ -13,14 +13,18 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 col-xs-12">
 			<div class="form-group">
-              	{!! Form::text('search_product', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.search_product_to_edit'), 'id' => 'search_product']); !!}
+              	@php
+              	$__f1 = ['name' => 'search_product', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.search_product_to_edit'), 'id' => 'search_product']];
+              	@endphp
+              	<x-form.input type="text" :name="$__f1['name']" :value="$__f1['value']" :options="$__f1['options']" />
 			</div>
 		</div>
 	</div>
 	<br>
-	{!! Form::open(['url' => action('ProductController@bulkUpdate'), 
-			'method' => 'post', 'id' => 'bulk_edit_products_form' ]) !!}
+	@php
+	$__f2 = ['options' => ['url' => action('ProductController@bulkUpdate'), 'method' => 'post', 'id' => 'bulk_edit_products_form' ]];
+	@endphp
+	<x-form.open :options="$__f2['options']" />
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table text-center table-bordered" id="product_table">
@@ -45,7 +49,7 @@
 			<button type="submit" class="btn btn-primary pull-right">@lang('messages.update')</button>
 		</div>
 	</div>
-	{!! Form::close() !!}
+	<x-form.close />
 </section>
 @endsection
 

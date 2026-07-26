@@ -1,7 +1,10 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
 
-    {!! Form::open(['url' => action('Restaurant\ModifierSetsController@store'), 'method' => 'post', 'id' => 'table_add_form' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('Restaurant\ModifierSetsController@store'), 'method' => 'post', 'id' => 'table_add_form' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -13,8 +16,14 @@
         
         <div class="col-sm-12">
           <div class="form-group">
-            {!! Form::label('name', __( 'restaurant.modifier_set' ) . ':*') !!}
-            {!! Form::text('name', null, ['class' => 'form-control', 'required', 'placeholder' => 'Nome']); !!}
+            @php
+            $__f2 = ['name' => 'name', 'value' => __( 'restaurant.modifier_set' ) . ':*'];
+            @endphp
+            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+            @php
+            $__f3 = ['name' => 'name', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Nome']];
+            @endphp
+            <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           </div>
         </div>
 
@@ -79,7 +88,7 @@
       <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'messages.close' )</button>
     </div>
 
-    {!! Form::close() !!}
+    <x-form.close />
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

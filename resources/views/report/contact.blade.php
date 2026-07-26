@@ -21,15 +21,27 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('cg_customer_group_id', __( 'lang_v1.customer_group_name' ) . ':') !!}
-                        {!! Form::select('cnt_customer_group_id', $customer_group, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'cnt_customer_group_id']); !!}
+                        @php
+                        $__f1 = ['name' => 'cg_customer_group_id', 'value' => __( 'lang_v1.customer_group_name' ) . ':'];
+                        @endphp
+                        <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                        @php
+                        $__f2 = ['name' => 'cnt_customer_group_id', 'list' => $customer_group, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'cnt_customer_group_id']];
+                        @endphp
+                        <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('type', __( 'lang_v1.type' ) . ':') !!}
-                        {!! Form::select('contact_type', $types, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'contact_type']); !!}
+                        @php
+                        $__f3 = ['name' => 'type', 'value' => __( 'lang_v1.type' ) . ':'];
+                        @endphp
+                        <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+                        @php
+                        $__f4 = ['name' => 'contact_type', 'list' => $types, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'contact_type']];
+                        @endphp
+                        <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
                     </div>
                 </div>
 

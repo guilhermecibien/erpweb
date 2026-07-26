@@ -14,40 +14,63 @@
 
     <!-- Main content -->
     <section class="content">
-      {!! Form::open(['url' => action('ProductController@update' , [$product->id] ), 'method' => 'PUT', 'id' => 'product_add_form',
-      'class' => 'product_form', 'files' => true ]) !!}
+      @php
+      $__f1 = ['options' => ['url' => action('ProductController@update' , [$product->id] ), 'method' => 'PUT', 'id' => 'product_add_form', 'class' => 'product_form', 'files' => true ]];
+      @endphp
+      <x-form.open :options="$__f1['options']" />
       <input type="hidden" id="product_id" value="{{ $product->id }}">
 
       @component('components.widget', ['class' => 'box-primary'])
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('name', __('product.product_name') . ':*') !!}
-            {!! Form::text('name', $product->name, ['class' => 'form-control', 'required',
-            'placeholder' => __('product.product_name')]); !!}
+            @php
+            $__f2 = ['name' => 'name', 'value' => __('product.product_name') . ':*'];
+            @endphp
+            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+            @php
+            $__f3 = ['name' => 'name', 'value' => $product->name, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __('product.product_name')]];
+            @endphp
+            <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           </div>
         </div>
 
         <div class="col-sm-2 @if(!(session('business.enable_category') && session('business.enable_sub_category'))) hide @endif">
           <div class="form-group">
-            {!! Form::label('sku', __('product.sku')  . ':*') !!} @show_tooltip(__('tooltip.sku'))
-            {!! Form::text('sku', $product->sku, ['class' => 'form-control',
-            'placeholder' => __('product.sku'), 'required']); !!}
+            @php
+            $__f4 = ['name' => 'sku', 'value' => __('product.sku')  . ':*'];
+            @endphp
+            <x-form.label :name="$__f4['name']" :value="$__f4['value']" /> @show_tooltip(__('tooltip.sku'))
+            @php
+            $__f5 = ['name' => 'sku', 'value' => $product->sku, 'options' => ['class' => 'form-control', 'placeholder' => __('product.sku'), 'required']];
+            @endphp
+            <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('barcode_type', __('product.barcode_type') . ':*') !!}
-            {!! Form::select('barcode_type', $barcode_types, $product->barcode_type, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']); !!}
+            @php
+            $__f6 = ['name' => 'barcode_type', 'value' => __('product.barcode_type') . ':*'];
+            @endphp
+            <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+            @php
+            $__f7 = ['name' => 'barcode_type', 'list' => $barcode_types, 'selected' => $product->barcode_type, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']];
+            @endphp
+            <x-form.select :name="$__f7['name']" :list="$__f7['list']" :selected="$__f7['selected']" :options="$__f7['options']" />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('codigo_barras', 'Código de barras' . ':') !!}
-            {!! Form::text('codigo_barras', $product->codigo_barras, ['class' => 'form-control',
-            'placeholder' => 'Código de barras']); !!}
+            @php
+            $__f8 = ['name' => 'codigo_barras', 'value' => 'Código de barras' . ':'];
+            @endphp
+            <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+            @php
+            $__f9 = ['name' => 'codigo_barras', 'value' => $product->codigo_barras, 'options' => ['class' => 'form-control', 'placeholder' => 'Código de barras']];
+            @endphp
+            <x-form.input type="text" :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
           </div>
         </div>
 
@@ -55,9 +78,15 @@
 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('unit_id', __('product.unit') . ':*') !!}
+            @php
+            $__f10 = ['name' => 'unit_id', 'value' => __('product.unit') . ':*'];
+            @endphp
+            <x-form.label :name="$__f10['name']" :value="$__f10['value']" />
             <div class="input-group">
-              {!! Form::select('unit_id', $units, $product->unit_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']); !!}
+              @php
+              $__f11 = ['name' => 'unit_id', 'list' => $units, 'selected' => $product->unit_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']];
+              @endphp
+              <x-form.select :name="$__f11['name']" :list="$__f11['list']" :selected="$__f11['selected']" :options="$__f11['options']" />
               <span class="input-group-btn">
                 <button type="button" @if(!auth()->user()->can('unit.create')) disabled @endif class="btn btn-default bg-white btn-flat quick_add_unit btn-modal" data-href="{{action('UnitController@create', ['quick_add' => true])}}" title="@lang('unit.add_unit')" data-container=".view_modal"><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
               </span>
@@ -67,7 +96,10 @@
 
         <div class="col-sm-4 @if(!session('business.enable_sub_units')) hide @endif">
           <div class="form-group">
-            {!! Form::label('sub_unit_ids', __('lang_v1.related_sub_units') . ':') !!} @show_tooltip(__('lang_v1.sub_units_tooltip'))
+            @php
+            $__f12 = ['name' => 'sub_unit_ids', 'value' => __('lang_v1.related_sub_units') . ':'];
+            @endphp
+            <x-form.label :name="$__f12['name']" :value="$__f12['value']" /> @show_tooltip(__('lang_v1.sub_units_tooltip'))
 
             <select name="sub_unit_ids[]" class="form-control select2" multiple id="sub_unit_ids">
               @foreach($sub_units as $sub_unit_id => $sub_unit_value)
@@ -82,9 +114,15 @@
 
         <div class="col-sm-4 @if(!session('business.enable_brand')) hide @endif">
           <div class="form-group">
-            {!! Form::label('brand_id', __('product.brand') . ':') !!}
+            @php
+            $__f13 = ['name' => 'brand_id', 'value' => __('product.brand') . ':'];
+            @endphp
+            <x-form.label :name="$__f13['name']" :value="$__f13['value']" />
             <div class="input-group">
-              {!! Form::select('brand_id', $brands, $product->brand_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']); !!}
+              @php
+              $__f14 = ['name' => 'brand_id', 'list' => $brands, 'selected' => $product->brand_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']];
+              @endphp
+              <x-form.select :name="$__f14['name']" :list="$__f14['list']" :selected="$__f14['selected']" :options="$__f14['options']" />
               <span class="input-group-btn">
                 <button type="button" @if(!auth()->user()->can('brand.create')) disabled @endif class="btn btn-default bg-white btn-flat btn-modal" data-href="{{action('BrandController@create', ['quick_add' => true])}}" title="@lang('brand.add_brand')" data-container=".view_modal"><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
               </span>
@@ -97,22 +135,40 @@
         <div class="clearfix"></div>
         <div class="col-sm-4 @if(!session('business.enable_category')) hide @endif">
           <div class="form-group">
-            {!! Form::label('category_id', __('product.category') . ':') !!}
-            {!! Form::select('category_id', $categories, $product->category_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']); !!}
+            @php
+            $__f15 = ['name' => 'category_id', 'value' => __('product.category') . ':'];
+            @endphp
+            <x-form.label :name="$__f15['name']" :value="$__f15['value']" />
+            @php
+            $__f16 = ['name' => 'category_id', 'list' => $categories, 'selected' => $product->category_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']];
+            @endphp
+            <x-form.select :name="$__f16['name']" :list="$__f16['list']" :selected="$__f16['selected']" :options="$__f16['options']" />
           </div>
         </div>
 
         <div class="col-sm-4 @if(!(session('business.enable_category') && session('business.enable_sub_category'))) hide @endif">
           <div class="form-group">
-            {!! Form::label('sub_category_id', __('product.sub_category')  . ':') !!}
-            {!! Form::select('sub_category_id', $sub_categories, $product->sub_category_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']); !!}
+            @php
+            $__f17 = ['name' => 'sub_category_id', 'value' => __('product.sub_category')  . ':'];
+            @endphp
+            <x-form.label :name="$__f17['name']" :value="$__f17['value']" />
+            @php
+            $__f18 = ['name' => 'sub_category_id', 'list' => $sub_categories, 'selected' => $product->sub_category_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']];
+            @endphp
+            <x-form.select :name="$__f18['name']" :list="$__f18['list']" :selected="$__f18['selected']" :options="$__f18['options']" />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('product_locations', __('business.business_locations') . ':') !!} @show_tooltip(__('lang_v1.product_location_help'))
-            {!! Form::select('product_locations[]', $business_locations, $product->product_locations->pluck('id'), ['class' => 'form-control select2', 'multiple', 'id' => 'product_locations']); !!}
+            @php
+            $__f19 = ['name' => 'product_locations', 'value' => __('business.business_locations') . ':'];
+            @endphp
+            <x-form.label :name="$__f19['name']" :value="$__f19['value']" /> @show_tooltip(__('lang_v1.product_location_help'))
+            @php
+            $__f20 = ['name' => 'product_locations[]', 'list' => $business_locations, 'selected' => $product->product_locations->pluck('id'), 'options' => ['class' => 'form-control select2', 'multiple', 'id' => 'product_locations']];
+            @endphp
+            <x-form.select :name="$__f20['name']" :list="$__f20['list']" :selected="$__f20['selected']" :options="$__f20['options']" />
           </div>
         </div>
 
@@ -122,22 +178,36 @@
           <div class="form-group">
             <br>
             <label>
-              {!! Form::checkbox('enable_stock', 1, $product->enable_stock, ['class' => 'input-icheck', 'id' => 'enable_stock']); !!} <strong>@lang('product.manage_stock')</strong>
+              @php
+              $__f21 = ['name' => 'enable_stock', 'value' => 1, 'checked' => $product->enable_stock, 'options' => ['class' => 'input-icheck', 'id' => 'enable_stock']];
+              @endphp
+              <x-form.checkbox :name="$__f21['name']" :value="$__f21['value']" :checked="$__f21['checked']" :options="$__f21['options']" /> <strong>@lang('product.manage_stock')</strong>
             </label>@show_tooltip(__('tooltip.enable_stock')) <p class="help-block"><i>@lang('product.enable_stock_help')</i></p>
           </div>
         </div>
         <div class="col-sm-4" id="alert_quantity_div" @if(!$product->enable_stock) style="display:none" @endif>
           <div class="form-group">
-            {!! Form::label('alert_quantity', __('product.alert_quantity') . ':') !!} @show_tooltip(__('tooltip.alert_quantity'))
-            {!! Form::number('alert_quantity', $product->alert_quantity, ['class' => 'form-control',
-            'placeholder' => __('product.alert_quantity') , 'min' => '0']); !!}
+            @php
+            $__f22 = ['name' => 'alert_quantity', 'value' => __('product.alert_quantity') . ':'];
+            @endphp
+            <x-form.label :name="$__f22['name']" :value="$__f22['value']" /> @show_tooltip(__('tooltip.alert_quantity'))
+            @php
+            $__f23 = ['name' => 'alert_quantity', 'value' => $product->alert_quantity, 'options' => ['class' => 'form-control', 'placeholder' => __('product.alert_quantity') , 'min' => '0']];
+            @endphp
+            <x-form.input type="number" :name="$__f23['name']" :value="$__f23['value']" :options="$__f23['options']" />
           </div>
         </div>
         @if(!empty($common_settings['enable_product_warranty']))
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('warranty_id', __('lang_v1.warranty') . ':') !!}
-            {!! Form::select('warranty_id', $warranties, $product->warranty_id, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select')]); !!}
+            @php
+            $__f24 = ['name' => 'warranty_id', 'value' => __('lang_v1.warranty') . ':'];
+            @endphp
+            <x-form.label :name="$__f24['name']" :value="$__f24['value']" />
+            @php
+            $__f25 = ['name' => 'warranty_id', 'list' => $warranties, 'selected' => $product->warranty_id, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select')]];
+            @endphp
+            <x-form.select :name="$__f25['name']" :list="$__f25['list']" :selected="$__f25['selected']" :options="$__f25['options']" />
           </div>
         </div>
         @endif
@@ -152,14 +222,26 @@
         <div class="clearfix"></div>
         <div class="col-sm-8">
           <div class="form-group">
-            {!! Form::label('product_description', __('lang_v1.product_description') . ':') !!}
-            {!! Form::textarea('product_description', $product->product_description, ['class' => 'form-control']); !!}
+            @php
+            $__f26 = ['name' => 'product_description', 'value' => __('lang_v1.product_description') . ':'];
+            @endphp
+            <x-form.label :name="$__f26['name']" :value="$__f26['value']" />
+            @php
+            $__f27 = ['name' => 'product_description', 'value' => $product->product_description, 'options' => ['class' => 'form-control']];
+            @endphp
+            <x-form.textarea :name="$__f27['name']" :value="$__f27['value']" :options="$__f27['options']" />
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('image', __('lang_v1.product_image') . ':') !!}
-            {!! Form::file('image' ,['id' => 'upload_image', 'accept' => 'image/*']); !!}
+            @php
+            $__f28 = ['name' => 'image', 'value' => __('lang_v1.product_image') . ':'];
+            @endphp
+            <x-form.label :name="$__f28['name']" :value="$__f28['value']" />
+            @php
+            $__f29 = ['name' => 'image', 'options' => ['id' => 'upload_image', 'accept' => 'image/*']];
+            @endphp
+            <x-form.input type="file" :name="$__f29['name']" :options="$__f29['options']" />
             <small><p class="help-block">@lang('purchase.max_file_size', ['size' => (config('constants.document_size_limit') / 1000000)]). @lang('lang_v1.aspect_ratio_should_be_1_1') @if(!empty($product->image)) <br> @lang('lang_v1.previous_image_will_be_replaced') @endif</p></small>
           </div>
           @if($product->image)
@@ -188,7 +270,10 @@
                 <div class="form-group">
                   <br>
                   <label>
-                    {!! Form::checkbox('ecommerce', 1, $product->ecommerce, ['class' => 'input-icheck']); !!} <strong>Ecommerce</strong>
+                    @php
+                    $__f30 = ['name' => 'ecommerce', 'value' => 1, 'checked' => $product->ecommerce, 'options' => ['class' => 'input-icheck']];
+                    @endphp
+                    <x-form.checkbox :name="$__f30['name']" :value="$__f30['value']" :checked="$__f30['checked']" :options="$__f30['options']" /> <strong>Ecommerce</strong>
                   </label> @show_tooltip('Se marcado, o produto será visível no ecommerce')
                 </div>
               </div>
@@ -197,7 +282,10 @@
                 <div class="form-group">
                   <br>
                   <label>
-                    {!! Form::checkbox('destaque', 1, $product->destaque, ['class' => 'input-icheck']); !!} <strong>Destaque</strong>
+                    @php
+                    $__f31 = ['name' => 'destaque', 'value' => 1, 'checked' => $product->destaque, 'options' => ['class' => 'input-icheck']];
+                    @endphp
+                    <x-form.checkbox :name="$__f31['name']" :value="$__f31['value']" :checked="$__f31['checked']" :options="$__f31['options']" /> <strong>Destaque</strong>
                   </label> @show_tooltip('Se marcado, o produto será mostrado na primeira pagina')
                 </div>
               </div>
@@ -206,7 +294,10 @@
                 <div class="form-group">
                   <br>
                   <label>
-                    {!! Form::checkbox('novo', 1, $product->novo, ['class' => 'input-icheck']); !!} <strong>Novo</strong>
+                    @php
+                    $__f32 = ['name' => 'novo', 'value' => 1, 'checked' => $product->novo, 'options' => ['class' => 'input-icheck']];
+                    @endphp
+                    <x-form.checkbox :name="$__f32['name']" :value="$__f32['value']" :checked="$__f32['checked']" :options="$__f32['options']" /> <strong>Novo</strong>
                   </label> @show_tooltip('Se marcado, o produto será mostrado como novidade')
                 </div>
               </div>
@@ -215,36 +306,66 @@
 
               <div class="col-sm-2">
                 <div class="form-group">
-                  {!! Form::label('weight',  __('lang_v1.weight') . ':') !!}
-                  {!! Form::text('weight', $product->weight, ['class' => 'form-control', 'placeholder' => __('lang_v1.weight'), 'data-mask="000000,000"', 'data-mask-reverse="true"']); !!}
+                  @php
+                  $__f33 = ['name' => 'weight', 'value' => __('lang_v1.weight') . ':'];
+                  @endphp
+                  <x-form.label :name="$__f33['name']" :value="$__f33['value']" />
+                  @php
+                  $__f34 = ['name' => 'weight', 'value' => $product->weight, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.weight'), 'data-mask="000000,000"', 'data-mask-reverse="true"']];
+                  @endphp
+                  <x-form.input type="text" :name="$__f34['name']" :value="$__f34['value']" :options="$__f34['options']" />
                 </div>
               </div>
 
               <div class="col-sm-2">
                 <div class="form-group">
-                  {!! Form::label('altura',  'Altura' . ':') !!}
-                  {!! Form::text('altura', $product->altura, ['class' => 'form-control', 'placeholder' => 'Altura', 'data-mask="000000,00"', 'data-mask-reverse="true"']); !!}
+                  @php
+                  $__f35 = ['name' => 'altura', 'value' => 'Altura' . ':'];
+                  @endphp
+                  <x-form.label :name="$__f35['name']" :value="$__f35['value']" />
+                  @php
+                  $__f36 = ['name' => 'altura', 'value' => $product->altura, 'options' => ['class' => 'form-control', 'placeholder' => 'Altura', 'data-mask="000000,00"', 'data-mask-reverse="true"']];
+                  @endphp
+                  <x-form.input type="text" :name="$__f36['name']" :value="$__f36['value']" :options="$__f36['options']" />
                 </div>
               </div>
 
               <div class="col-sm-2">
                 <div class="form-group">
-                  {!! Form::label('largura',  'Largura' . ':') !!}
-                  {!! Form::text('largura', $product->largura, ['class' => 'form-control', 'placeholder' => 'Largura', 'data-mask="000000,00"', 'data-mask-reverse="true"']); !!}
+                  @php
+                  $__f37 = ['name' => 'largura', 'value' => 'Largura' . ':'];
+                  @endphp
+                  <x-form.label :name="$__f37['name']" :value="$__f37['value']" />
+                  @php
+                  $__f38 = ['name' => 'largura', 'value' => $product->largura, 'options' => ['class' => 'form-control', 'placeholder' => 'Largura', 'data-mask="000000,00"', 'data-mask-reverse="true"']];
+                  @endphp
+                  <x-form.input type="text" :name="$__f38['name']" :value="$__f38['value']" :options="$__f38['options']" />
                 </div>
               </div>
 
               <div class="col-sm-2">
                 <div class="form-group">
-                  {!! Form::label('comprimento',  'Comprimento' . ':') !!}
-                  {!! Form::text('comprimento', $product->comprimento, ['class' => 'form-control', 'placeholder' => 'Comprimento', 'data-mask="000000,00"', 'data-mask-reverse="true"']); !!}
+                  @php
+                  $__f39 = ['name' => 'comprimento', 'value' => 'Comprimento' . ':'];
+                  @endphp
+                  <x-form.label :name="$__f39['name']" :value="$__f39['value']" />
+                  @php
+                  $__f40 = ['name' => 'comprimento', 'value' => $product->comprimento, 'options' => ['class' => 'form-control', 'placeholder' => 'Comprimento', 'data-mask="000000,00"', 'data-mask-reverse="true"']];
+                  @endphp
+                  <x-form.input type="text" :name="$__f40['name']" :value="$__f40['value']" :options="$__f40['options']" />
                 </div>
               </div>
 
               <div class="col-sm-2">
                 <div class="form-group">
-                  {!! Form::label('valor_ecommerce',  'Valor ecommerce' . ':') !!}
-                  {!! Form::text('valor_ecommerce', $product->valor_ecommerce, ['class' => 'form-control', 'placeholder' => 'Valor ecommerce', 'data-mask="000000,00"', 'data-mask-reverse="true"']); !!}
+                  @php
+                  $__f41 = ['name' => 'valor_ecommerce', 'value' => 'Valor ecommerce' . ':'];
+                  @endphp
+                  <x-form.label :name="$__f41['name']" :value="$__f41['value']" />
+                  @php
+                  $__f42 = ['name' => 'valor_ecommerce', 'value' => $product->valor_ecommerce, 'options' => ['class' => 'form-control', 'placeholder' => 'Valor ecommerce', 'data-mask="000000,00"', 'data-mask-reverse="true"']];
+                  @endphp
+                  <x-form.input type="text" :name="$__f42['name']" :value="$__f42['value']" :options="$__f42['options']" />
                 </div>
               </div>
 
@@ -282,10 +403,18 @@
                 $disabled_period = true;
               }
               @endphp
-              {!! Form::label('expiry_period', __('product.expires_in') . ':') !!}<br>
-              {!! Form::text('expiry_period', @num_format($product->expiry_period), ['class' => 'form-control pull-left input_number',
-              'placeholder' => __('product.expiry_period'), 'style' => 'width:60%;', 'disabled' => $disabled]); !!}
-              {!! Form::select('expiry_period_type', ['months'=>__('product.months'), 'days'=>__('product.days'), '' =>__('product.not_applicable') ], $product->expiry_period_type, ['class' => 'form-control select2 pull-left', 'style' => 'width:40%;', 'id' => 'expiry_period_type', 'disabled' => $disabled_period]); !!}
+              @php
+              $__f43 = ['name' => 'expiry_period', 'value' => __('product.expires_in') . ':'];
+              @endphp
+              <x-form.label :name="$__f43['name']" :value="$__f43['value']" /><br>
+              @php
+              $__f44 = ['name' => 'expiry_period', 'value' => number_format($product->expiry_period, 2, ',', '.'), 'options' => ['class' => 'form-control pull-left input_number', 'placeholder' => __('product.expiry_period'), 'style' => 'width:60%;', 'disabled' => $disabled]];
+              @endphp
+              <x-form.input type="text" :name="$__f44['name']" :value="$__f44['value']" :options="$__f44['options']" />
+              @php
+              $__f45 = ['name' => 'expiry_period_type', 'list' => ['months'=>__('product.months'), 'days'=>__('product.days'), '' =>__('product.not_applicable') ], 'selected' => $product->expiry_period_type, 'options' => ['class' => 'form-control select2 pull-left', 'style' => 'width:40%;', 'id' => 'expiry_period_type', 'disabled' => $disabled_period]];
+              @endphp
+              <x-form.select :name="$__f45['name']" :list="$__f45['list']" :selected="$__f45['selected']" :options="$__f45['options']" />
             </div>
           </div>
         </div>
@@ -293,7 +422,10 @@
         <div class="col-sm-4">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('enable_sr_no', 1, $product->enable_sr_no, ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.enable_imei_or_sr_no')</strong>
+              @php
+              $__f46 = ['name' => 'enable_sr_no', 'value' => 1, 'checked' => $product->enable_sr_no, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f46['name']" :value="$__f46['value']" :checked="$__f46['checked']" :options="$__f46['options']" /> <strong>@lang('lang_v1.enable_imei_or_sr_no')</strong>
             </label>
             @show_tooltip(__('lang_v1.tooltip_sr_no'))
           </div>
@@ -303,7 +435,10 @@
           <div class="form-group">
             <br>
             <label>
-              {!! Form::checkbox('not_for_selling', 1, $product->not_for_selling, ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.not_for_selling')</strong>
+              @php
+              $__f47 = ['name' => 'not_for_selling', 'value' => 1, 'checked' => $product->not_for_selling, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f47['name']" :value="$__f47['value']" :checked="$__f47['checked']" :options="$__f47['options']" /> <strong>@lang('lang_v1.not_for_selling')</strong>
             </label> @show_tooltip(__('lang_v1.tooltip_not_for_selling'))
           </div>
         </div>
@@ -322,27 +457,48 @@
         @foreach($business_locations as $id => $location)
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('rack_' . $id,  $location . ':') !!}
+            @php
+            $__f48 = ['name' => 'rack_' . $id, 'value' => $location . ':'];
+            @endphp
+            <x-form.label :name="$__f48['name']" :value="$__f48['value']" />
 
 
             @if(!empty($rack_details[$id]))
             @if(session('business.enable_racks'))
-            {!! Form::text('product_racks_update[' . $id . '][rack]', $rack_details[$id]['rack'], ['class' => 'form-control', 'id' => 'rack_' . $id]); !!}
+            @php
+            $__f49 = ['name' => 'product_racks_update[' . $id . '][rack]', 'value' => $rack_details[$id]['rack'], 'options' => ['class' => 'form-control', 'id' => 'rack_' . $id]];
+            @endphp
+            <x-form.input type="text" :name="$__f49['name']" :value="$__f49['value']" :options="$__f49['options']" />
             @endif
 
             @if(session('business.enable_row'))
-            {!! Form::text('product_racks_update[' . $id . '][row]', $rack_details[$id]['row'], ['class' => 'form-control']); !!}
+            @php
+            $__f50 = ['name' => 'product_racks_update[' . $id . '][row]', 'value' => $rack_details[$id]['row'], 'options' => ['class' => 'form-control']];
+            @endphp
+            <x-form.input type="text" :name="$__f50['name']" :value="$__f50['value']" :options="$__f50['options']" />
             @endif
 
             @if(session('business.enable_position'))
-            {!! Form::text('product_racks_update[' . $id . '][position]', $rack_details[$id]['position'], ['class' => 'form-control']); !!}
+            @php
+            $__f51 = ['name' => 'product_racks_update[' . $id . '][position]', 'value' => $rack_details[$id]['position'], 'options' => ['class' => 'form-control']];
+            @endphp
+            <x-form.input type="text" :name="$__f51['name']" :value="$__f51['value']" :options="$__f51['options']" />
             @endif
             @else
-            {!! Form::text('product_racks[' . $id . '][rack]', null, ['class' => 'form-control', 'id' => 'rack_' . $id, 'placeholder' => __('lang_v1.rack')]); !!}
+            @php
+            $__f52 = ['name' => 'product_racks[' . $id . '][rack]', 'value' => null, 'options' => ['class' => 'form-control', 'id' => 'rack_' . $id, 'placeholder' => __('lang_v1.rack')]];
+            @endphp
+            <x-form.input type="text" :name="$__f52['name']" :value="$__f52['value']" :options="$__f52['options']" />
 
-            {!! Form::text('product_racks[' . $id . '][row]', null, ['class' => 'form-control', 'placeholder' => __('lang_v1.row')]); !!}
+            @php
+            $__f53 = ['name' => 'product_racks[' . $id . '][row]', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.row')]];
+            @endphp
+            <x-form.input type="text" :name="$__f53['name']" :value="$__f53['value']" :options="$__f53['options']" />
 
-            {!! Form::text('product_racks[' . $id . '][position]', null, ['class' => 'form-control', 'placeholder' => __('lang_v1.position')]); !!}
+            @php
+            $__f54 = ['name' => 'product_racks[' . $id . '][position]', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.position')]];
+            @endphp
+            <x-form.input type="text" :name="$__f54['name']" :value="$__f54['value']" :options="$__f54['options']" />
             @endif
 
           </div>
@@ -363,29 +519,53 @@
         <!--custom fields-->
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('product_custom_field1',  $product_custom_field1 . ':') !!}
-            {!! Form::text('product_custom_field1', $product->product_custom_field1, ['class' => 'form-control', 'placeholder' => $product_custom_field1]); !!}
+            @php
+            $__f55 = ['name' => 'product_custom_field1', 'value' => $product_custom_field1 . ':'];
+            @endphp
+            <x-form.label :name="$__f55['name']" :value="$__f55['value']" />
+            @php
+            $__f56 = ['name' => 'product_custom_field1', 'value' => $product->product_custom_field1, 'options' => ['class' => 'form-control', 'placeholder' => $product_custom_field1]];
+            @endphp
+            <x-form.input type="text" :name="$__f56['name']" :value="$__f56['value']" :options="$__f56['options']" />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('product_custom_field2',  $product_custom_field2 . ':') !!}
-            {!! Form::text('product_custom_field2', $product->product_custom_field2, ['class' => 'form-control', 'placeholder' => $product_custom_field2]); !!}
+            @php
+            $__f57 = ['name' => 'product_custom_field2', 'value' => $product_custom_field2 . ':'];
+            @endphp
+            <x-form.label :name="$__f57['name']" :value="$__f57['value']" />
+            @php
+            $__f58 = ['name' => 'product_custom_field2', 'value' => $product->product_custom_field2, 'options' => ['class' => 'form-control', 'placeholder' => $product_custom_field2]];
+            @endphp
+            <x-form.input type="text" :name="$__f58['name']" :value="$__f58['value']" :options="$__f58['options']" />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('product_custom_field3',  $product_custom_field3 . ':') !!}
-            {!! Form::text('product_custom_field3', $product->product_custom_field3, ['class' => 'form-control', 'placeholder' => $product_custom_field3]); !!}
+            @php
+            $__f59 = ['name' => 'product_custom_field3', 'value' => $product_custom_field3 . ':'];
+            @endphp
+            <x-form.label :name="$__f59['name']" :value="$__f59['value']" />
+            @php
+            $__f60 = ['name' => 'product_custom_field3', 'value' => $product->product_custom_field3, 'options' => ['class' => 'form-control', 'placeholder' => $product_custom_field3]];
+            @endphp
+            <x-form.input type="text" :name="$__f60['name']" :value="$__f60['value']" :options="$__f60['options']" />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('product_custom_field4',  $product_custom_field4 . ':') !!}
-            {!! Form::text('product_custom_field4', $product->product_custom_field4, ['class' => 'form-control', 'placeholder' => $product_custom_field4]); !!}
+            @php
+            $__f61 = ['name' => 'product_custom_field4', 'value' => $product_custom_field4 . ':'];
+            @endphp
+            <x-form.label :name="$__f61['name']" :value="$__f61['value']" />
+            @php
+            $__f62 = ['name' => 'product_custom_field4', 'value' => $product->product_custom_field4, 'options' => ['class' => 'form-control', 'placeholder' => $product_custom_field4]];
+            @endphp
+            <x-form.input type="text" :name="$__f62['name']" :value="$__f62['value']" :options="$__f62['options']" />
           </div>
         </div>
         <!--custom fields-->
@@ -397,25 +577,41 @@
       <div class="row">
         <div class="col-sm-4 @if(!session('business.enable_price_tax')) hide @endif">
           <div class="form-group">
-            {!! Form::label('tax', __('product.applicable_tax') . ':') !!}
-            {!! Form::select('tax', $taxes, $product->tax, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2'], $tax_attributes); !!}
+            @php
+            $__f63 = ['name' => 'tax', 'value' => __('product.applicable_tax') . ':'];
+            @endphp
+            <x-form.label :name="$__f63['name']" :value="$__f63['value']" />
+            @php
+            $__f64 = ['name' => 'tax', 'list' => $taxes, 'selected' => $product->tax, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2'], 'optionsAttributes' => $tax_attributes];
+            @endphp
+            <x-form.select :name="$__f64['name']" :list="$__f64['list']" :selected="$__f64['selected']" :options="$__f64['options']" :options-attributes="$__f64['optionsAttributes']" />
           </div>
         </div>
 
         <div class="col-sm-4 @if(!session('business.enable_price_tax')) hide @endif">
           <div class="form-group">
-            {!! Form::label('tax_type', __('product.selling_price_tax_type') . ':*') !!}
-            {!! Form::select('tax_type',['inclusive' => __('product.inclusive'), 'exclusive' => __('product.exclusive')], $product->tax_type,
-            ['class' => 'form-control select2', 'required']); !!}
+            @php
+            $__f65 = ['name' => 'tax_type', 'value' => __('product.selling_price_tax_type') . ':*'];
+            @endphp
+            <x-form.label :name="$__f65['name']" :value="$__f65['value']" />
+            @php
+            $__f66 = ['name' => 'tax_type', 'list' => ['inclusive' => __('product.inclusive'), 'exclusive' => __('product.exclusive')], 'selected' => $product->tax_type, 'options' => ['class' => 'form-control select2', 'required']];
+            @endphp
+            <x-form.select :name="$__f66['name']" :list="$__f66['list']" :selected="$__f66['selected']" :options="$__f66['options']" />
           </div>
         </div>
 
         <div class="clearfix"></div>
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('type', __('product.product_type') . ':*') !!} @show_tooltip(__('tooltip.product_type'))
-            {!! Form::select('type', $product_types, $product->type, ['class' => 'form-control select2',
-            'required','disabled', 'data-action' => 'edit', 'data-product_id' => $product->id ]); !!}
+            @php
+            $__f67 = ['name' => 'type', 'value' => __('product.product_type') . ':*'];
+            @endphp
+            <x-form.label :name="$__f67['name']" :value="$__f67['value']" /> @show_tooltip(__('tooltip.product_type'))
+            @php
+            $__f68 = ['name' => 'type', 'list' => $product_types, 'selected' => $product->type, 'options' => ['class' => 'form-control select2', 'required','disabled', 'data-action' => 'edit', 'data-product_id' => $product->id ]];
+            @endphp
+            <x-form.select :name="$__f68['name']" :list="$__f68['list']" :selected="$__f68['selected']" :options="$__f68['options']" />
           </div>
         </div>
 
@@ -446,33 +642,53 @@
 
         <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('cst_csosn', 'CST/CSOSN' . ':*') !!}
-            {!! Form::select('cst_csosn', $listaCSTCSOSN, $product->cst_csosn, ['class' => 'form-control select2',
-            'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']); !!}
+            @php
+            $__f69 = ['name' => 'cst_csosn', 'value' => 'CST/CSOSN' . ':*'];
+            @endphp
+            <x-form.label :name="$__f69['name']" :value="$__f69['value']" />
+            @php
+            $__f70 = ['name' => 'cst_csosn', 'list' => $listaCSTCSOSN, 'selected' => $product->cst_csosn, 'options' => ['class' => 'form-control select2', 'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']];
+            @endphp
+            <x-form.select :name="$__f70['name']" :list="$__f70['list']" :selected="$__f70['selected']" :options="$__f70['options']" />
           </div>
         </div>
 
         <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('cst_pis', 'CST/PIS' . ':*') !!} 
-            {!! Form::select('cst_pis', $listaCST_PIS_COFINS, $product->cst_pis, ['class' => 'form-control select2',
-            'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']); !!}
+            @php
+            $__f71 = ['name' => 'cst_pis', 'value' => 'CST/PIS' . ':*'];
+            @endphp
+            <x-form.label :name="$__f71['name']" :value="$__f71['value']" /> 
+            @php
+            $__f72 = ['name' => 'cst_pis', 'list' => $listaCST_PIS_COFINS, 'selected' => $product->cst_pis, 'options' => ['class' => 'form-control select2', 'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']];
+            @endphp
+            <x-form.select :name="$__f72['name']" :list="$__f72['list']" :selected="$__f72['selected']" :options="$__f72['options']" />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('cst_cofins', 'CST/COFINS' . ':*') !!} 
-            {!! Form::select('cst_cofins', $listaCST_PIS_COFINS, $product->cst_cofins, ['class' => 'form-control select2',
-            'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']); !!}
+            @php
+            $__f73 = ['name' => 'cst_cofins', 'value' => 'CST/COFINS' . ':*'];
+            @endphp
+            <x-form.label :name="$__f73['name']" :value="$__f73['value']" /> 
+            @php
+            $__f74 = ['name' => 'cst_cofins', 'list' => $listaCST_PIS_COFINS, 'selected' => $product->cst_cofins, 'options' => ['class' => 'form-control select2', 'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']];
+            @endphp
+            <x-form.select :name="$__f74['name']" :list="$__f74['list']" :selected="$__f74['selected']" :options="$__f74['options']" />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('cst_ipi', 'CST/IPI' . ':*') !!} 
-            {!! Form::select('cst_ipi', $listaCST_IPI, $product->cst_ipi, ['class' => 'form-control select2',
-            'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']); !!}
+            @php
+            $__f75 = ['name' => 'cst_ipi', 'value' => 'CST/IPI' . ':*'];
+            @endphp
+            <x-form.label :name="$__f75['name']" :value="$__f75['value']" /> 
+            @php
+            $__f76 = ['name' => 'cst_ipi', 'list' => $listaCST_IPI, 'selected' => $product->cst_ipi, 'options' => ['class' => 'form-control select2', 'required', 'data-action' => !empty($duplicate_product) ? 'duplicate' : 'add', 'data-product_id' => !empty($duplicate_product) ? $duplicate_product->id : '0']];
+            @endphp
+            <x-form.select :name="$__f76['name']" :list="$__f76['list']" :selected="$__f76['selected']" :options="$__f76['options']" />
           </div>
         </div>
 
@@ -506,8 +722,14 @@
 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('origem', 'Origem' . ':') !!}
-            {!! Form::select('origem', App\Models\Product::listaOrigem(), $product->origem, ['class' => 'form-control select2']); !!}
+            @php
+            $__f77 = ['name' => 'origem', 'value' => 'Origem' . ':'];
+            @endphp
+            <x-form.label :name="$__f77['name']" :value="$__f77['value']" />
+            @php
+            $__f78 = ['name' => 'origem', 'list' => App\Models\Product::listaOrigem(), 'selected' => $product->origem, 'options' => ['class' => 'form-control select2']];
+            @endphp
+            <x-form.select :name="$__f78['name']" :list="$__f78['list']" :selected="$__f78['selected']" :options="$__f78['options']" />
           </div>
         </div>
 
@@ -515,63 +737,105 @@
 
         <div class="col-sm-5">
           <div class="form-group">
-            {!! Form::label('codigo_anp', 'ANP' . ':') !!}
-            {!! Form::select('codigo_anp', App\Models\Product::lista_ANP(), $product->codigo_anp, ['class' => 'form-control select2']); !!}
+            @php
+            $__f79 = ['name' => 'codigo_anp', 'value' => 'ANP' . ':'];
+            @endphp
+            <x-form.label :name="$__f79['name']" :value="$__f79['value']" />
+            @php
+            $__f80 = ['name' => 'codigo_anp', 'list' => App\Models\Product::lista_ANP(), 'selected' => $product->codigo_anp, 'options' => ['class' => 'form-control select2']];
+            @endphp
+            <x-form.select :name="$__f80['name']" :list="$__f80['list']" :selected="$__f80['selected']" :options="$__f80['options']" />
           </div>
         </div>
 
         <div class="col-sm-2">
           <div class="form-group">
-            {!! Form::label('perc_glp', '% GLP' . ':') !!}
-            {!! Form::text('perc_glp', $product->perc_glp, ['class' => 'form-control',
-            'placeholder' => '% GLP', 'data-mask="000.00"', 'data-mask-reverse="true"']); !!}
+            @php
+            $__f81 = ['name' => 'perc_glp', 'value' => '% GLP' . ':'];
+            @endphp
+            <x-form.label :name="$__f81['name']" :value="$__f81['value']" />
+            @php
+            $__f82 = ['name' => 'perc_glp', 'value' => $product->perc_glp, 'options' => ['class' => 'form-control', 'placeholder' => '% GLP', 'data-mask="000.00"', 'data-mask-reverse="true"']];
+            @endphp
+            <x-form.input type="text" :name="$__f82['name']" :value="$__f82['value']" :options="$__f82['options']" />
           </div>
         </div>
 
         <div class="col-sm-2">
           <div class="form-group">
-            {!! Form::label('perc_gnn', '% GNn' . ':') !!}
-            {!! Form::text('perc_gnn', $product->perc_gnn, ['class' => 'form-control',
-            'placeholder' => '% GNn', 'data-mask="000.00"', 'data-mask-reverse="true"']); !!}
+            @php
+            $__f83 = ['name' => 'perc_gnn', 'value' => '% GNn' . ':'];
+            @endphp
+            <x-form.label :name="$__f83['name']" :value="$__f83['value']" />
+            @php
+            $__f84 = ['name' => 'perc_gnn', 'value' => $product->perc_gnn, 'options' => ['class' => 'form-control', 'placeholder' => '% GNn', 'data-mask="000.00"', 'data-mask-reverse="true"']];
+            @endphp
+            <x-form.input type="text" :name="$__f84['name']" :value="$__f84['value']" :options="$__f84['options']" />
           </div>
         </div>
 
         <div class="col-sm-2">
           <div class="form-group">
-            {!! Form::label('perc_gni', '% GNi' . ':') !!}
-            {!! Form::text('perc_gni', $product->perc_gni, ['class' => 'form-control',
-            'placeholder' => '% GNi', 'data-mask="000.00"', 'data-mask-reverse="true"']); !!}
+            @php
+            $__f85 = ['name' => 'perc_gni', 'value' => '% GNi' . ':'];
+            @endphp
+            <x-form.label :name="$__f85['name']" :value="$__f85['value']" />
+            @php
+            $__f86 = ['name' => 'perc_gni', 'value' => $product->perc_gni, 'options' => ['class' => 'form-control', 'placeholder' => '% GNi', 'data-mask="000.00"', 'data-mask-reverse="true"']];
+            @endphp
+            <x-form.input type="text" :name="$__f86['name']" :value="$__f86['value']" :options="$__f86['options']" />
           </div>
         </div>
 
         <div class="col-sm-2">
           <div class="form-group">
-            {!! Form::label('valor_partida', 'Valor partida' . ':') !!}
-            {!! Form::text('valor_partida', $product->valor_partida, ['class' => 'form-control',
-            'placeholder' => 'Valor partida', 'data-mask="000000.00"', 'data-mask-reverse="true"']); !!}
+            @php
+            $__f87 = ['name' => 'valor_partida', 'value' => 'Valor partida' . ':'];
+            @endphp
+            <x-form.label :name="$__f87['name']" :value="$__f87['value']" />
+            @php
+            $__f88 = ['name' => 'valor_partida', 'value' => $product->valor_partida, 'options' => ['class' => 'form-control', 'placeholder' => 'Valor partida', 'data-mask="000000.00"', 'data-mask-reverse="true"']];
+            @endphp
+            <x-form.input type="text" :name="$__f88['name']" :value="$__f88['value']" :options="$__f88['options']" />
           </div>
         </div>
 
         <div class="col-sm-2">
           <div class="form-group">
-            {!! Form::label('unidade_tributavel', 'Un. tributável' . ':') !!}
-            {!! Form::text('unidade_tributavel', $product->unidade_tributavel, ['class' => 'form-control',
-            'placeholder' => 'Un. tributável', 'data-mask="AAAA"', 'data-mask-reverse="true"']); !!}
+            @php
+            $__f89 = ['name' => 'unidade_tributavel', 'value' => 'Un. tributável' . ':'];
+            @endphp
+            <x-form.label :name="$__f89['name']" :value="$__f89['value']" />
+            @php
+            $__f90 = ['name' => 'unidade_tributavel', 'value' => $product->unidade_tributavel, 'options' => ['class' => 'form-control', 'placeholder' => 'Un. tributável', 'data-mask="AAAA"', 'data-mask-reverse="true"']];
+            @endphp
+            <x-form.input type="text" :name="$__f90['name']" :value="$__f90['value']" :options="$__f90['options']" />
           </div>
         </div>
 
         <div class="col-sm-2">
           <div class="form-group">
-            {!! Form::label('quantidade_tributavel', 'Qtd. tributável' . ':') !!}
-            {!! Form::text('quantidade_tributavel', $product->quantidade_tributavel, ['class' => 'form-control',
-            'placeholder' => 'Qtd. tributável']); !!}
+            @php
+            $__f91 = ['name' => 'quantidade_tributavel', 'value' => 'Qtd. tributável' . ':'];
+            @endphp
+            <x-form.label :name="$__f91['name']" :value="$__f91['value']" />
+            @php
+            $__f92 = ['name' => 'quantidade_tributavel', 'value' => $product->quantidade_tributavel, 'options' => ['class' => 'form-control', 'placeholder' => 'Qtd. tributável']];
+            @endphp
+            <x-form.input type="text" :name="$__f92['name']" :value="$__f92['value']" :options="$__f92['options']" />
           </div>
         </div>
 
         <div class="col-sm-2">
           <div class="form-group">
-            {!! Form::label('tipo', 'Tipo' . ':') !!}
-            {!! Form::select('tipo', ['normal' => 'Normal', 'veiculo' => 'Veiculo'] , $product->tipo, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+            @php
+            $__f93 = ['name' => 'tipo', 'value' => 'Tipo' . ':'];
+            @endphp
+            <x-form.label :name="$__f93['name']" :value="$__f93['value']" />
+            @php
+            $__f94 = ['name' => 'tipo', 'list' => ['normal' => 'Normal', 'veiculo' => 'Veiculo'], 'selected' => $product->tipo, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+            @endphp
+            <x-form.select :name="$__f94['name']" :list="$__f94['list']" :selected="$__f94['selected']" :options="$__f94['options']" />
           </div>
         </div>
 
@@ -585,192 +849,326 @@
 
           <div class="col-sm-12">
             <div class="form-group">
-              {!! Form::label('veicProd', 'Detalhamento de Veículo' . ':') !!}
-              {!! Form::text('veicProd', $product->veicProd, ['class' => 'form-control',
-              'placeholder' => 'Detalhamento de Veículo']); !!}
+              @php
+              $__f95 = ['name' => 'veicProd', 'value' => 'Detalhamento de Veículo' . ':'];
+              @endphp
+              <x-form.label :name="$__f95['name']" :value="$__f95['value']" />
+              @php
+              $__f96 = ['name' => 'veicProd', 'value' => $product->veicProd, 'options' => ['class' => 'form-control', 'placeholder' => 'Detalhamento de Veículo']];
+              @endphp
+              <x-form.input type="text" :name="$__f96['name']" :value="$__f96['value']" :options="$__f96['options']" />
             </div>
           </div>
 
           <div class="col-sm-3">
             <div class="form-group">
-              {!! Form::label('tpOp', 'Tipo da operação' . ':') !!}
-              {!! Form::select('tpOp', App\Models\Veiculo::tiposOperacao() , $product->tpOp, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f97 = ['name' => 'tpOp', 'value' => 'Tipo da operação' . ':'];
+              @endphp
+              <x-form.label :name="$__f97['name']" :value="$__f97['value']" />
+              @php
+              $__f98 = ['name' => 'tpOp', 'list' => App\Models\Veiculo::tiposOperacao(), 'selected' => $product->tpOp, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f98['name']" :list="$__f98['list']" :selected="$__f98['selected']" :options="$__f98['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('chassi', 'Chassi' . ':') !!}
-              {!! Form::text('chassi', $product->chassi, ['class' => 'form-control',
-              'placeholder' => 'Chassi']); !!}
+              @php
+              $__f99 = ['name' => 'chassi', 'value' => 'Chassi' . ':'];
+              @endphp
+              <x-form.label :name="$__f99['name']" :value="$__f99['value']" />
+              @php
+              $__f100 = ['name' => 'chassi', 'value' => $product->chassi, 'options' => ['class' => 'form-control', 'placeholder' => 'Chassi']];
+              @endphp
+              <x-form.input type="text" :name="$__f100['name']" :value="$__f100['value']" :options="$__f100['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('cCor', 'Código da cor' . ':') !!}
-              {!! Form::text('cCor', $product->cCor, ['class' => 'form-control',
-              'placeholder' => 'Código da cor']); !!}
+              @php
+              $__f101 = ['name' => 'cCor', 'value' => 'Código da cor' . ':'];
+              @endphp
+              <x-form.label :name="$__f101['name']" :value="$__f101['value']" />
+              @php
+              $__f102 = ['name' => 'cCor', 'value' => $product->cCor, 'options' => ['class' => 'form-control', 'placeholder' => 'Código da cor']];
+              @endphp
+              <x-form.input type="text" :name="$__f102['name']" :value="$__f102['value']" :options="$__f102['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('xCor', 'Descrição da cor' . ':') !!}
-              {!! Form::text('xCor', $product->xCor, ['class' => 'form-control',
-              'placeholder' => 'Descrição da cor']); !!}
+              @php
+              $__f103 = ['name' => 'xCor', 'value' => 'Descrição da cor' . ':'];
+              @endphp
+              <x-form.label :name="$__f103['name']" :value="$__f103['value']" />
+              @php
+              $__f104 = ['name' => 'xCor', 'value' => $product->xCor, 'options' => ['class' => 'form-control', 'placeholder' => 'Descrição da cor']];
+              @endphp
+              <x-form.input type="text" :name="$__f104['name']" :value="$__f104['value']" :options="$__f104['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('pot', 'Potência Motor (CV)' . ':') !!}
-              {!! Form::text('pot', $product->pot, ['class' => 'form-control',
-              'placeholder' => 'Potência Motor (CV)']); !!}
+              @php
+              $__f105 = ['name' => 'pot', 'value' => 'Potência Motor (CV)' . ':'];
+              @endphp
+              <x-form.label :name="$__f105['name']" :value="$__f105['value']" />
+              @php
+              $__f106 = ['name' => 'pot', 'value' => $product->pot, 'options' => ['class' => 'form-control', 'placeholder' => 'Potência Motor (CV)']];
+              @endphp
+              <x-form.input type="text" :name="$__f106['name']" :value="$__f106['value']" :options="$__f106['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('cilin', 'Cilindradas' . ':') !!}
-              {!! Form::text('cilin', $product->cilin, ['class' => 'form-control',
-              'placeholder' => 'Cilindradas']); !!}
+              @php
+              $__f107 = ['name' => 'cilin', 'value' => 'Cilindradas' . ':'];
+              @endphp
+              <x-form.label :name="$__f107['name']" :value="$__f107['value']" />
+              @php
+              $__f108 = ['name' => 'cilin', 'value' => $product->cilin, 'options' => ['class' => 'form-control', 'placeholder' => 'Cilindradas']];
+              @endphp
+              <x-form.input type="text" :name="$__f108['name']" :value="$__f108['value']" :options="$__f108['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('pesoL', 'Peso líquido' . ':') !!}
-              {!! Form::text('pesoL', $product->pesoL, ['class' => 'form-control',
-              'placeholder' => 'Peso líquido']); !!}
+              @php
+              $__f109 = ['name' => 'pesoL', 'value' => 'Peso líquido' . ':'];
+              @endphp
+              <x-form.label :name="$__f109['name']" :value="$__f109['value']" />
+              @php
+              $__f110 = ['name' => 'pesoL', 'value' => $product->pesoL, 'options' => ['class' => 'form-control', 'placeholder' => 'Peso líquido']];
+              @endphp
+              <x-form.input type="text" :name="$__f110['name']" :value="$__f110['value']" :options="$__f110['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('pesoB', 'Peso bruto' . ':') !!}
-              {!! Form::text('pesoB', $product->pesoB, ['class' => 'form-control',
-              'placeholder' => 'Peso bruto']); !!}
+              @php
+              $__f111 = ['name' => 'pesoB', 'value' => 'Peso bruto' . ':'];
+              @endphp
+              <x-form.label :name="$__f111['name']" :value="$__f111['value']" />
+              @php
+              $__f112 = ['name' => 'pesoB', 'value' => $product->pesoB, 'options' => ['class' => 'form-control', 'placeholder' => 'Peso bruto']];
+              @endphp
+              <x-form.input type="text" :name="$__f112['name']" :value="$__f112['value']" :options="$__f112['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('nSerie', 'Nº série' . ':') !!}
-              {!! Form::text('nSerie', $product->nSerie, ['class' => 'form-control',
-              'placeholder' => 'Nº série']); !!}
+              @php
+              $__f113 = ['name' => 'nSerie', 'value' => 'Nº série' . ':'];
+              @endphp
+              <x-form.label :name="$__f113['name']" :value="$__f113['value']" />
+              @php
+              $__f114 = ['name' => 'nSerie', 'value' => $product->nSerie, 'options' => ['class' => 'form-control', 'placeholder' => 'Nº série']];
+              @endphp
+              <x-form.input type="text" :name="$__f114['name']" :value="$__f114['value']" :options="$__f114['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('tpComb', 'Tipo de combustível' . ':') !!}
-              {!! Form::select('tpComb', App\Models\Veiculo::tiposCompustivel() , $product->tpComb, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f115 = ['name' => 'tpComb', 'value' => 'Tipo de combustível' . ':'];
+              @endphp
+              <x-form.label :name="$__f115['name']" :value="$__f115['value']" />
+              @php
+              $__f116 = ['name' => 'tpComb', 'list' => App\Models\Veiculo::tiposCompustivel(), 'selected' => $product->tpComb, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f116['name']" :list="$__f116['list']" :selected="$__f116['selected']" :options="$__f116['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('nMotor', 'Nº motor' . ':') !!}
-              {!! Form::text('nMotor', $product->nMotor, ['class' => 'form-control',
-              'placeholder' => 'Nº série']); !!}
+              @php
+              $__f117 = ['name' => 'nMotor', 'value' => 'Nº motor' . ':'];
+              @endphp
+              <x-form.label :name="$__f117['name']" :value="$__f117['value']" />
+              @php
+              $__f118 = ['name' => 'nMotor', 'value' => $product->nMotor, 'options' => ['class' => 'form-control', 'placeholder' => 'Nº série']];
+              @endphp
+              <x-form.input type="text" :name="$__f118['name']" :value="$__f118['value']" :options="$__f118['options']" />
             </div>
           </div>
 
           <div class="col-sm-3">
             <div class="form-group">
-              {!! Form::label('CMT', 'Capacidade Máxima de Tração' . ':') !!}
-              {!! Form::text('CMT', $product->nMotor, ['class' => 'form-control',
-              'placeholder' => 'Capacidade Máxima de Tração']); !!}
+              @php
+              $__f119 = ['name' => 'CMT', 'value' => 'Capacidade Máxima de Tração' . ':'];
+              @endphp
+              <x-form.label :name="$__f119['name']" :value="$__f119['value']" />
+              @php
+              $__f120 = ['name' => 'CMT', 'value' => $product->nMotor, 'options' => ['class' => 'form-control', 'placeholder' => 'Capacidade Máxima de Tração']];
+              @endphp
+              <x-form.input type="text" :name="$__f120['name']" :value="$__f120['value']" :options="$__f120['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('dist', 'Distância entre eixos' . ':') !!}
-              {!! Form::text('dist', $product->dist, ['class' => 'form-control',
-              'placeholder' => 'Distância entre eixos']); !!}
+              @php
+              $__f121 = ['name' => 'dist', 'value' => 'Distância entre eixos' . ':'];
+              @endphp
+              <x-form.label :name="$__f121['name']" :value="$__f121['value']" />
+              @php
+              $__f122 = ['name' => 'dist', 'value' => $product->dist, 'options' => ['class' => 'form-control', 'placeholder' => 'Distância entre eixos']];
+              @endphp
+              <x-form.input type="text" :name="$__f122['name']" :value="$__f122['value']" :options="$__f122['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('anoMod', 'Ano Modelo de Fab' . ':') !!}
-              {!! Form::text('anoMod', $product->anoMod, ['class' => 'form-control',
-              'placeholder' => 'Ano Modelo de Fabricação ']); !!}
+              @php
+              $__f123 = ['name' => 'anoMod', 'value' => 'Ano Modelo de Fab' . ':'];
+              @endphp
+              <x-form.label :name="$__f123['name']" :value="$__f123['value']" />
+              @php
+              $__f124 = ['name' => 'anoMod', 'value' => $product->anoMod, 'options' => ['class' => 'form-control', 'placeholder' => 'Ano Modelo de Fabricação ']];
+              @endphp
+              <x-form.input type="text" :name="$__f124['name']" :value="$__f124['value']" :options="$__f124['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('anoFab', 'Ano de Fabricação' . ':') !!}
-              {!! Form::text('anoFab', $product->anoFab, ['class' => 'form-control',
-              'placeholder' => 'Ano de Fabricação ']); !!}
+              @php
+              $__f125 = ['name' => 'anoFab', 'value' => 'Ano de Fabricação' . ':'];
+              @endphp
+              <x-form.label :name="$__f125['name']" :value="$__f125['value']" />
+              @php
+              $__f126 = ['name' => 'anoFab', 'value' => $product->anoFab, 'options' => ['class' => 'form-control', 'placeholder' => 'Ano de Fabricação ']];
+              @endphp
+              <x-form.input type="text" :name="$__f126['name']" :value="$__f126['value']" :options="$__f126['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('tpPint', 'Tipo de pintura' . ':') !!}
-              {!! Form::select('tpPint', App\Models\Veiculo::tiposPintura() , $product->tpPint, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f127 = ['name' => 'tpPint', 'value' => 'Tipo de pintura' . ':'];
+              @endphp
+              <x-form.label :name="$__f127['name']" :value="$__f127['value']" />
+              @php
+              $__f128 = ['name' => 'tpPint', 'list' => App\Models\Veiculo::tiposPintura(), 'selected' => $product->tpPint, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f128['name']" :list="$__f128['list']" :selected="$__f128['selected']" :options="$__f128['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('tpVeic', 'Tipo do veiculo' . ':') !!}
-              {!! Form::select('tpVeic', App\Models\Veiculo::tipos(), $product->tpVeic, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f129 = ['name' => 'tpVeic', 'value' => 'Tipo do veiculo' . ':'];
+              @endphp
+              <x-form.label :name="$__f129['name']" :value="$__f129['value']" />
+              @php
+              $__f130 = ['name' => 'tpVeic', 'list' => App\Models\Veiculo::tipos(), 'selected' => $product->tpVeic, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f130['name']" :list="$__f130['list']" :selected="$__f130['selected']" :options="$__f130['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('espVeic', 'Espécie' . ':') !!}
-              {!! Form::select('espVeic', App\Models\Veiculo::especies(), $product->espVeic, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f131 = ['name' => 'espVeic', 'value' => 'Espécie' . ':'];
+              @endphp
+              <x-form.label :name="$__f131['name']" :value="$__f131['value']" />
+              @php
+              $__f132 = ['name' => 'espVeic', 'list' => App\Models\Veiculo::especies(), 'selected' => $product->espVeic, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f132['name']" :list="$__f132['list']" :selected="$__f132['selected']" :options="$__f132['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('VIN', 'Condição do VIN' . ':') !!}
-              {!! Form::select('VIN', ['R' => 'Remarcado', 'N' => 'Normal'], $product->VIN, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f133 = ['name' => 'VIN', 'value' => 'Condição do VIN' . ':'];
+              @endphp
+              <x-form.label :name="$__f133['name']" :value="$__f133['value']" />
+              @php
+              $__f134 = ['name' => 'VIN', 'list' => ['R' => 'Remarcado', 'N' => 'Normal'], 'selected' => $product->VIN, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f134['name']" :list="$__f134['list']" :selected="$__f134['selected']" :options="$__f134['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('condVeic', 'Condição do Veículo' . ':') !!}
-              {!! Form::select('condVeic', ['1' => 'Acabado', '2' => 'Inacabado', '3' => 'Semiacabado'], $product->condVeic, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f135 = ['name' => 'condVeic', 'value' => 'Condição do Veículo' . ':'];
+              @endphp
+              <x-form.label :name="$__f135['name']" :value="$__f135['value']" />
+              @php
+              $__f136 = ['name' => 'condVeic', 'list' => ['1' => 'Acabado', '2' => 'Inacabado', '3' => 'Semiacabado'], 'selected' => $product->condVeic, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f136['name']" :list="$__f136['list']" :selected="$__f136['selected']" :options="$__f136['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('cMod', 'Código Marca Modelo' . ':') !!}
-              {!! Form::text('cMod', $product->cMod, ['class' => 'form-control',
-              'placeholder' => 'Código Marca Modelo']); !!}
+              @php
+              $__f137 = ['name' => 'cMod', 'value' => 'Código Marca Modelo' . ':'];
+              @endphp
+              <x-form.label :name="$__f137['name']" :value="$__f137['value']" />
+              @php
+              $__f138 = ['name' => 'cMod', 'value' => $product->cMod, 'options' => ['class' => 'form-control', 'placeholder' => 'Código Marca Modelo']];
+              @endphp
+              <x-form.input type="text" :name="$__f138['name']" :value="$__f138['value']" :options="$__f138['options']" />
             </div>
           </div>
 
           <div class="col-sm-2">
             <div class="form-group">
-              {!! Form::label('cCorDENATRAN', 'Cor' . ':') !!}<br>
-              {!! Form::select('cCorDENATRAN', App\Models\Veiculo::cores(), $product->cCorDENATRAN, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f139 = ['name' => 'cCorDENATRAN', 'value' => 'Cor' . ':'];
+              @endphp
+              <x-form.label :name="$__f139['name']" :value="$__f139['value']" /><br>
+              @php
+              $__f140 = ['name' => 'cCorDENATRAN', 'list' => App\Models\Veiculo::cores(), 'selected' => $product->cCorDENATRAN, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f140['name']" :list="$__f140['list']" :selected="$__f140['selected']" :options="$__f140['options']" />
             </div>
           </div>
 
           <div class="col-sm-3">
             <div class="form-group">
-              {!! Form::label('lota', 'Capacidade de lotação' . ':') !!}
-              {!! Form::text('lota', $product->lota, ['class' => 'form-control',
-              'placeholder' => 'Capacidade de lotação']); !!}
+              @php
+              $__f141 = ['name' => 'lota', 'value' => 'Capacidade de lotação' . ':'];
+              @endphp
+              <x-form.label :name="$__f141['name']" :value="$__f141['value']" />
+              @php
+              $__f142 = ['name' => 'lota', 'value' => $product->lota, 'options' => ['class' => 'form-control', 'placeholder' => 'Capacidade de lotação']];
+              @endphp
+              <x-form.input type="text" :name="$__f142['name']" :value="$__f142['value']" :options="$__f142['options']" />
             </div>
           </div>
 
           <div class="col-sm-3">
             <div class="form-group">
-              {!! Form::label('tpRest', 'Tipo de restrição' . ':') !!}<br>
-              {!! Form::select('tpRest', App\Models\Veiculo::restricoes(), $product->tpRest, ['class' => 'form-control select2', 'style' => 'width: 100%']); !!}
+              @php
+              $__f143 = ['name' => 'tpRest', 'value' => 'Tipo de restrição' . ':'];
+              @endphp
+              <x-form.label :name="$__f143['name']" :value="$__f143['value']" /><br>
+              @php
+              $__f144 = ['name' => 'tpRest', 'list' => App\Models\Veiculo::restricoes(), 'selected' => $product->tpRest, 'options' => ['class' => 'form-control select2', 'style' => 'width: 100%']];
+              @endphp
+              <x-form.select :name="$__f144['name']" :list="$__f144['list']" :selected="$__f144['selected']" :options="$__f144['options']" />
             </div>
           </div>
 
@@ -808,7 +1206,7 @@
           </div>
         </div>
       </div>
-      {!! Form::close() !!}
+      <x-form.close />
     </section>
     <!-- /.content -->
 

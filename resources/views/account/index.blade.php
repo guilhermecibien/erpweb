@@ -55,7 +55,10 @@
                             <div class="col-md-12">
                                 @component('components.widget')
                                     <div class="col-md-4">
-                                        {!! Form::select('account_status', ['active' => __('business.is_active'), 'closed' => __('account.closed')], null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'account_status']); !!}
+                                        @php
+                                        $__f1 = ['name' => 'account_status', 'list' => ['active' => __('business.is_active'), 'closed' => __('account.closed')], 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'account_status']];
+                                        @endphp
+                                        <x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
                                     </div>
                                     <div class="col-md-8">
                                         <button type="button" class="btn btn-primary btn-modal pull-right" 
@@ -126,7 +129,10 @@
                                                 <th>{{$account_type->name}}</th>
                                                 <td>
                                                     
-                                                    {!! Form::open(['url' => action('AccountTypeController@destroy', $account_type->id), 'method' => 'delete' ]) !!}
+                                                    @php
+                                                    $__f2 = ['options' => ['url' => action('AccountTypeController@destroy', $account_type->id), 'method' => 'delete' ]];
+                                                    @endphp
+                                                    <x-form.open :options="$__f2['options']" />
                                                     <button type="button" class="btn btn-primary btn-modal btn-xs" 
                                                     data-href="{{action('AccountTypeController@edit', $account_type->id)}}"
                                                     data-container="#account_type_modal">
@@ -134,7 +140,7 @@
 
                                                     <button type="button" class="btn btn-danger btn-xs delete_account_type" >
                                                     <i class="fa fa-trash"></i> @lang( 'messages.delete' )</button>
-                                                    {!! Form::close() !!}
+                                                    <x-form.close />
                                                 </td>
                                             </tr>
                                             @foreach($account_type->sub_types as $sub_type)
@@ -143,14 +149,17 @@
                                                     <td>
                                                         
 
-                                                        {!! Form::open(['url' => action('AccountTypeController@destroy', $sub_type->id), 'method' => 'delete' ]) !!}
+                                                        @php
+                                                        $__f4 = ['options' => ['url' => action('AccountTypeController@destroy', $sub_type->id), 'method' => 'delete' ]];
+                                                        @endphp
+                                                        <x-form.open :options="$__f4['options']" />
                                                             <button type="button" class="btn btn-primary btn-modal btn-xs" 
                                                         data-href="{{action('AccountTypeController@edit', $sub_type->id)}}"
                                                         data-container="#account_type_modal">
                                                         <i class="fa fa-edit"></i> @lang( 'messages.edit' )</button>
                                                             <button type="button" class="btn btn-danger btn-xs delete_account_type" >
                                                             <i class="fa fa-trash"></i> @lang( 'messages.delete' )</button>
-                                                            {!! Form::close() !!}
+                                                            <x-form.close />
                                                     </td>
                                                 </tr>
                                             @endforeach

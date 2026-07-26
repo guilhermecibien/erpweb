@@ -18,8 +18,10 @@
 
 <!-- Main content -->
 <section class="content">
-{!! Form::open(['url' => action('CashRegisterController@store'), 'method' => 'post', 
-'id' => 'add_cash_register_form' ]) !!}
+@php
+$__f1 = ['options' => ['url' => action('CashRegisterController@store'), 'method' => 'post', 'id' => 'add_cash_register_form' ]];
+@endphp
+<x-form.open :options="$__f1['options']" />
   <div class="box box-solid">
     <div class="box-body">
     <br><br><br>
@@ -28,22 +30,35 @@
         @if($business_locations->count() > 0)
         <div class="col-sm-3 @if(count($business_locations) == 1) col-sm-offset-3 @else col-sm-offset-1 @endif">
           <div class="form-group">
-            {!! Form::label('amount','Valor em dinheiro:*') !!}
-            {!! Form::text('amount', null, ['class' => 'form-control money',
-              'placeholder' => __('cash_register.enter_amount'), 'required']); !!}
+            @php
+            $__f2 = ['name' => 'amount', 'value' => 'Valor em dinheiro:*'];
+            @endphp
+            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+            @php
+            $__f3 = ['name' => 'amount', 'value' => null, 'options' => ['class' => 'form-control money', 'placeholder' => __('cash_register.enter_amount'), 'required']];
+            @endphp
+            <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           </div>
         </div>
         @if(count($business_locations) > 1)
         <!-- <div class="clearfix"></div> -->
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('location_id', 'Local:*') !!}
-              {!! Form::select('location_id', $business_locations, null, ['class' => 'form-control select2',
-              'placeholder' => __('lang_v1.select_location'), 'required']); !!}
+            @php
+            $__f4 = ['name' => 'location_id', 'value' => 'Local:*'];
+            @endphp
+            <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+              @php
+              $__f5 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('lang_v1.select_location'), 'required']];
+              @endphp
+              <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
           </div>
         </div>
         @else
-          {!! Form::hidden('location_id', array_key_first($business_locations->toArray()) ); !!}
+          @php
+          $__f6 = ['name' => 'location_id', 'value' => array_key_first($business_locations->toArray())];
+          @endphp
+          <x-form.input type="hidden" :name="$__f6['name']" :value="$__f6['value']" />
         @endif
         <div class="col-sm-3">
           <button type="submit" style="margin-top: 23px;" class="btn btn-primary pull-left">@lang('cash_register.open_register')</button>
@@ -57,7 +72,7 @@
       <br><br><br>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
 </section>
 <!-- /.content -->
 @endsection

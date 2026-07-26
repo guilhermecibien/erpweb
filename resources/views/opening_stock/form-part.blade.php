@@ -59,30 +59,45 @@
 		{{ $product->name }} @if( $product->type == 'variable' ) (<b>{{ $variation->product_variation->name }}</b> : {{ $variation->name }}) @endif
 
 		@if(!empty($purchase_line_id))
-			{!! Form::hidden('stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][purchase_line_id]', $purchase_line_id); !!}
+			@php
+			$__f1 = ['name' => 'stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][purchase_line_id]', 'value' => $purchase_line_id];
+			@endphp
+			<x-form.input type="hidden" :name="$__f1['name']" :value="$__f1['value']" />
 		@endif
 	</td>
 	<td>
 		<div class="input-group">
-		  {!! Form::text('stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][quantity]', @format_quantity($qty) , ['class' => 'form-control input-sm input_number purchase_quantity input_quantity', 'required', 'data-mask="0000000.00', 'data-mask-reverse="true"']); !!}
+		  @php
+		  $__f2 = ['name' => 'stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][quantity]', 'value' => number_format($qty, 2, ',', ''), 'options' => ['class' => 'form-control input-sm input_number purchase_quantity input_quantity', 'required', 'data-mask="0000000.00', 'data-mask-reverse="true"']];
+		  @endphp
+		  <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
 		  <span class="input-group-addon">
 		    {{ $product->unit->short_name }}
 		  </span>
 		</div>
 	</td>
 <td>
-	{!! Form::text('stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][purchase_price]', @num_format($purcahse_price) , ['class' => 'form-control input-sm input_number unit_price', 'required', 'data-mask="0000000.00"', 'data-mask-reverse="true"']); !!}
+	@php
+	$__f3 = ['name' => 'stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][purchase_price]', 'value' => number_format($purcahse_price, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm input_number unit_price', 'required', 'data-mask="0000000.00"', 'data-mask-reverse="true"']];
+	@endphp
+	<x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
 </td>
 
 @if($enable_expiry == 1 && $product->enable_stock == 1)
 	<td>
-		{!! Form::text('stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][exp_date]', !empty($var['exp_date']) ? @format_date($var['exp_date']) : null , ['class' => 'form-control input-sm os_exp_date', 'readonly']); !!}
+		@php
+		$__f4 = ['name' => 'stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][exp_date]', 'value' => !empty($var['exp_date']) ? \Carbon::createFromTimestamp(strtotime($var['exp_date']))->format(session('business.date_format')) : null, 'options' => ['class' => 'form-control input-sm os_exp_date', 'readonly']];
+		@endphp
+		<x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 	</td>
 @endif
 
 @if($enable_lot == 1)
 	<td>
-		{!! Form::text('stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][lot_number]', $lot_number , ['class' => 'form-control input-sm']); !!}
+		@php
+		$__f5 = ['name' => 'stocks[' . $key . '][' . $variation->id . '][' . $sub_key . '][lot_number]', 'value' => $lot_number, 'options' => ['class' => 'form-control input-sm']];
+		@endphp
+		<x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
 	</td>
 @endif
 	<td>

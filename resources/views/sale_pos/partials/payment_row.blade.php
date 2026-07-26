@@ -9,7 +9,10 @@
     @endif
 
     @if(!empty($payment_line['id']))
-    {!! Form::hidden("payment[$row_index][payment_id]", $payment_line['id']); !!}
+    @php
+    $__f1 = ['name' => "payment[$row_index][payment_id]", 'value' => $payment_line['id']];
+    @endphp
+    <x-form.input type="hidden" :name="$__f1['name']" :value="$__f1['value']" />
     @endif
 
     <div class="box-body" >

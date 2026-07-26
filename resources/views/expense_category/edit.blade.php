@@ -1,7 +1,10 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
 
-    {!! Form::open(['url' => action('ExpenseCategoryController@update', [$expense_category->id]), 'method' => 'PUT', 'id' => 'expense_category_add_form' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('ExpenseCategoryController@update', [$expense_category->id]), 'method' => 'PUT', 'id' => 'expense_category_add_form' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -10,20 +13,32 @@
 
     <div class="modal-body">
      <div class="form-group">
-        {!! Form::label('name', __( 'expense.category_name' ) . ':*') !!}
-          {!! Form::text('name', $expense_category->name, ['class' => 'form-control', 'required', 'placeholder' => __( 'expense.category_name' )]); !!}
+        @php
+        $__f2 = ['name' => 'name', 'value' => __( 'expense.category_name' ) . ':*'];
+        @endphp
+        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+          @php
+          $__f3 = ['name' => 'name', 'value' => $expense_category->name, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __( 'expense.category_name' )]];
+          @endphp
+          <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
       </div>
 
       <div class="form-group">
-        {!! Form::label('code', 'Código da categoria:') !!}
-          {!! Form::text('code', $expense_category->code, ['class' => 'form-control', 'placeholder' => __( 'expense.category_code' )]); !!}
+        @php
+        $__f4 = ['name' => 'code', 'value' => 'Código da categoria:'];
+        @endphp
+        <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+          @php
+          $__f5 = ['name' => 'code', 'value' => $expense_category->code, 'options' => ['class' => 'form-control', 'placeholder' => __( 'expense.category_code' )]];
+          @endphp
+          <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
       </div>
     <div class="modal-footer">
       <button type="submit" class="btn btn-primary">@lang( 'messages.update' )</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'messages.close' )</button>
     </div>
 
-    {!! Form::close() !!}
+    <x-form.close />
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

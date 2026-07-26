@@ -15,7 +15,10 @@
 <section class="content">
 
 
-  {!! Form::open(['url' => action('CteController@save'), 'method' => 'post', 'id' => 'cte_add_form' ]) !!}
+  @php
+  $__f1 = ['options' => ['url' => action('CteController@save'), 'method' => 'post', 'id' => 'cte_add_form' ]];
+  @endphp
+  <x-form.open :options="$__f1['options']" />
   <div class="row">
     <div class="col-md-12">
       @component('components.widget')
@@ -37,8 +40,14 @@
       
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('natureza_id', 'Natureza de operação' . ':*') !!}
-          {!! Form::select('natureza_id', $naturezas, '', ['class' => 'form-control select2', 'id' => 'contact_type', 'required']); !!}
+          @php
+          $__f2 = ['name' => 'natureza_id', 'value' => 'Natureza de operação' . ':*'];
+          @endphp
+          <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+          @php
+          $__f3 = ['name' => 'natureza_id', 'list' => $naturezas, 'selected' => '', 'options' => ['class' => 'form-control select2', 'id' => 'contact_type', 'required']];
+          @endphp
+          <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
         </div>
       </div>
 
@@ -51,10 +60,10 @@
             <span class="input-group-addon">
               <i class="fa fa-map-marker"></i>
             </span>
-            {!! Form::select('select_location_id', $business_locations, null, ['class' => 'form-control input-sm', 
-            'placeholder' => __('lang_v1.select_location'),
-            'id' => 'select_location_id', 
-            'required', 'autofocus'], $bl_attributes); !!}
+            @php
+            $__f4 = ['name' => 'select_location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control input-sm', 'placeholder' => __('lang_v1.select_location'), 'id' => 'select_location_id', 'required', 'autofocus'], 'optionsAttributes' => $bl_attributes];
+            @endphp
+            <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" :options-attributes="$__f4['optionsAttributes']" />
             <span class="input-group-addon">
               @show_tooltip('Local da CTe')
             </span> 
@@ -68,8 +77,14 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          {!! Form::label('remetente_id', 'Remetente' . ':*') !!}
-          {!! Form::select('remetente_id', $clientes, $dadosDaNFe['remetente'], ['class' => 'form-control select2', 'id' => 'remetente_id', 'required', 'placeholder' => 'Selecione o remetente']); !!}
+          @php
+          $__f5 = ['name' => 'remetente_id', 'value' => 'Remetente' . ':*'];
+          @endphp
+          <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
+          @php
+          $__f6 = ['name' => 'remetente_id', 'list' => $clientes, 'selected' => $dadosDaNFe['remetente'], 'options' => ['class' => 'form-control select2', 'id' => 'remetente_id', 'required', 'placeholder' => 'Selecione o remetente']];
+          @endphp
+          <x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
         </div>
 
         <div class="box box-success" id="box-remetente" style="display: none">
@@ -85,8 +100,14 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          {!! Form::label('destinatario_id', 'Destinatário' . ':*') !!}
-          {!! Form::select('destinatario_id', $clientes, $dadosDaNFe['destinatario'], ['class' => 'form-control select2', 'id' => 'destinatario_id', 'required', 'placeholder' => 'Selecione o destinatário']); !!}
+          @php
+          $__f7 = ['name' => 'destinatario_id', 'value' => 'Destinatário' . ':*'];
+          @endphp
+          <x-form.label :name="$__f7['name']" :value="$__f7['value']" />
+          @php
+          $__f8 = ['name' => 'destinatario_id', 'list' => $clientes, 'selected' => $dadosDaNFe['destinatario'], 'options' => ['class' => 'form-control select2', 'id' => 'destinatario_id', 'required', 'placeholder' => 'Selecione o destinatário']];
+          @endphp
+          <x-form.select :name="$__f8['name']" :list="$__f8['list']" :selected="$__f8['selected']" :options="$__f8['options']" />
         </div>
         <div class="box box-danger" id="box-destinatario" style="display: none">
           <div class="box-body">
@@ -164,29 +185,53 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        {!! Form::label('tpDoc', 'Tipo documento' . ':*') !!}
-                        {!! Form::select('tpDoc', $tipos, '', ['class' => 'form-control', 'id' => 'tpDoc', 'required']); !!}
+                        @php
+                        $__f9 = ['name' => 'tpDoc', 'value' => 'Tipo documento' . ':*'];
+                        @endphp
+                        <x-form.label :name="$__f9['name']" :value="$__f9['value']" />
+                        @php
+                        $__f10 = ['name' => 'tpDoc', 'list' => $tipos, 'selected' => '', 'options' => ['class' => 'form-control', 'id' => 'tpDoc', 'required']];
+                        @endphp
+                        <x-form.select :name="$__f10['name']" :list="$__f10['list']" :selected="$__f10['selected']" :options="$__f10['options']" />
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
-                        {!! Form::label('descOutros', 'Descrição do Doc.' . ':*') !!}
-                        {!! Form::text('descOutros', null, ['class' => 'form-control type-ref', 'placeholder' => 'Descrição do Doc.' ]); !!}
+                        @php
+                        $__f11 = ['name' => 'descOutros', 'value' => 'Descrição do Doc.' . ':*'];
+                        @endphp
+                        <x-form.label :name="$__f11['name']" :value="$__f11['value']" />
+                        @php
+                        $__f12 = ['name' => 'descOutros', 'value' => null, 'options' => ['class' => 'form-control type-ref', 'placeholder' => 'Descrição do Doc.' ]];
+                        @endphp
+                        <x-form.input type="text" :name="$__f12['name']" :value="$__f12['value']" :options="$__f12['options']" />
                       </div>
                     </div>
 
                     <div class="col-md-2">
                       <div class="form-group">
-                        {!! Form::label('nDoc', 'Numero do Doc.' . ':*') !!}
-                        {!! Form::text('nDoc', null, ['class' => 'form-control type-ref', 'placeholder' => 'Numero do Doc.' ]); !!}
+                        @php
+                        $__f13 = ['name' => 'nDoc', 'value' => 'Numero do Doc.' . ':*'];
+                        @endphp
+                        <x-form.label :name="$__f13['name']" :value="$__f13['value']" />
+                        @php
+                        $__f14 = ['name' => 'nDoc', 'value' => null, 'options' => ['class' => 'form-control type-ref', 'placeholder' => 'Numero do Doc.' ]];
+                        @endphp
+                        <x-form.input type="text" :name="$__f14['name']" :value="$__f14['value']" :options="$__f14['options']" />
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        {!! Form::label('vDocFisc', 'Valor do Documento' . ':*') !!}
-                        {!! Form::text('vDocFisc', null, ['class' => 'form-control type-ref', 'placeholder' => 'Valor do Documento', 'data-mask="000000.00", data-mask-reverse="true"' ]); !!}
+                        @php
+                        $__f15 = ['name' => 'vDocFisc', 'value' => 'Valor do Documento' . ':*'];
+                        @endphp
+                        <x-form.label :name="$__f15['name']" :value="$__f15['value']" />
+                        @php
+                        $__f16 = ['name' => 'vDocFisc', 'value' => null, 'options' => ['class' => 'form-control type-ref', 'placeholder' => 'Valor do Documento', 'data-mask="000000.00", data-mask-reverse="true"' ]];
+                        @endphp
+                        <x-form.input type="text" :name="$__f16['name']" :value="$__f16['value']" :options="$__f16['options']" />
                       </div>
                     </div>
 
@@ -207,22 +252,40 @@
       <div class="col-md-4">
 
         <div class="form-group">
-          {!! Form::label('veiculo_id', 'Veiculo' . ':*') !!}
-          {!! Form::select('veiculo_id', $veiculos, '', ['class' => 'form-control select2', 'id' => 'veiculo_id', 'required', 'placeholder' => 'Veiculo']); !!}
+          @php
+          $__f17 = ['name' => 'veiculo_id', 'value' => 'Veiculo' . ':*'];
+          @endphp
+          <x-form.label :name="$__f17['name']" :value="$__f17['value']" />
+          @php
+          $__f18 = ['name' => 'veiculo_id', 'list' => $veiculos, 'selected' => '', 'options' => ['class' => 'form-control select2', 'id' => 'veiculo_id', 'required', 'placeholder' => 'Veiculo']];
+          @endphp
+          <x-form.select :name="$__f18['name']" :list="$__f18['list']" :selected="$__f18['selected']" :options="$__f18['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('prod_predominante', 'Produto predominante' . ':*') !!}
-          {!! Form::text('prod_predominante', $dadosDaNFe['produto_predominante'], ['class' => 'form-control type-ref', 'required', 'placeholder' => 'Produto predominante' ]); !!}
+          @php
+          $__f19 = ['name' => 'prod_predominante', 'value' => 'Produto predominante' . ':*'];
+          @endphp
+          <x-form.label :name="$__f19['name']" :value="$__f19['value']" />
+          @php
+          $__f20 = ['name' => 'prod_predominante', 'value' => $dadosDaNFe['produto_predominante'], 'options' => ['class' => 'form-control type-ref', 'required', 'placeholder' => 'Produto predominante' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f20['name']" :value="$__f20['value']" :options="$__f20['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('tomador', 'Tomador' . ':*') !!}
-          {!! Form::select('tomador', $tiposTomador, '', ['class' => 'form-control select2', 'id' => 'tomador', 'required']); !!}
+          @php
+          $__f21 = ['name' => 'tomador', 'value' => 'Tomador' . ':*'];
+          @endphp
+          <x-form.label :name="$__f21['name']" :value="$__f21['value']" />
+          @php
+          $__f22 = ['name' => 'tomador', 'list' => $tiposTomador, 'selected' => '', 'options' => ['class' => 'form-control select2', 'id' => 'tomador', 'required']];
+          @endphp
+          <x-form.select :name="$__f22['name']" :list="$__f22['list']" :selected="$__f22['selected']" :options="$__f22['options']" />
         </div>
       </div>
 
@@ -230,15 +293,27 @@
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('valor_carga', 'Valor da Carga' . ':*') !!}
-          {!! Form::text('valor_carga', $dadosDaNFe['valor_carga'], ['class' => 'form-control', 'required type-ref', 'placeholder' => 'Valor da Carga', 'data-mask="000000.00", data-mask-reverse="true"' ]); !!}
+          @php
+          $__f23 = ['name' => 'valor_carga', 'value' => 'Valor da Carga' . ':*'];
+          @endphp
+          <x-form.label :name="$__f23['name']" :value="$__f23['value']" />
+          @php
+          $__f24 = ['name' => 'valor_carga', 'value' => $dadosDaNFe['valor_carga'], 'options' => ['class' => 'form-control', 'required type-ref', 'placeholder' => 'Valor da Carga', 'data-mask="000000.00", data-mask-reverse="true"' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f24['name']" :value="$__f24['value']" :options="$__f24['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('modal_transp', 'Modelo de Transporte' . ':*') !!}
-          {!! Form::select('modal_transp', $modals, '', ['class' => 'form-control select2', 'id' => 'modal_transp', 'required']); !!}
+          @php
+          $__f25 = ['name' => 'modal_transp', 'value' => 'Modelo de Transporte' . ':*'];
+          @endphp
+          <x-form.label :name="$__f25['name']" :value="$__f25['value']" />
+          @php
+          $__f26 = ['name' => 'modal_transp', 'list' => $modals, 'selected' => '', 'options' => ['class' => 'form-control select2', 'id' => 'modal_transp', 'required']];
+          @endphp
+          <x-form.select :name="$__f26['name']" :list="$__f26['list']" :selected="$__f26['selected']" :options="$__f26['options']" />
         </div>
       </div>
 
@@ -248,22 +323,40 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('unidade_medida', 'Unidade medida' . ':*') !!}
-          {!! Form::select('unidade_medida', $unidadesMedida, $dadosDaNFe['unidade'], ['class' => 'form-control select2', 'id' => 'unidade_medida', 'required']); !!}
+          @php
+          $__f27 = ['name' => 'unidade_medida', 'value' => 'Unidade medida' . ':*'];
+          @endphp
+          <x-form.label :name="$__f27['name']" :value="$__f27['value']" />
+          @php
+          $__f28 = ['name' => 'unidade_medida', 'list' => $unidadesMedida, 'selected' => $dadosDaNFe['unidade'], 'options' => ['class' => 'form-control select2', 'id' => 'unidade_medida', 'required']];
+          @endphp
+          <x-form.select :name="$__f28['name']" :list="$__f28['list']" :selected="$__f28['selected']" :options="$__f28['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('tipo_medida', 'Tipo de medida' . ':*') !!}
-          {!! Form::select('tipo_medida', $tiposMedida, '', ['class' => 'form-control select2', 'id' => 'tipo_medida', 'required']); !!}
+          @php
+          $__f29 = ['name' => 'tipo_medida', 'value' => 'Tipo de medida' . ':*'];
+          @endphp
+          <x-form.label :name="$__f29['name']" :value="$__f29['value']" />
+          @php
+          $__f30 = ['name' => 'tipo_medida', 'list' => $tiposMedida, 'selected' => '', 'options' => ['class' => 'form-control select2', 'id' => 'tipo_medida', 'required']];
+          @endphp
+          <x-form.select :name="$__f30['name']" :list="$__f30['list']" :selected="$__f30['selected']" :options="$__f30['options']" />
         </div>
       </div>
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('quantidade_carga', 'Quantidade' . ':*') !!}
-          {!! Form::text('quantidade_carga', $dadosDaNFe['quantidade'], ['class' => 'form-control type-ref', 'placeholder' => 'Quantidade',  'data-mask="000000.000", data-mask-reverse="true"' ]); !!}
+          @php
+          $__f31 = ['name' => 'quantidade_carga', 'value' => 'Quantidade' . ':*'];
+          @endphp
+          <x-form.label :name="$__f31['name']" :value="$__f31['value']" />
+          @php
+          $__f32 = ['name' => 'quantidade_carga', 'value' => $dadosDaNFe['quantidade'], 'options' => ['class' => 'form-control type-ref', 'placeholder' => 'Quantidade',  'data-mask="000000.000", data-mask-reverse="true"' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f32['name']" :value="$__f32['value']" :options="$__f32['options']" />
         </div>
       </div>
 
@@ -308,15 +401,27 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('nome_componente', 'Nome do componente' . ':*') !!}
-          {!! Form::text('nome_componente', $dadosDaNFe['componente'], ['class' => 'form-control', 'required', 'placeholder' => 'Nome do componente' ]); !!}
+          @php
+          $__f33 = ['name' => 'nome_componente', 'value' => 'Nome do componente' . ':*'];
+          @endphp
+          <x-form.label :name="$__f33['name']" :value="$__f33['value']" />
+          @php
+          $__f34 = ['name' => 'nome_componente', 'value' => $dadosDaNFe['componente'], 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Nome do componente' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f34['name']" :value="$__f34['value']" :options="$__f34['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('valor_componente', 'Valor do componente' . ':*') !!}
-          {!! Form::text('valor_componente', $dadosDaNFe['valor_frete'], ['class' => 'form-control', 'required', 'placeholder' => 'Valor do componente', 'data-mask="000000.00", data-mask-reverse="true"' ]); !!}
+          @php
+          $__f35 = ['name' => 'valor_componente', 'value' => 'Valor do componente' . ':*'];
+          @endphp
+          <x-form.label :name="$__f35['name']" :value="$__f35['value']" />
+          @php
+          $__f36 = ['name' => 'valor_componente', 'value' => $dadosDaNFe['valor_frete'], 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Valor do componente', 'data-mask="000000.00", data-mask-reverse="true"' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f36['name']" :value="$__f36['value']" :options="$__f36['options']" />
         </div>
       </div>
 
@@ -375,35 +480,65 @@
       </div>
       <div class="col-md-5">
         <div class="form-group">
-          {!! Form::label('rua_tomador', 'Rua' . ':*') !!}
-          {!! Form::text('rua_tomador', null, ['class' => 'form-control', 'required', 'placeholder' => 'Rua' ]); !!}
+          @php
+          $__f37 = ['name' => 'rua_tomador', 'value' => 'Rua' . ':*'];
+          @endphp
+          <x-form.label :name="$__f37['name']" :value="$__f37['value']" />
+          @php
+          $__f38 = ['name' => 'rua_tomador', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Rua' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f38['name']" :value="$__f38['value']" :options="$__f38['options']" />
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('numero_tomador', 'Número' . ':*') !!}
-          {!! Form::text('numero_tomador', null, ['class' => 'form-control', 'required', 'placeholder' => 'Número' ]); !!}
+          @php
+          $__f39 = ['name' => 'numero_tomador', 'value' => 'Número' . ':*'];
+          @endphp
+          <x-form.label :name="$__f39['name']" :value="$__f39['value']" />
+          @php
+          $__f40 = ['name' => 'numero_tomador', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Número' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f40['name']" :value="$__f40['value']" :options="$__f40['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('cep_tomador', 'CEP' . ':*') !!}
-          {!! Form::text('cep_tomador', null, ['class' => 'form-control', 'required', 'placeholder' => 'CEP' ]); !!}
+          @php
+          $__f41 = ['name' => 'cep_tomador', 'value' => 'CEP' . ':*'];
+          @endphp
+          <x-form.label :name="$__f41['name']" :value="$__f41['value']" />
+          @php
+          $__f42 = ['name' => 'cep_tomador', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'CEP' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f42['name']" :value="$__f42['value']" :options="$__f42['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('bairro_tomador', 'Bairro' . ':*') !!}
-          {!! Form::text('bairro_tomador', null, ['class' => 'form-control', 'required', 'placeholder' => 'Bairro' ]); !!}
+          @php
+          $__f43 = ['name' => 'bairro_tomador', 'value' => 'Bairro' . ':*'];
+          @endphp
+          <x-form.label :name="$__f43['name']" :value="$__f43['value']" />
+          @php
+          $__f44 = ['name' => 'bairro_tomador', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Bairro' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f44['name']" :value="$__f44['value']" :options="$__f44['options']" />
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('cidade_tomador', 'Cidade' . ':*') !!}
-          {!! Form::select('cidade_tomador', $cidades, '', ['class' => 'form-control select2', 'id' => 'cidade_tomador', 'required']); !!}
+          @php
+          $__f45 = ['name' => 'cidade_tomador', 'value' => 'Cidade' . ':*'];
+          @endphp
+          <x-form.label :name="$__f45['name']" :value="$__f45['value']" />
+          @php
+          $__f46 = ['name' => 'cidade_tomador', 'list' => $cidades, 'selected' => '', 'options' => ['class' => 'form-control select2', 'id' => 'cidade_tomador', 'required']];
+          @endphp
+          <x-form.select :name="$__f46['name']" :list="$__f46['list']" :selected="$__f46['selected']" :options="$__f46['options']" />
         </div>
       </div>
 
@@ -411,27 +546,45 @@
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('data_prevista_entrega', 'Data previsa de entrega' . ':*') !!}
+          @php
+          $__f47 = ['name' => 'data_prevista_entrega', 'value' => 'Data previsa de entrega' . ':*'];
+          @endphp
+          <x-form.label :name="$__f47['name']" :value="$__f47['value']" />
           <div class="input-group">
             <span class="input-group-addon">
               <i class="fa fa-calendar"></i>
             </span>
-            {!! Form::text('data_prevista_entrega', $dadosDaNFe['data_entrega'], ['class' => 'form-control type-ref', 'required', 'data-mask="00/00/0000"']); !!}
+            @php
+            $__f48 = ['name' => 'data_prevista_entrega', 'value' => $dadosDaNFe['data_entrega'], 'options' => ['class' => 'form-control type-ref', 'required', 'data-mask="00/00/0000"']];
+            @endphp
+            <x-form.input type="text" :name="$__f48['name']" :value="$__f48['value']" :options="$__f48['options']" />
           </div>
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('valor_transporte', 'Valor da Prestação de Serviço' . ':*') !!}
-          {!! Form::text('valor_transporte', null, ['class' => 'form-control type-ref', 'required', 'placeholder' => 'Valor da Prestação de Serviço' ]); !!}
+          @php
+          $__f49 = ['name' => 'valor_transporte', 'value' => 'Valor da Prestação de Serviço' . ':*'];
+          @endphp
+          <x-form.label :name="$__f49['name']" :value="$__f49['value']" />
+          @php
+          $__f50 = ['name' => 'valor_transporte', 'value' => null, 'options' => ['class' => 'form-control type-ref', 'required', 'placeholder' => 'Valor da Prestação de Serviço' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f50['name']" :value="$__f50['value']" :options="$__f50['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('valor_receber', 'Valor a Receber' . ':*') !!}
-          {!! Form::text('valor_receber', null, ['class' => 'form-control', 'required', 'placeholder' => 'Valor a Receber' ]); !!}
+          @php
+          $__f51 = ['name' => 'valor_receber', 'value' => 'Valor a Receber' . ':*'];
+          @endphp
+          <x-form.label :name="$__f51['name']" :value="$__f51['value']" />
+          @php
+          $__f52 = ['name' => 'valor_receber', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Valor a Receber' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f52['name']" :value="$__f52['value']" :options="$__f52['options']" />
         </div>
       </div>
 
@@ -439,41 +592,77 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('cidade_envio', 'Municipio envio' . ':*') !!}
-          {!! Form::select('cidade_envio', $cidades, $dadosDaNFe['munipio_envio'], ['class' => 'form-control select2', 'id' => 'cidade_envio', 'required']); !!}
+          @php
+          $__f53 = ['name' => 'cidade_envio', 'value' => 'Municipio envio' . ':*'];
+          @endphp
+          <x-form.label :name="$__f53['name']" :value="$__f53['value']" />
+          @php
+          $__f54 = ['name' => 'cidade_envio', 'list' => $cidades, 'selected' => $dadosDaNFe['munipio_envio'], 'options' => ['class' => 'form-control select2', 'id' => 'cidade_envio', 'required']];
+          @endphp
+          <x-form.select :name="$__f54['name']" :list="$__f54['list']" :selected="$__f54['selected']" :options="$__f54['options']" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('cidade_inicio', 'Municipio Inicio' . ':*') !!}
-          {!! Form::select('cidade_inicio', $cidades, $dadosDaNFe['munipio_envio'], ['class' => 'form-control select2', 'id' => 'cidade_inicio', 'required']); !!}
+          @php
+          $__f55 = ['name' => 'cidade_inicio', 'value' => 'Municipio Inicio' . ':*'];
+          @endphp
+          <x-form.label :name="$__f55['name']" :value="$__f55['value']" />
+          @php
+          $__f56 = ['name' => 'cidade_inicio', 'list' => $cidades, 'selected' => $dadosDaNFe['munipio_envio'], 'options' => ['class' => 'form-control select2', 'id' => 'cidade_inicio', 'required']];
+          @endphp
+          <x-form.select :name="$__f56['name']" :list="$__f56['list']" :selected="$__f56['selected']" :options="$__f56['options']" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('cidade_fim', 'Municipio Fim' . ':*') !!}
-          {!! Form::select('cidade_fim', $cidades, $dadosDaNFe['munipio_final'], ['class' => 'form-control select2', 'id' => 'cidade_fim', 'required']); !!}
+          @php
+          $__f57 = ['name' => 'cidade_fim', 'value' => 'Municipio Fim' . ':*'];
+          @endphp
+          <x-form.label :name="$__f57['name']" :value="$__f57['value']" />
+          @php
+          $__f58 = ['name' => 'cidade_fim', 'list' => $cidades, 'selected' => $dadosDaNFe['munipio_final'], 'options' => ['class' => 'form-control select2', 'id' => 'cidade_fim', 'required']];
+          @endphp
+          <x-form.select :name="$__f58['name']" :list="$__f58['list']" :selected="$__f58['selected']" :options="$__f58['options']" />
         </div>
       </div>
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('retira', 'Retira' . ':*') !!}
-          {!! Form::select('retira', [1 => 'sim', 0 => 'não'], '', ['class' => 'form-control select2', 'id' => 'retira', 'required']); !!}
+          @php
+          $__f59 = ['name' => 'retira', 'value' => 'Retira' . ':*'];
+          @endphp
+          <x-form.label :name="$__f59['name']" :value="$__f59['value']" />
+          @php
+          $__f60 = ['name' => 'retira', 'list' => [1 => 'sim', 0 => 'não'], 'selected' => '', 'options' => ['class' => 'form-control select2', 'id' => 'retira', 'required']];
+          @endphp
+          <x-form.select :name="$__f60['name']" :list="$__f60['list']" :selected="$__f60['selected']" :options="$__f60['options']" />
         </div>
       </div>
 
       <div class="col-md-5">
         <div class="form-group">
-          {!! Form::label('detalhes_retira', 'Detalhes(opcional)' . ':*') !!}
-          {!! Form::text('detalhes_retira', null, ['class' => 'form-control type-ref', 'placeholder' => 'Detalhes(opcional)' ]); !!}
+          @php
+          $__f61 = ['name' => 'detalhes_retira', 'value' => 'Detalhes(opcional)' . ':*'];
+          @endphp
+          <x-form.label :name="$__f61['name']" :value="$__f61['value']" />
+          @php
+          $__f62 = ['name' => 'detalhes_retira', 'value' => null, 'options' => ['class' => 'form-control type-ref', 'placeholder' => 'Detalhes(opcional)' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f62['name']" :value="$__f62['value']" :options="$__f62['options']" />
         </div>
       </div>
 
       <div class="col-md-7">
         <div class="form-group">
-          {!! Form::label('obs', 'Informação Adicional' . ':*') !!}
-          {!! Form::text('obs', null, ['class' => 'form-control type-ref', 'placeholder' => 'Informação Adicional' ]); !!}
+          @php
+          $__f63 = ['name' => 'obs', 'value' => 'Informação Adicional' . ':*'];
+          @endphp
+          <x-form.label :name="$__f63['name']" :value="$__f63['value']" />
+          @php
+          $__f64 = ['name' => 'obs', 'value' => null, 'options' => ['class' => 'form-control type-ref', 'placeholder' => 'Informação Adicional' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f64['name']" :value="$__f64['value']" :options="$__f64['options']" />
         </div>
       </div>
       <input type="hidden" name="componentes" id="comps">
@@ -495,7 +684,7 @@
       <button id="finalizar" type="submit" class="btn btn-primary pull-right disabled" id="submit_user_button">@lang( 'messages.save' ) CTe</button>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
   @stop
   @section('javascript')
   <script type="text/javascript">

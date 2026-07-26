@@ -19,16 +19,22 @@
     @if(!$is_service_staff)
         @component('components.widget')
             <div class="col-sm-6">
-                {!! Form::open(['url' => action('Restaurant\OrderController@index'), 'method' => 'get', 'id' => 'select_service_staff_form' ]) !!}
+                @php
+                $__f1 = ['options' => ['url' => action('Restaurant\OrderController@index'), 'method' => 'get', 'id' => 'select_service_staff_form' ]];
+                @endphp
+                <x-form.open :options="$__f1['options']" />
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-user-secret"></i>
                         </span>
-                        {!! Form::select('service_staff', $service_staff, null, ['class' => 'form-control select2', 'placeholder' => 'Selecionar o grupo de serviço', 'id' => 'service_staff_id']); !!}
+                        @php
+                        $__f2 = ['name' => 'service_staff', 'list' => $service_staff, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => 'Selecionar o grupo de serviço', 'id' => 'service_staff_id']];
+                        @endphp
+                        <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
                     </div>
                 </div>
-                {!! Form::close() !!}
+                <x-form.close />
             </div>
         @endcomponent
     @endif

@@ -11,10 +11,19 @@
 <!-- Main content -->
 <section class="content no-print">
 
-{!! Form::hidden('location_id', $sell->location->id, ['id' => 'location_id', 'data-receipt_printer_type' => $sell->location->receipt_printer_type ]); !!}
+@php
+$__f1 = ['name' => 'location_id', 'value' => $sell->location->id, 'options' => ['id' => 'location_id', 'data-receipt_printer_type' => $sell->location->receipt_printer_type ]];
+@endphp
+<x-form.input type="hidden" :name="$__f1['name']" :value="$__f1['value']" :options="$__f1['options']" />
 
-	{!! Form::open(['url' => action('SellReturnController@store'), 'method' => 'post', 'id' => 'sell_return_form' ]) !!}
-	{!! Form::hidden('transaction_id', $sell->id); !!}
+	@php
+	$__f2 = ['options' => ['url' => action('SellReturnController@store'), 'method' => 'post', 'id' => 'sell_return_form' ]];
+	@endphp
+	<x-form.open :options="$__f2['options']" />
+	@php
+	$__f3 = ['name' => 'transaction_id', 'value' => $sell->id];
+	@endphp
+	<x-form.input type="hidden" :name="$__f3['name']" :value="$__f3['value']" />
 	<div class="box box-solid">
 		<div class="box-header">
 			<h3 class="box-title">@lang('lang_v1.parent_sale')</h3>
@@ -37,13 +46,22 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('invoice_no', __('sale.invoice_no').':') !!}
-						{!! Form::text('invoice_no', !empty($sell->return_parent->invoice_no) ? $sell->return_parent->invoice_no : null, ['class' => 'form-control']); !!}
+						@php
+						$__f4 = ['name' => 'invoice_no', 'value' => __('sale.invoice_no').':'];
+						@endphp
+						<x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+						@php
+						$__f5 = ['name' => 'invoice_no', 'value' => !empty($sell->return_parent->invoice_no) ? $sell->return_parent->invoice_no : null, 'options' => ['class' => 'form-control']];
+						@endphp
+						<x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('transaction_date', __('messages.date') . ':*') !!}
+						@php
+						$__f6 = ['name' => 'transaction_date', 'value' => __('messages.date') . ':*'];
+						@endphp
+						<x-form.label :name="$__f6['name']" :value="$__f6['value']" />
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="fa fa-calendar"></i>
@@ -51,7 +69,10 @@
 							@php
 								$transaction_date = !empty($sell->return_parent->transaction_date) ? $sell->return_parent->transaction_date : 'now';
 							@endphp
-							{!! Form::text('transaction_date', @format_date($transaction_date), ['class' => 'form-control', 'readonly', 'required']); !!}
+							@php
+							$__f7 = ['name' => 'transaction_date', 'value' => \Carbon::createFromTimestamp(strtotime($transaction_date))->format(session('business.date_format')), 'options' => ['class' => 'form-control', 'readonly', 'required']];
+							@endphp
+							<x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
 						</div>
 					</div>
 				</div>
@@ -127,14 +148,26 @@
 				@endphp
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('discount_type', __( 'purchase.discount_type' ) . ':') !!}
-						{!! Form::select('discount_type', [ '' => __('lang_v1.none'), 'fixed' => __( 'lang_v1.fixed' ), 'percentage' => __( 'lang_v1.percentage' )], $discount_type, ['class' => 'form-control']); !!}
+						@php
+						$__f8 = ['name' => 'discount_type', 'value' => __( 'purchase.discount_type' ) . ':'];
+						@endphp
+						<x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+						@php
+						$__f9 = ['name' => 'discount_type', 'list' => [ '' => __('lang_v1.none'), 'fixed' => __( 'lang_v1.fixed' ), 'percentage' => __( 'lang_v1.percentage' )], 'selected' => $discount_type, 'options' => ['class' => 'form-control']];
+						@endphp
+						<x-form.select :name="$__f9['name']" :list="$__f9['list']" :selected="$__f9['selected']" :options="$__f9['options']" />
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('discount_amount', __( 'purchase.discount_amount' ) . ':') !!}
-						{!! Form::text('discount_amount', @num_format($discount_amount), ['class' => 'form-control input_number']); !!}
+						@php
+						$__f10 = ['name' => 'discount_amount', 'value' => __( 'purchase.discount_amount' ) . ':'];
+						@endphp
+						<x-form.label :name="$__f10['name']" :value="$__f10['value']" />
+						@php
+						$__f11 = ['name' => 'discount_amount', 'value' => number_format($discount_amount, 2, ',', '.'), 'options' => ['class' => 'form-control input_number']];
+						@endphp
+						<x-form.input type="text" :name="$__f11['name']" :value="$__f11['value']" :options="$__f11['options']" />
 					</div>
 				</div>
 			</div>
@@ -144,9 +177,18 @@
 					$tax_percent = $sell->tax->amount;
 				}
 			@endphp
-			{!! Form::hidden('tax_id', $sell->tax_id); !!}
-			{!! Form::hidden('tax_amount', 0, ['id' => 'tax_amount']); !!}
-			{!! Form::hidden('tax_percent', $tax_percent, ['id' => 'tax_percent']); !!}
+			@php
+			$__f12 = ['name' => 'tax_id', 'value' => $sell->tax_id];
+			@endphp
+			<x-form.input type="hidden" :name="$__f12['name']" :value="$__f12['value']" />
+			@php
+			$__f13 = ['name' => 'tax_amount', 'value' => 0, 'options' => ['id' => 'tax_amount']];
+			@endphp
+			<x-form.input type="hidden" :name="$__f13['name']" :value="$__f13['value']" :options="$__f13['options']" />
+			@php
+			$__f14 = ['name' => 'tax_percent', 'value' => $tax_percent, 'options' => ['id' => 'tax_percent']];
+			@endphp
+			<x-form.input type="hidden" :name="$__f14['name']" :value="$__f14['value']" :options="$__f14['options']" />
 			<div class="row">
 				<div class="col-sm-12 text-right">
 					<strong>@lang('lang_v1.total_return_discount'):</strong> 
@@ -169,7 +211,7 @@
 			</div>
 		</div>
 	</div>
-	{!! Form::close() !!}
+	<x-form.close />
 
 </section>
 @stop

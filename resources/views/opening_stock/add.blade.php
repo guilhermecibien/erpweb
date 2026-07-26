@@ -10,8 +10,14 @@
 
 <!-- Main content -->
 <section class="content">
-	{!! Form::open(['url' => action('OpeningStockController@save'), 'method' => 'post', 'id' => 'add_opening_stock_form' ]) !!}
-	{!! Form::hidden('product_id', $product->id); !!}
+	@php
+	$__f1 = ['options' => ['url' => action('OpeningStockController@save'), 'method' => 'post', 'id' => 'add_opening_stock_form' ]];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
+	@php
+	$__f2 = ['name' => 'product_id', 'value' => $product->id];
+	@endphp
+	<x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" />
 	@include('opening_stock.form-part')
 	<div class="row">
 		<div class="col-sm-12">
@@ -19,7 +25,7 @@
 		</div>
 	</div>
 
-	{!! Form::close() !!}
+	<x-form.close />
 </section>
 @stop
 @section('javascript')

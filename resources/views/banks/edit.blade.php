@@ -11,7 +11,10 @@
 
 <!-- Main content -->
 <section class="content">
-  {!! Form::open(['url' => action('BankController@update', [$item->id]), 'method' => 'put', 'id' => 'bank_form' ]) !!}
+  @php
+  $__f1 = ['options' => ['url' => action('BankController@update', [$item->id]), 'method' => 'put', 'id' => 'bank_form' ]];
+  @endphp
+  <x-form.open :options="$__f1['options']" />
   <div class="row">
     <div class="col-md-12">
       @component('components.widget', ['class' => 'box-primary'])
@@ -26,7 +29,7 @@
       <button type="submit" class="btn btn-primary pull-right" id="submit_button">Atualizar</button>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
   @stop 
 </section>
 

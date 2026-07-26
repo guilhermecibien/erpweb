@@ -18,7 +18,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(\App\Support\FormHtml\HtmlBuilder::class);
+
+        $this->app->singleton(\App\Support\FormHtml\FormFieldResolver::class, function ($app) {
+            $resolver = new \App\Support\FormHtml\FormFieldResolver(
+                $app[\App\Support\FormHtml\HtmlBuilder::class],
+                $app['url'],
+                $app['session.store']->token(),
+                $app['request']
+            );
+
+            return $resolver->setSessionStore($app['session.store']);
+        });
     }
 
     /**

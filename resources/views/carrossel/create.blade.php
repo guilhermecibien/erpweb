@@ -11,15 +11,24 @@
 
 <!-- Main content -->
 <section class="content">
-  {!! Form::open(['url' => action('CarrosselController@store'), 'method' => 'post', 'id' => 'carrossel_add_form', 'files' => true ]) !!}
+  @php
+  $__f1 = ['options' => ['url' => action('CarrosselController@store'), 'method' => 'post', 'id' => 'carrossel_add_form', 'files' => true ]];
+  @endphp
+  <x-form.open :options="$__f1['options']" />
   <div class="row">
     <div class="col-md-12">
       @component('components.widget')
       
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('titulo', 'Título' . ':') !!}
-          {!! Form::text('titulo', null, ['class' => 'form-control', 'placeholder' => 'Título' ]); !!}
+          @php
+          $__f2 = ['name' => 'titulo', 'value' => 'Título' . ':'];
+          @endphp
+          <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+          @php
+          $__f3 = ['name' => 'titulo', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => 'Título' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           @if($errors->has('titulo'))
           <span class="text-danger">
             {{ $errors->first('titulo') }}
@@ -30,8 +39,14 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('nome_botao', 'Nome botão' . ':') !!}
-          {!! Form::text('nome_botao', null, ['class' => 'form-control', 'placeholder' => 'Nome botão' ]); !!}
+          @php
+          $__f4 = ['name' => 'nome_botao', 'value' => 'Nome botão' . ':'];
+          @endphp
+          <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+          @php
+          $__f5 = ['name' => 'nome_botao', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => 'Nome botão' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
           @if($errors->has('nome_botao'))
           <span class="text-danger">
             {{ $errors->first('nome_botao') }}
@@ -42,8 +57,14 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('link_acao', 'Link ação' . ':') !!}
-          {!! Form::text('link_acao', null, ['class' => 'form-control', 'placeholder' => 'Link ação' ]); !!}
+          @php
+          $__f6 = ['name' => 'link_acao', 'value' => 'Link ação' . ':'];
+          @endphp
+          <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+          @php
+          $__f7 = ['name' => 'link_acao', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => 'Link ação' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
           @if($errors->has('link_acao'))
           <span class="text-danger">
             {{ $errors->first('link_acao') }}
@@ -58,8 +79,14 @@
 
       <div class="col-md-10">
         <div class="form-group">
-          {!! Form::label('descricao', 'Descrição' . ':') !!}
-          {!! Form::text('descricao', null, ['class' => 'form-control', 'placeholder' => 'Descrição' ]); !!}
+          @php
+          $__f8 = ['name' => 'descricao', 'value' => 'Descrição' . ':'];
+          @endphp
+          <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+          @php
+          $__f9 = ['name' => 'descricao', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => 'Descrição' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
           @if($errors->has('descricao'))
           <span class="text-danger">
             {{ $errors->first('descricao') }}
@@ -73,8 +100,14 @@
       <div class="col-md-4">
 
         <div class="form-group">
-          {!! Form::label('image', 'Imagem' . ':*') !!}
-          {!! Form::file('image', ['id' => 'upload_image', 'accept' => 'image/*']); !!}
+          @php
+          $__f10 = ['name' => 'image', 'value' => 'Imagem' . ':*'];
+          @endphp
+          <x-form.label :name="$__f10['name']" :value="$__f10['value']" />
+          @php
+          $__f11 = ['name' => 'image', 'options' => ['id' => 'upload_image', 'accept' => 'image/*']];
+          @endphp
+          <x-form.input type="file" :name="$__f11['name']" :options="$__f11['options']" />
           <small><p class="help-block">@lang('purchase.max_file_size', ['size' => (config('constants.document_size_limit') / 1000000)]) <br> @lang('lang_v1.aspect_ratio_should_be_1_1')</p></small>
           @if($errors->has('image'))
           <span class="text-danger">
@@ -86,7 +119,10 @@
 
       <div class="col-md-3" style="visibility: hidden">
         <div class="form-group">
-          {!! Form::label('cor_fundo', 'Cor de fundo' . '*:') !!}
+          @php
+          $__f12 = ['name' => 'cor_fundo', 'value' => 'Cor de fundo' . '*:'];
+          @endphp
+          <x-form.label :name="$__f12['name']" :value="$__f12['value']" />
           <input class="form-control" type="color" name="cor_fundo">
 
         </div>
@@ -107,7 +143,7 @@
       <button type="submit" class="btn btn-primary pull-right" id="submit_user_button">@lang( 'messages.save' )</button>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
   @stop
   @section('javascript')
   <script type="text/javascript">

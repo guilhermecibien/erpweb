@@ -10,7 +10,10 @@
                 <h3>Visualizando usuário</h3>
             </div>
             <div class="col-md-4 col-xs-12 mt-15 pull-right">
-                {!! Form::select('user_id', $users, $user->id , ['class' => 'form-control select2', 'id' => 'user_id']); !!}
+                @php
+                $__f1 = ['name' => 'user_id', 'list' => $users, 'selected' => $user->id, 'options' => ['class' => 'form-control select2', 'id' => 'user_id']];
+                @endphp
+                <x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
             </div>
         </div>
         <br>

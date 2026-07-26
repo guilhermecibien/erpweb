@@ -24,14 +24,26 @@
                 <div class="box-body">
                     <div class="col-md-3">
                         <div class="form-group">
-                            {!! Form::label('account_id', __('account.account') . ':') !!}
-                            {!! Form::select('account_id', $accounts, null, ['class' => 'form-control select2']); !!}
+                            @php
+                            $__f1 = ['name' => 'account_id', 'value' => __('account.account') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                            @php
+                            $__f2 = ['name' => 'account_id', 'list' => $accounts, 'selected' => null, 'options' => ['class' => 'form-control select2']];
+                            @endphp
+                            <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            {!! Form::label('date_filter', __('report.date_range') . ':') !!}
-                            {!! Form::text('date_range', null, ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'date_filter', 'readonly']); !!}
+                            @php
+                            $__f3 = ['name' => 'date_filter', 'value' => __('report.date_range') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+                            @php
+                            $__f4 = ['name' => 'date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'date_filter', 'readonly']];
+                            @endphp
+                            <x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
                         </div>
                     </div>
                 </div>

@@ -13,14 +13,20 @@
 					<div class="col-md-12">
 						<div class="checkbox">
 							<label>
-				              	{!! Form::checkbox('search_fields[]', 'name', true, ['class' => 'input-icheck search_fields']); !!} @lang('product.product_name')
+				              	@php
+				              	$__f1 = ['name' => 'search_fields[]', 'value' => 'name', 'checked' => true, 'options' => ['class' => 'input-icheck search_fields']];
+				              	@endphp
+				              	<x-form.checkbox :name="$__f1['name']" :value="$__f1['value']" :checked="$__f1['checked']" :options="$__f1['options']" /> @lang('product.product_name')
 				            </label>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="checkbox">
 							<label>
-				              	{!! Form::checkbox('search_fields[]', 'sku', true, ['class' => 'input-icheck search_fields']); !!} @lang('product.sku')
+				              	@php
+				              	$__f2 = ['name' => 'search_fields[]', 'value' => 'sku', 'checked' => true, 'options' => ['class' => 'input-icheck search_fields']];
+				              	@endphp
+				              	<x-form.checkbox :name="$__f2['name']" :value="$__f2['value']" :checked="$__f2['checked']" :options="$__f2['options']" /> @lang('product.sku')
 				            </label>
 						</div>
 					</div>
@@ -28,7 +34,10 @@
 					<div class="col-md-12">
 						<div class="checkbox">
 							<label>
-				              	{!! Form::checkbox('search_fields[]', 'lot_number', true, ['class' => 'input-icheck search_fields']); !!} @lang('lang_v1.lot_number')
+				              	@php
+				              	$__f3 = ['name' => 'search_fields[]', 'value' => 'lot_number', 'checked' => true, 'options' => ['class' => 'input-icheck search_fields']];
+				              	@endphp
+				              	<x-form.checkbox :name="$__f3['name']" :value="$__f3['value']" :checked="$__f3['checked']" :options="$__f3['options']" /> @lang('lang_v1.lot_number')
 				            </label>
 						</div>
 					</div>

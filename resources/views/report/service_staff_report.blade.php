@@ -15,22 +15,40 @@
             @component('components.filters', ['title' => __('report.filters')])
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('ssr_location_id',  __('purchase.business_location') . ':') !!}
-                        {!! Form::select('ssr_location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%']); !!}
+                        @php
+                        $__f1 = ['name' => 'ssr_location_id', 'value' => __('purchase.business_location') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                        @php
+                        $__f2 = ['name' => 'ssr_location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%']];
+                        @endphp
+                        <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('service_staff_id',  __('restaurant.service_staff') . ':') !!}
-                        {!! Form::select('service_staff_id', $waiters, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]); !!}
+                        @php
+                        $__f3 = ['name' => 'service_staff_id', 'value' => __('restaurant.service_staff') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+                        @php
+                        $__f4 = ['name' => 'service_staff_id', 'list' => $waiters, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]];
+                        @endphp
+                        <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('ssr_date_range', __('report.date_range') . ':') !!}
-                        {!! Form::text('date_range', @format_date('first day of this month') . ' ~ ' . @format_date('last day of this month'), ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'ssr_date_range', 'readonly']); !!}
+                        @php
+                        $__f5 = ['name' => 'ssr_date_range', 'value' => __('report.date_range') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
+                        @php
+                        $__f6 = ['name' => 'date_range', 'value' => \Carbon::createFromTimestamp(strtotime('first day of this month'))->format(session('business.date_format')) . ' ~ ' . \Carbon::createFromTimestamp(strtotime('last day of this month'))->format(session('business.date_format')), 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'ssr_date_range', 'readonly']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
                     </div>
                 </div>
             @endcomponent

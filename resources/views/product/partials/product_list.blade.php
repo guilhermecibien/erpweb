@@ -48,27 +48,51 @@ $custom_labels = json_decode(session('business.custom_labels'), true);
         <td colspan="{{$colspan}}">
             <div style="display: flex; width: 100%;">
                 @can('product.delete')
-                {!! Form::open(['url' => action('ProductController@massDestroy'), 'method' => 'post', 'id' => 'mass_delete_form' ]) !!}
-                {!! Form::hidden('selected_rows', null, ['id' => 'selected_rows']); !!}
-                {!! Form::submit(__('lang_v1.delete_selected'), array('class' => 'btn btn-xs btn-danger', 'id' => 'delete-selected')) !!}
-                {!! Form::close() !!}
+                @php
+                $__f1 = ['options' => ['url' => action('ProductController@massDestroy'), 'method' => 'post', 'id' => 'mass_delete_form' ]];
+                @endphp
+                <x-form.open :options="$__f1['options']" />
+                @php
+                $__f2 = ['name' => 'selected_rows', 'value' => null, 'options' => ['id' => 'selected_rows']];
+                @endphp
+                <x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
+                @php
+                $__f3 = ['value' => __('lang_v1.delete_selected'), 'options' => array('class' => 'btn btn-xs btn-danger', 'id' => 'delete-selected')];
+                @endphp
+                <x-form.submit :value="$__f3['value']" :options="$__f3['options']" />
+                <x-form.close />
                 @endcan
                 @can('product.update')
                 &nbsp;
-                {!! Form::open(['url' => action('ProductController@bulkEdit'), 'method' => 'post', 'id' => 'bulk_edit_form' ]) !!}
-                {!! Form::hidden('selected_products', null, ['id' => 'selected_products_for_edit']); !!}
+                @php
+                $__f5 = ['options' => ['url' => action('ProductController@bulkEdit'), 'method' => 'post', 'id' => 'bulk_edit_form' ]];
+                @endphp
+                <x-form.open :options="$__f5['options']" />
+                @php
+                $__f6 = ['name' => 'selected_products', 'value' => null, 'options' => ['id' => 'selected_products_for_edit']];
+                @endphp
+                <x-form.input type="hidden" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
                 <button type="submit" class="btn btn-xs btn-primary" id="edit-selected"> <i class="fa fa-edit"></i>{{__('lang_v1.bulk_edit')}}</button>
-                {!! Form::close() !!}
+                <x-form.close />
                 &nbsp;
                 <button type="button" class="btn btn-xs btn-success update_product_location" data-type="add">Adicionar localização</button>
                 &nbsp;
                 <button type="button" class="btn btn-xs bg-navy update_product_location" data-type="remove">Remover localização</button>
                 @endcan
                 &nbsp;
-                {!! Form::open(['url' => action('ProductController@massDeactivate'), 'method' => 'post', 'id' => 'mass_deactivate_form' ]) !!}
-                {!! Form::hidden('selected_products', null, ['id' => 'selected_products']); !!}
-                {!! Form::submit('Desativar selecionado', array('class' => 'btn btn-xs btn-warning', 'id' => 'deactivate-selected')) !!}
-                {!! Form::close() !!} @show_tooltip('Destivar os produtos selecionados')
+                @php
+                $__f8 = ['options' => ['url' => action('ProductController@massDeactivate'), 'method' => 'post', 'id' => 'mass_deactivate_form' ]];
+                @endphp
+                <x-form.open :options="$__f8['options']" />
+                @php
+                $__f9 = ['name' => 'selected_products', 'value' => null, 'options' => ['id' => 'selected_products']];
+                @endphp
+                <x-form.input type="hidden" :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
+                @php
+                $__f10 = ['value' => 'Desativar selecionado', 'options' => array('class' => 'btn btn-xs btn-warning', 'id' => 'deactivate-selected')];
+                @endphp
+                <x-form.submit :value="$__f10['value']" :options="$__f10['options']" />
+                <x-form.close /> @show_tooltip('Destivar os produtos selecionados')
             </div>
         </td>
     </tr>

@@ -13,26 +13,47 @@
     <div class="row">
         <div class="col-md-12">
             @component('components.filters', ['title' => __('report.filters')])
-              {!! Form::open(['url' => action('ReportController@getStockReport'), 'method' => 'get', 'id' => 'register_report_filter_form' ]) !!}
+              @php
+              $__f1 = ['options' => ['url' => action('ReportController@getStockReport'), 'method' => 'get', 'id' => 'register_report_filter_form' ]];
+              @endphp
+              <x-form.open :options="$__f1['options']" />
                 <div class="col-md-4">
                     <div class="form-group">
-                        {!! Form::label('register_user_id',  __('report.user') . ':') !!}
-                        {!! Form::select('register_user_id', $users, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('report.all_users')]); !!}
+                        @php
+                        $__f2 = ['name' => 'register_user_id', 'value' => __('report.user') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+                        @php
+                        $__f3 = ['name' => 'register_user_id', 'list' => $users, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('report.all_users')]];
+                        @endphp
+                        <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        {!! Form::label('register_status',  __('sale.status') . ':') !!}
-                        {!! Form::select('register_status', ['open' => __('cash_register.open'), 'close' => __('cash_register.close')], null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('report.all')]); !!}
+                        @php
+                        $__f4 = ['name' => 'register_status', 'value' => __('sale.status') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+                        @php
+                        $__f5 = ['name' => 'register_status', 'list' => ['open' => __('cash_register.open'), 'close' => __('cash_register.close')], 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('report.all')]];
+                        @endphp
+                        <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        {!! Form::label('register_report_date_range', __('report.date_range') . ':') !!}
-                        {!! Form::text('register_report_date_range', null , ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'register_report_date_range', 'readonly']); !!}
+                        @php
+                        $__f6 = ['name' => 'register_report_date_range', 'value' => __('report.date_range') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+                        @php
+                        $__f7 = ['name' => 'register_report_date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'register_report_date_range', 'readonly']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
                     </div>
                 </div>
-                {!! Form::close() !!}
+                <x-form.close />
             @endcomponent
         </div>
     </div>

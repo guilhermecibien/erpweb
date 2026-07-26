@@ -34,29 +34,44 @@
                     <br>
                     <div class="row">
                         <div class="col-md-12">
-                            {!! Form::open(['url' => route('location.settings_update', [$location->id]), 'method' => 'post', 'id' => 'bl_receipt_setting_form']) !!}
+                            @php
+                            $__f1 = ['options' => ['url' => route('location.settings_update', [$location->id]), 'method' => 'post', 'id' => 'bl_receipt_setting_form']];
+                            @endphp
+                            <x-form.open :options="$__f1['options']" />
 
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    {!! Form::label('print_receipt_on_invoice', 'Impressão automática após a conclusão' . ':') !!}
+                                    @php
+                                    $__f2 = ['name' => 'print_receipt_on_invoice', 'value' => 'Impressão automática após a conclusão' . ':'];
+                                    @endphp
+                                    <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
                                     @show_tooltip(__('tooltip.print_receipt_on_invoice'))
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="fa fa-file-alt"></i>
                                         </span>
-                                        {!! Form::select('print_receipt_on_invoice', $printReceiptOnInvoice, $location->print_receipt_on_invoice, ['class' => 'form-control select2', 'required']); !!}
+                                        @php
+                                        $__f3 = ['name' => 'print_receipt_on_invoice', 'list' => $printReceiptOnInvoice, 'selected' => $location->print_receipt_on_invoice, 'options' => ['class' => 'form-control select2', 'required']];
+                                        @endphp
+                                        <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    {!! Form::label('receipt_printer_type', __('receipt.receipt_printer_type') . ':*') !!} @show_tooltip(__('tooltip.receipt_printer_type'))
+                                    @php
+                                    $__f4 = ['name' => 'receipt_printer_type', 'value' => __('receipt.receipt_printer_type') . ':*'];
+                                    @endphp
+                                    <x-form.label :name="$__f4['name']" :value="$__f4['value']" /> @show_tooltip(__('tooltip.receipt_printer_type'))
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="fa fa-print"></i>
                                         </span>
-                                        {!! Form::select('receipt_printer_type', $receiptPrinterType, $location->receipt_printer_type, ['class' => 'form-control select2', 'required']); !!}
+                                        @php
+                                        $__f5 = ['name' => 'receipt_printer_type', 'list' => $receiptPrinterType, 'selected' => $location->receipt_printer_type, 'options' => ['class' => 'form-control select2', 'required']];
+                                        @endphp
+                                        <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
                                     </div>
                                     @if(config('app.env') == 'demo')
                                     <span class="help-block">Only Browser based option is enabled in demo.</span>
@@ -67,12 +82,18 @@
 
                             <div class="col-sm-4" id="location_printer_div">
                                 <div class="form-group">
-                                    {!! Form::label('printer_id', 'Impressoras de recibos' . ':*') !!}
+                                    @php
+                                    $__f6 = ['name' => 'printer_id', 'value' => 'Impressoras de recibos' . ':*'];
+                                    @endphp
+                                    <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="fa fa-share-alt"></i>
                                         </span>
-                                        {!! Form::select('printer_id', $printers, $location->printer_id, ['class' => 'form-control select2']); !!}
+                                        @php
+                                        $__f7 = ['name' => 'printer_id', 'list' => $printers, 'selected' => $location->printer_id, 'options' => ['class' => 'form-control select2']];
+                                        @endphp
+                                        <x-form.select :name="$__f7['name']" :list="$__f7['list']" :selected="$__f7['selected']" :options="$__f7['options']" />
                                     </div>
                                 </div>
                             </div>
@@ -81,24 +102,36 @@
 
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    {!! Form::label('invoice_layout_id', __('invoice.invoice_layout') . ':*') !!} @show_tooltip(__('tooltip.invoice_layout'))
+                                    @php
+                                    $__f8 = ['name' => 'invoice_layout_id', 'value' => __('invoice.invoice_layout') . ':*'];
+                                    @endphp
+                                    <x-form.label :name="$__f8['name']" :value="$__f8['value']" /> @show_tooltip(__('tooltip.invoice_layout'))
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="fa fa-info"></i>
                                         </span>
-                                        {!! Form::select('invoice_layout_id', $invoice_layouts, $location->invoice_layout_id, ['class' => 'form-control select2', 'required']); !!}
+                                        @php
+                                        $__f9 = ['name' => 'invoice_layout_id', 'list' => $invoice_layouts, 'selected' => $location->invoice_layout_id, 'options' => ['class' => 'form-control select2', 'required']];
+                                        @endphp
+                                        <x-form.select :name="$__f9['name']" :list="$__f9['list']" :selected="$__f9['selected']" :options="$__f9['options']" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    {!! Form::label('invoice_scheme_id', __('invoice.invoice_scheme') . ':*') !!} @show_tooltip(__('tooltip.invoice_scheme'))
+                                    @php
+                                    $__f10 = ['name' => 'invoice_scheme_id', 'value' => __('invoice.invoice_scheme') . ':*'];
+                                    @endphp
+                                    <x-form.label :name="$__f10['name']" :value="$__f10['value']" /> @show_tooltip(__('tooltip.invoice_scheme'))
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="fa fa-info"></i>
                                         </span>
-                                        {!! Form::select('invoice_scheme_id', $invoice_schemes, $location->invoice_scheme_id, ['class' => 'form-control select2', 'required']); !!}
+                                        @php
+                                        $__f11 = ['name' => 'invoice_scheme_id', 'list' => $invoice_schemes, 'selected' => $location->invoice_scheme_id, 'options' => ['class' => 'form-control select2', 'required']];
+                                        @endphp
+                                        <x-form.select :name="$__f11['name']" :list="$__f11['list']" :selected="$__f11['selected']" :options="$__f11['options']" />
                                     </div>
                                 </div>
                             </div>
@@ -106,8 +139,14 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    {!! Form::label('invoice_scheme_id', 'Informação complementar' . ':*') !!} @show_tooltip('Informação complementar para NFe')
-                                    {!! Form::textarea('info_complementar', $location->info_complementar, ['class' => 'form-control', 'rows' => 3]); !!}
+                                    @php
+                                    $__f12 = ['name' => 'invoice_scheme_id', 'value' => 'Informação complementar' . ':*'];
+                                    @endphp
+                                    <x-form.label :name="$__f12['name']" :value="$__f12['value']" /> @show_tooltip('Informação complementar para NFe')
+                                    @php
+                                    $__f13 = ['name' => 'info_complementar', 'value' => $location->info_complementar, 'options' => ['class' => 'form-control', 'rows' => 3]];
+                                    @endphp
+                                    <x-form.textarea :name="$__f13['name']" :value="$__f13['value']" :options="$__f13['options']" />
 
                                 </div>
                             </div>
@@ -120,7 +159,7 @@
                                     <button class="btn btn-primary pull-right" type="submit">@lang('messages.update')</button>
                                 </div>
                             </div>
-                            {!! Form::close() !!}
+                            <x-form.close />
                         </div>
                     </div>
                 </div>
@@ -136,7 +175,10 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            {!! Form::open(['url' => route('location.settings_update_certificado', [$location->id]), 'method' => 'post', 'id' => 'bl_receipt_setting_form', 'files' => true ]) !!}
+                            @php
+                            $__f15 = ['options' => ['url' => route('location.settings_update_certificado', [$location->id]), 'method' => 'post', 'id' => 'bl_receipt_setting_form', 'files' => true ]];
+                            @endphp
+                            <x-form.open :options="$__f15['options']" />
 
 
                             <div class="row">
@@ -149,9 +191,14 @@
 
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        {!! Form::label('senha_certificado', 'Senha' . ':') !!}
-                                        {!! Form::text('senha_certificado', '', ['class' => 'form-control',
-                                        'placeholder' => 'Senha']); !!}
+                                        @php
+                                        $__f16 = ['name' => 'senha_certificado', 'value' => 'Senha' . ':'];
+                                        @endphp
+                                        <x-form.label :name="$__f16['name']" :value="$__f16['value']" />
+                                        @php
+                                        $__f17 = ['name' => 'senha_certificado', 'value' => '', 'options' => ['class' => 'form-control', 'placeholder' => 'Senha']];
+                                        @endphp
+                                        <x-form.input type="text" :name="$__f17['name']" :value="$__f17['value']" :options="$__f17['options']" />
                                     </div>
                                 </div>
 
@@ -173,7 +220,7 @@
                             <button class="btn btn-primary pull-right" type="submit">Salvar</button>
                         </div>
                     </div>
-                    {!! Form::close() !!}
+                    <x-form.close />
 
                 </div>
             </div>

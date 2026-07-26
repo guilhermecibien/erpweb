@@ -1,5 +1,8 @@
 <div class="modal-dialog modal-lg" role="document">
-    {!! Form::open(['url' => action('DocumentAndNoteController@update', $document_note->id), 'id' => 'docus_notes_form', 'method' => 'put']) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('DocumentAndNoteController@update', $document_note->id), 'id' => 'docus_notes_form', 'method' => 'put']];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,20 +14,38 @@
             <div class="row">
                 <div class="col-md-12">
                    <div class="form-group">
-                        {!! Form::label('heading', __('lang_v1.heading') . ':*' )!!}
-                        {!! Form::text('heading', $document_note->heading, ['class' => 'form-control', 'required' ]) !!}
+                        @php
+                        $__f2 = ['name' => 'heading', 'value' => __('lang_v1.heading') . ':*'];
+                        @endphp
+                        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+                        @php
+                        $__f3 = ['name' => 'heading', 'value' => $document_note->heading, 'options' => ['class' => 'form-control', 'required' ]];
+                        @endphp
+                        <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
                    </div>
                 </div>
             </div>
             <!-- model id like project_id, user_id -->
-            {!! Form::hidden('notable_id', $document_note->notable_id, ['class' => 'form-control']) !!}
+            @php
+            $__f4 = ['name' => 'notable_id', 'value' => $document_note->notable_id, 'options' => ['class' => 'form-control']];
+            @endphp
+            <x-form.input type="hidden" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
             <!-- model name like App\User -->
-            {!! Form::hidden('notable_type', $notable_type, ['class' => 'form-control']) !!}
+            @php
+            $__f5 = ['name' => 'notable_type', 'value' => $notable_type, 'options' => ['class' => 'form-control']];
+            @endphp
+            <x-form.input type="hidden" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        {!! Form::label('description', __('lang_v1.description') . ':') !!}
-                        {!! Form::textarea('description', $document_note->description, ['class' => 'form-control ', 'id' => 'docs_note_description']); !!}
+                        @php
+                        $__f6 = ['name' => 'description', 'value' => __('lang_v1.description') . ':'];
+                        @endphp
+                        <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+                        @php
+                        $__f7 = ['name' => 'description', 'value' => $document_note->description, 'options' => ['class' => 'form-control ', 'id' => 'docs_note_description']];
+                        @endphp
+                        <x-form.textarea :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
                     </div>
                 </div>
             </div>
@@ -63,5 +84,5 @@
             </button>
         </div>
     </div><!-- /.modal-content -->
-    {!! Form::close() !!}
+    <x-form.close />
 </div><!-- /.modal-dialog -->

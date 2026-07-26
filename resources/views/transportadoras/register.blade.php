@@ -11,37 +11,64 @@
 
 <!-- Main content -->
 <section class="content">
-  {!! Form::open(['url' => action('TransportadoraController@save'), 'method' => 'post', 'id' => 'natureza_add_form' ]) !!}
+  @php
+  $__f1 = ['options' => ['url' => action('TransportadoraController@save'), 'method' => 'post', 'id' => 'natureza_add_form' ]];
+  @endphp
+  <x-form.open :options="$__f1['options']" />
   <div class="row">
     <div class="col-md-12">
       @component('components.widget')
       
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('razao_social', 'Razão Social' . ':*') !!}
-          {!! Form::text('razao_social', null, ['class' => 'form-control', 'required', 'placeholder' => 'Razão Social' ]); !!}
+          @php
+          $__f2 = ['name' => 'razao_social', 'value' => 'Razão Social' . ':*'];
+          @endphp
+          <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+          @php
+          $__f3 = ['name' => 'razao_social', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Razão Social' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('cnpj_cpf', 'CNPJ/CPF' . '*:') !!}
-          {!! Form::text('cnpj_cpf', null, ['class' => 'form-control', 'required', 'placeholder' => 'CNPJ/CPF', 'class' => 'form-control cpf_cnpj' ]); !!}
+          @php
+          $__f4 = ['name' => 'cnpj_cpf', 'value' => 'CNPJ/CPF' . '*:'];
+          @endphp
+          <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+          @php
+          $__f5 = ['name' => 'cnpj_cpf', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'CNPJ/CPF', 'class' => 'form-control cpf_cnpj' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
         </div>
       </div>
 
       <div class="col-md-5">
         <div class="form-group">
-          {!! Form::label('logradouro', 'Logradouro' . '*:') !!}
-          {!! Form::text('logradouro', null, ['class' => 'form-control', 'required', 'placeholder' => 'Logradouro' ]); !!}
+          @php
+          $__f6 = ['name' => 'logradouro', 'value' => 'Logradouro' . '*:'];
+          @endphp
+          <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+          @php
+          $__f7 = ['name' => 'logradouro', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => 'Logradouro' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
         </div>
       </div>
       <div class="clearfix"></div>
 
       <div class="col-md-4 customer_fields">
         <div class="form-group">
-          {!! Form::label('cidade_id', 'Cidade:*') !!}
-          {!! Form::select('cidade_id', $cities, '', ['class' => 'form-control select2', 'required']); !!}
+          @php
+          $__f8 = ['name' => 'cidade_id', 'value' => 'Cidade:*'];
+          @endphp
+          <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+          @php
+          $__f9 = ['name' => 'cidade_id', 'list' => $cities, 'selected' => '', 'options' => ['class' => 'form-control select2', 'required']];
+          @endphp
+          <x-form.select :name="$__f9['name']" :list="$__f9['list']" :selected="$__f9['selected']" :options="$__f9['options']" />
         </div>
       </div>
       
@@ -63,7 +90,7 @@
       <button type="submit" class="btn btn-primary pull-right" id="submit_user_button">@lang( 'messages.save' )</button>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
   @stop
   @section('javascript')
   <script type="text/javascript">

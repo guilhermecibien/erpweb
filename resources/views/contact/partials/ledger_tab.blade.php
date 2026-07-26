@@ -16,8 +16,14 @@
     <div class="col-md-12">
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('ledger_date_range', __('report.date_range') . ':') !!}
-                {!! Form::text('ledger_date_range', null, ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'readonly']); !!}
+                @php
+                $__f1 = ['name' => 'ledger_date_range', 'value' => __('report.date_range') . ':'];
+                @endphp
+                <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                @php
+                $__f2 = ['name' => 'ledger_date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'readonly']];
+                @endphp
+                <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
             </div>
         </div>
         <div class="col-md-9 text-right">

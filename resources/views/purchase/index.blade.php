@@ -19,32 +19,62 @@
     @component('components.filters', ['title' => __('report.filters')])
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('purchase_list_filter_location_id',  __('purchase.business_location') . ':') !!}
-                {!! Form::select('purchase_list_filter_location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f1 = ['name' => 'purchase_list_filter_location_id', 'value' => __('purchase.business_location') . ':'];
+                @endphp
+                <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                @php
+                $__f2 = ['name' => 'purchase_list_filter_location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('purchase_list_filter_supplier_id',  __('purchase.supplier') . ':') !!}
-                {!! Form::select('purchase_list_filter_supplier_id', $suppliers, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f3 = ['name' => 'purchase_list_filter_supplier_id', 'value' => __('purchase.supplier') . ':'];
+                @endphp
+                <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+                @php
+                $__f4 = ['name' => 'purchase_list_filter_supplier_id', 'list' => $suppliers, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('purchase_list_filter_status',  __('purchase.purchase_status') . ':') !!}
-                {!! Form::select('purchase_list_filter_status', $orderStatuses, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f5 = ['name' => 'purchase_list_filter_status', 'value' => __('purchase.purchase_status') . ':'];
+                @endphp
+                <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
+                @php
+                $__f6 = ['name' => 'purchase_list_filter_status', 'list' => $orderStatuses, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('purchase_list_filter_payment_status',  __('purchase.payment_status') . ':') !!}
-                {!! Form::select('purchase_list_filter_payment_status', ['paid' => __('lang_v1.paid'), 'due' => __('lang_v1.due'), 'partial' => __('lang_v1.partial'), 'overdue' => __('lang_v1.overdue')], null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f7 = ['name' => 'purchase_list_filter_payment_status', 'value' => __('purchase.payment_status') . ':'];
+                @endphp
+                <x-form.label :name="$__f7['name']" :value="$__f7['value']" />
+                @php
+                $__f8 = ['name' => 'purchase_list_filter_payment_status', 'list' => ['paid' => __('lang_v1.paid'), 'due' => __('lang_v1.due'), 'partial' => __('lang_v1.partial'), 'overdue' => __('lang_v1.overdue')], 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f8['name']" :list="$__f8['list']" :selected="$__f8['selected']" :options="$__f8['options']" />
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('purchase_list_filter_date_range', __('report.date_range') . ':') !!}
-                {!! Form::text('purchase_list_filter_date_range', null, ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'readonly']); !!}
+                @php
+                $__f9 = ['name' => 'purchase_list_filter_date_range', 'value' => __('report.date_range') . ':'];
+                @endphp
+                <x-form.label :name="$__f9['name']" :value="$__f9['value']" />
+                @php
+                $__f10 = ['name' => 'purchase_list_filter_date_range', 'value' => null, 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'readonly']];
+                @endphp
+                <x-form.input type="text" :name="$__f10['name']" :value="$__f10['value']" :options="$__f10['options']" />
             </div>
         </div>
     @endcomponent

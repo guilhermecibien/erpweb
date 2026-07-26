@@ -24,13 +24,22 @@
 <div class="row">
     <div class="col-md-12 form_col" style="display: none;">
         @component('components.widget')
-            {!! Form::open(['url' => action('\App\Http\Controllers\Install\ModulesController@uploadModule'), 'id' => 'upload_module_form','files' => true, 'style' => 'display:none']) !!}
+            @php
+            $__f1 = ['options' => ['url' => action('\App\Http\Controllers\Install\ModulesController@uploadModule'), 'id' => 'upload_module_form','files' => true, 'style' => 'display:none']];
+            @endphp
+            <x-form.open :options="$__f1['options']" />
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
-                            {!! Form::label('module', __('lang_v1.upload_module') . ":*") !!}
+                            @php
+                            $__f2 = ['name' => 'module', 'value' => __('lang_v1.upload_module') . ":*"];
+                            @endphp
+                            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
 
-                            {!! Form::file('module', ['required', 'accept' => 'application/zip']) !!}
+                            @php
+                            $__f3 = ['name' => 'module', 'options' => ['required', 'accept' => 'application/zip']];
+                            @endphp
+                            <x-form.input type="file" :name="$__f3['name']" :options="$__f3['options']" />
                             <p class="help-block">
                                 @lang("lang_v1.pls_upload_valid_zip_file")
                             </p>
@@ -47,7 +56,7 @@
                         </button>
                     </div>
                 </div>
-            {!! Form::close() !!}
+            <x-form.close />
         @endcomponent()
     </div>
     <div class="col-md-12">

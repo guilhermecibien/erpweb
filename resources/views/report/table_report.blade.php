@@ -24,15 +24,27 @@
                 <div class="box-body">
                     <div class="col-md-3">
                         <div class="form-group">
-                            {!! Form::label('tr_location_id',  __('purchase.business_location') . ':') !!}
-                            {!! Form::select('tr_location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%']); !!}
+                            @php
+                            $__f1 = ['name' => 'tr_location_id', 'value' => __('purchase.business_location') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                            @php
+                            $__f2 = ['name' => 'tr_location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%']];
+                            @endphp
+                            <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            {!! Form::label('tr_date_range', __('report.date_range') . ':') !!}
-                            {!! Form::text('date_range', @format_date('first day of this month') . ' ~ ' . @format_date('last day of this month'), ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'tr_date_range', 'readonly']); !!}
+                            @php
+                            $__f3 = ['name' => 'tr_date_range', 'value' => __('report.date_range') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+                            @php
+                            $__f4 = ['name' => 'date_range', 'value' => \Carbon::createFromTimestamp(strtotime('first day of this month'))->format(session('business.date_format')) . ' ~ ' . \Carbon::createFromTimestamp(strtotime('last day of this month'))->format(session('business.date_format')), 'options' => ['placeholder' => __('lang_v1.select_a_date_range'), 'class' => 'form-control', 'id' => 'tr_date_range', 'readonly']];
+                            @endphp
+                            <x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
                         </div>
                     </div>
                 </div>

@@ -10,8 +10,14 @@
 
 <!-- Main content -->
 <section class="content">
-	{!! Form::open(['url' => action('ProductController@saveSellingPrices'), 'method' => 'post', 'id' => 'selling_price_form' ]) !!}
-	{!! Form::hidden('product_id', $product->id); !!}
+	@php
+	$__f1 = ['options' => ['url' => action('ProductController@saveSellingPrices'), 'method' => 'post', 'id' => 'selling_price_form' ]];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
+	@php
+	$__f2 = ['name' => 'product_id', 'value' => $product->id];
+	@endphp
+	<x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" />
 	<div class="row">
 		<div class="col-xs-12">
 		<div class="box box-solid">
@@ -47,7 +53,10 @@
 										<td><span class="display_currency" data-currency_symbol="true">{{$variation->sell_price_inc_tax}}</span></td>
 											@foreach($price_groups as $price_group)
 												<td>
-													{!! Form::text('group_prices[' . $price_group->id . '][' . $variation->id . ']', !empty($variation_prices[$variation->id][$price_group->id]) ? @num_format($variation_prices[$variation->id][$price_group->id]) : 0, ['class' => 'form-control input_number input-sm'] ); !!}
+													@php
+													$__f3 = ['name' => 'group_prices[' . $price_group->id . '][' . $variation->id . ']', 'value' => !empty($variation_prices[$variation->id][$price_group->id]) ? number_format($variation_prices[$variation->id][$price_group->id], 2, ',', '.') : 0, 'options' => ['class' => 'form-control input_number input-sm']];
+													@endphp
+													<x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
 												</td>
 											@endforeach
 										</tr>
@@ -63,7 +72,10 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			{!! Form::hidden('submit_type', 'save', ['id' => 'submit_type']); !!}
+			@php
+			$__f4 = ['name' => 'submit_type', 'value' => 'save', 'options' => ['id' => 'submit_type']];
+			@endphp
+			<x-form.input type="hidden" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 			<div class="text-center">
       			<div class="btn-group">
 					<button id="opening_stock_button" @if($product->enable_stock == 0) disabled @endif type="submit" value="submit_n_add_opening_stock" class="btn bg-purple submit_form">@lang('lang_v1.save_n_add_opening_stock')</button>
@@ -74,7 +86,7 @@
 		</div>
 	</div>
 
-	{!! Form::close() !!}
+	<x-form.close />
 </section>
 @stop
 @section('javascript')

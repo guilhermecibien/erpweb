@@ -28,14 +28,23 @@
     <div class="row">
         <div class="col-sm-12">
             @component('components.widget', ['class' => 'box-primary'])
-                {!! Form::open(['url' => action('ImportOpeningStockController@store'), 'method' => 'post', 'enctype' => 'multipart/form-data' ]) !!}
+                @php
+                $__f1 = ['options' => ['url' => action('ImportOpeningStockController@store'), 'method' => 'post', 'enctype' => 'multipart/form-data' ]];
+                @endphp
+                <x-form.open :options="$__f1['options']" />
                     <div class="row">
                         <div class="col-sm-6">
                         <div class="col-sm-8">
                             <div class="form-group">
-                                {!! Form::label('name', __( 'product.file_to_import' ) . ':') !!}
+                                @php
+                                $__f2 = ['name' => 'name', 'value' => __( 'product.file_to_import' ) . ':'];
+                                @endphp
+                                <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
                                 @show_tooltip(__('lang_v1.tooltip_import_opening_stock'))
-                                {!! Form::file('products_csv', ['accept'=> '.xls', 'required' => 'required']); !!}
+                                @php
+                                $__f3 = ['name' => 'products_csv', 'options' => ['accept'=> '.xls', 'required' => 'required']];
+                                @endphp
+                                <x-form.input type="file" :name="$__f3['name']" :options="$__f3['options']" />
                               </div>
                         </div>
                         <div class="col-sm-4">
@@ -45,7 +54,7 @@
                         </div>
                     </div>
 
-                {!! Form::close() !!}
+                <x-form.close />
                 <br><br>
                 <div class="row">
                     <div class="col-sm-4">

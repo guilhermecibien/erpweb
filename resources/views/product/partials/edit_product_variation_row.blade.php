@@ -21,9 +21,15 @@
 
 <tr class="variation_row">
     <td>
-        {!! Form::text($array_name . '[' . $row_index .'][name]', $product_variation->name, ['class' => 'form-control input-sm variation_name', 'required', 'readonly']); !!}
+        @php
+        $__f1 = ['name' => $array_name . '[' . $row_index .'][name]', 'value' => $product_variation->name, 'options' => ['class' => 'form-control input-sm variation_name', 'required', 'readonly']];
+        @endphp
+        <x-form.input type="text" :name="$__f1['name']" :value="$__f1['value']" :options="$__f1['options']" />
 
-        {!! Form::hidden($array_name . '[' . $row_index .'][variation_template_id]', $product_variation->variation_template_id); !!}
+        @php
+        $__f2 = ['name' => $array_name . '[' . $row_index .'][variation_template_id]', 'value' => $product_variation->variation_template_id];
+        @endphp
+        <x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" />
 
         <input type="hidden" class="row_index" value="@if($action == 'edit'){{$row_index}}@else{{$loop->index}}@endif">
         <input type="hidden" class="row_edit" value="edit">
@@ -64,29 +70,53 @@
                 @endphp
                 <tr>
                     <td>
-                        {!! Form::text($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][sub_sku]', $action == 'edit' ? $variation->sub_sku : null, ['class' => 'form-control input-sm variation_value_name', $sub_sku_required]); !!}
+                        @php
+                        $__f3 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][sub_sku]', 'value' => $action == 'edit' ? $variation->sub_sku : null, 'options' => ['class' => 'form-control input-sm variation_value_name', $sub_sku_required]];
+                        @endphp
+                        <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
                     </td>
                     <td>
-                        {!! Form::text($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][value]', $variation->name, ['class' => 'form-control input-sm variation_value_name', 'required', 'readonly']); !!}
+                        @php
+                        $__f4 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][value]', 'value' => $variation->name, 'options' => ['class' => 'form-control input-sm variation_value_name', 'required', 'readonly']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 
-                        {!! Form::hidden($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][variation_value_id]', $variation->variation_value_id); !!}
+                        @php
+                        $__f5 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][variation_value_id]', 'value' => $variation->variation_value_id];
+                        @endphp
+                        <x-form.input type="hidden" :name="$__f5['name']" :value="$__f5['value']" />
                     </td>
                     <td class="{{$class}}">
                         <div class="col-sm-6">
-                            {!! Form::text($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][default_purchase_price]', @num_format($variation->default_purchase_price), ['class' => 'form-control input-sm variable_dpp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']); !!}
+                            @php
+                            $__f6 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][default_purchase_price]', 'value' => number_format($variation->default_purchase_price, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm variable_dpp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']];
+                            @endphp
+                            <x-form.input type="text" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
                         </div>
 
                         <div class="col-sm-6">
-                            {!! Form::text($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][dpp_inc_tax]', @num_format($variation->dpp_inc_tax), ['class' => 'form-control input-sm variable_dpp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']); !!}
+                            @php
+                            $__f7 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][dpp_inc_tax]', 'value' => number_format($variation->dpp_inc_tax, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm variable_dpp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']];
+                            @endphp
+                            <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
                         </div>
                     </td>
                     <td class="{{$class}}">
-                        {!! Form::text($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][profit_percent]', @num_format($variation->profit_percent), ['class' => 'form-control input-sm variable_profit_percent input_number', 'required']); !!}
+                        @php
+                        $__f8 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][profit_percent]', 'value' => number_format($variation->profit_percent, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm variable_profit_percent input_number', 'required']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f8['name']" :value="$__f8['value']" :options="$__f8['options']" />
                     </td>
                     <td class="{{$class}}">
-                        {!! Form::text($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][default_sell_price]', @num_format($variation->default_sell_price), ['class' => 'form-control input-sm variable_dsp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']); !!}
+                        @php
+                        $__f9 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][default_sell_price]', 'value' => number_format($variation->default_sell_price, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm variable_dsp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
 
-                        {!! Form::text($array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][sell_price_inc_tax]', @num_format($variation->sell_price_inc_tax), ['class' => 'form-control input-sm variable_dsp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']); !!}
+                        @php
+                        $__f10 = ['name' => $array_name . '[' . $row_index .'][' . $variation_array_name . '][' . $variation_row_index . '][sell_price_inc_tax]', 'value' => number_format($variation->sell_price_inc_tax, 2, ',', '.'), 'options' => ['class' => 'form-control input-sm variable_dsp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']];
+                        @endphp
+                        <x-form.input type="text" :name="$__f10['name']" :value="$__f10['value']" :options="$__f10['options']" />
                     </td>
                     <td>
                         @php 
@@ -99,9 +129,15 @@
                                     {!! $media->thumbnail() !!}
                                 </div>
                             @endforeach
-                            {!! Form::file('edit_variation_images_' . $row_index . '_' . $variation_row_index . '[]', ['class' => 'variation_images', 'accept' => 'image/*', 'multiple']); !!}
+                            @php
+                            $__f11 = ['name' => 'edit_variation_images_' . $row_index . '_' . $variation_row_index . '[]', 'options' => ['class' => 'variation_images', 'accept' => 'image/*', 'multiple']];
+                            @endphp
+                            <x-form.input type="file" :name="$__f11['name']" :options="$__f11['options']" />
                         @else
-                            {!! Form::file('edit_variation_images_' . $row_index . '_' . $variation_row_index . '[]', ['class' => 'variation_images', 'accept' => 'image/*', 'multiple']); !!}
+                            @php
+                            $__f12 = ['name' => 'edit_variation_images_' . $row_index . '_' . $variation_row_index . '[]', 'options' => ['class' => 'variation_images', 'accept' => 'image/*', 'multiple']];
+                            @endphp
+                            <x-form.input type="file" :name="$__f12['name']" :options="$__f12['options']" />
                         @endif
                     </td>
                     <td>

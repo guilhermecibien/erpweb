@@ -27,47 +27,76 @@
 	<div class="row">
 		<div class="col-sm-3">
 			<div class="form-group">
-				{!! Form::label('location_id', __('purchase.business_location').':*') !!}
-				{!! Form::select('location_id', $business_locations, $default_location, ['class' => 'form-control', 'placeholder' => __('messages.please_select'), 'required', 
-				'id' => 'select_location_id']); !!}
+				@php
+				$__f1 = ['name' => 'location_id', 'value' => __('purchase.business_location').':*'];
+				@endphp
+				<x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+				@php
+				$__f2 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => $default_location, 'options' => ['class' => 'form-control', 'placeholder' => __('messages.please_select'), 'required', 'id' => 'select_location_id']];
+				@endphp
+				<x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 			</div>
 		</div>
 	</div>
 	<input type="hidden" id="product_row_count" value="0">
 	
-	{!! Form::open(['url' => action('SellReturnController@store'), 'method' => 'post', 'id' => 'sell_return_form' ]) !!}
+	@php
+	$__f3 = ['options' => ['url' => action('SellReturnController@store'), 'method' => 'post', 'id' => 'sell_return_form' ]];
+	@endphp
+	<x-form.open :options="$__f3['options']" />
 	
 	<div class="box box-solid">
 		<div class="box-body">
 			<div class="row">
-				{!! Form::hidden('location_id', $default_location, ['id' => 'location_id']); !!}
+				@php
+				$__f4 = ['name' => 'location_id', 'value' => $default_location, 'options' => ['id' => 'location_id']];
+				@endphp
+				<x-form.input type="hidden" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('contact_id', __('contact.customer') . ':*') !!}
+						@php
+						$__f5 = ['name' => 'contact_id', 'value' => __('contact.customer') . ':*'];
+						@endphp
+						<x-form.label :name="$__f5['name']" :value="$__f5['value']" />
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="fa fa-user"></i>
 							</span>
-							{!! Form::select('contact_id', [], null, ['class' => 'form-control', 'id' => 'customer_id', 'placeholder' => 'Enter Customer name / phone', 'required']); !!}
+							@php
+							$__f6 = ['name' => 'contact_id', 'list' => [], 'selected' => null, 'options' => ['class' => 'form-control', 'id' => 'customer_id', 'placeholder' => 'Enter Customer name / phone', 'required']];
+							@endphp
+							<x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
 						</div>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('invoice_no', __('purchase.ref_no').':') !!}
-						{!! Form::text('invoice_no', null, ['class' => 'form-control']); !!}
+						@php
+						$__f7 = ['name' => 'invoice_no', 'value' => __('purchase.ref_no').':'];
+						@endphp
+						<x-form.label :name="$__f7['name']" :value="$__f7['value']" />
+						@php
+						$__f8 = ['name' => 'invoice_no', 'value' => null, 'options' => ['class' => 'form-control']];
+						@endphp
+						<x-form.input type="text" :name="$__f8['name']" :value="$__f8['value']" :options="$__f8['options']" />
 					</div>
 				</div>
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						{!! Form::label('transaction_date', __('purchase.purchase_date') . ':*') !!}
+						@php
+						$__f9 = ['name' => 'transaction_date', 'value' => __('purchase.purchase_date') . ':*'];
+						@endphp
+						<x-form.label :name="$__f9['name']" :value="$__f9['value']" />
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</span>
-							{!! Form::text('transaction_date', @format_date('now'), ['class' => 'form-control', 'readonly', 'required']); !!}
+							@php
+							$__f10 = ['name' => 'transaction_date', 'value' => \Carbon::createFromTimestamp(strtotime('now'))->format(session('business.date_format')), 'options' => ['class' => 'form-control', 'readonly', 'required']];
+							@endphp
+							<x-form.input type="text" :name="$__f10['name']" :value="$__f10['value']" :options="$__f10['options']" />
 						</div>
 					</div>
 				</div>
@@ -86,11 +115,10 @@
 							<span class="input-group-addon">
 								<i class="fa fa-search"></i>
 							</span>
-							{!! Form::text('search_product', null, ['class' => 'form-control', 'id' => 'search_product', 
-								'placeholder' => __('lang_v1.search_product_placeholder'),
-								'disabled' => is_null($default_location)? true : false,
-								'autofocus' => is_null($default_location)? false : true,
-								]); !!}
+							@php
+							$__f11 = ['name' => 'search_product', 'value' => null, 'options' => ['class' => 'form-control', 'id' => 'search_product', 'placeholder' => __('lang_v1.search_product_placeholder'), 'disabled' => is_null($default_location)? true : false, 'autofocus' => is_null($default_location)? false : true, ]];
+							@endphp
+							<x-form.input type="text" :name="$__f11['name']" :value="$__f11['value']" :options="$__f11['options']" />
 						</div>
 					</div>
 				</div>
@@ -179,14 +207,26 @@
 					<tr>
 						<td class="col-md-3">
 							<div class="form-group">
-								{!! Form::label('discount_type', __( 'purchase.discount_type' ) . ':') !!}
-								{!! Form::select('discount_type', [ '' => __('lang_v1.none'), 'fixed' => __( 'lang_v1.fixed' ), 'percentage' => __( 'lang_v1.percentage' )], '', ['class' => 'form-control']); !!}
+								@php
+								$__f12 = ['name' => 'discount_type', 'value' => __( 'purchase.discount_type' ) . ':'];
+								@endphp
+								<x-form.label :name="$__f12['name']" :value="$__f12['value']" />
+								@php
+								$__f13 = ['name' => 'discount_type', 'list' => [ '' => __('lang_v1.none'), 'fixed' => __( 'lang_v1.fixed' ), 'percentage' => __( 'lang_v1.percentage' )], 'selected' => '', 'options' => ['class' => 'form-control']];
+								@endphp
+								<x-form.select :name="$__f13['name']" :list="$__f13['list']" :selected="$__f13['selected']" :options="$__f13['options']" />
 							</div>
 						</td>
 						<td class="col-md-3">
 							<div class="form-group">
-							{!! Form::label('discount_amount', __( 'purchase.discount_amount' ) . ':') !!}
-							{!! Form::text('discount_amount', 0, ['class' => 'form-control input_number', 'required']); !!}
+							@php
+							$__f14 = ['name' => 'discount_amount', 'value' => __( 'purchase.discount_amount' ) . ':'];
+							@endphp
+							<x-form.label :name="$__f14['name']" :value="$__f14['value']" />
+							@php
+							$__f15 = ['name' => 'discount_amount', 'value' => 0, 'options' => ['class' => 'form-control input_number', 'required']];
+							@endphp
+							<x-form.input type="text" :name="$__f15['name']" :value="$__f15['value']" :options="$__f15['options']" />
 							</div>
 						</td>
 						<td class="col-md-3">
@@ -202,15 +242,24 @@
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>
-							{!! Form::hidden('final_total', 0 , ['id' => 'final_total_input']); !!}
+							@php
+							$__f16 = ['name' => 'final_total', 'value' => 0, 'options' => ['id' => 'final_total_input']];
+							@endphp
+							<x-form.input type="hidden" :name="$__f16['name']" :value="$__f16['value']" :options="$__f16['options']" />
 							<b>@lang('lang_v1.total_credit_amt'): </b><span id="total_payable" class="display_currency" data-currency_symbol='true'>0</span>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="4">
 							<div class="form-group">
-								{!! Form::label('additional_notes',__('purchase.additional_notes')) !!}
-								{!! Form::textarea('additional_notes', null, ['class' => 'form-control', 'rows' => 3]); !!}
+								@php
+								$__f17 = ['name' => 'additional_notes', 'value' => __('purchase.additional_notes')];
+								@endphp
+								<x-form.label :name="$__f17['name']" :value="$__f17['value']" />
+								@php
+								$__f18 = ['name' => 'additional_notes', 'value' => null, 'options' => ['class' => 'form-control', 'rows' => 3]];
+								@endphp
+								<x-form.textarea :name="$__f18['name']" :value="$__f18['value']" :options="$__f18['options']" />
 							</div>
 						</td>
 					</tr>
@@ -226,7 +275,7 @@
 		</div>
 
 	</div><!--box end-->
-{!! Form::close() !!}
+<x-form.close />
 </section>
 <!-- /.content -->
 @endsection

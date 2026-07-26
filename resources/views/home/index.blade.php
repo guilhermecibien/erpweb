@@ -15,7 +15,10 @@
 	<div class="row">
     <div class="col-md-4 col-xs-12">
       @if(count($all_locations) > 1)
-        {!! Form::select('dashboard_location', $all_locations, null, ['class' => 'form-control select2', 'placeholder' => __('lang_v1.select_location'), 'id' => 'dashboard_location']); !!}
+        @php
+        $__f1 = ['name' => 'dashboard_location', 'list' => $all_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'placeholder' => __('lang_v1.select_location'), 'id' => 'dashboard_location']];
+        @endphp
+        <x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
       @endif
     </div>
 		<div class="col-md-8 col-xs-12">

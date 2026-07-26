@@ -1,7 +1,10 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
 
-    {!! Form::open(['url' => action('Restaurant\ProductModifierSetController@update', [$modifer_set->id]), 'method' => 'post', 'id' => 'table_add_form' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('Restaurant\ProductModifierSetController@update', [$modifer_set->id]), 'method' => 'post', 'id' => 'table_add_form' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -14,7 +17,10 @@
         
         <div class="col-sm-12">
           <div class="form-group">
-            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __( 'lang_v1.search_product_placeholder' ), 'id' => 'search_product' ]); !!}
+            @php
+            $__f2 = ['name' => 'name', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __( 'lang_v1.search_product_placeholder' ), 'id' => 'search_product' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
           </div>
         </div>
         
@@ -46,7 +52,7 @@
       <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'messages.close' )</button>
     </div>
 
-    {!! Form::close() !!}
+    <x-form.close />
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

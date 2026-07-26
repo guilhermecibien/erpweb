@@ -11,15 +11,24 @@
 
 <!-- Main content -->
 <section class="content">
-  {!! Form::open(['url' => action('EcommerceController@save'), 'method' => 'post', 'id' => 'config_form', 'files' => true ]) !!}
+  @php
+  $__f1 = ['options' => ['url' => action('EcommerceController@save'), 'method' => 'post', 'id' => 'config_form', 'files' => true ]];
+  @endphp
+  <x-form.open :options="$__f1['options']" />
   <div class="row">
     <div class="col-md-12">
       @component('components.widget', ['class' => 'box-primary'])
       
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('nome', 'Nome' . ':*') !!}
-          {!! Form::text('nome', $config != null ? $config->nome : old('nome'), ['class' => 'form-control', 'placeholder' => 'Nome' ]); !!}
+          @php
+          $__f2 = ['name' => 'nome', 'value' => 'Nome' . ':*'];
+          @endphp
+          <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+          @php
+          $__f3 = ['name' => 'nome', 'value' => $config != null ? $config->nome : old('nome'), 'options' => ['class' => 'form-control', 'placeholder' => 'Nome' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           @if($errors->has('nome'))
           <span class="text-danger">
             {{ $errors->first('nome') }}
@@ -30,8 +39,14 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('email', 'Email' . ':*') !!}
-          {!! Form::text('email', $config != null ? $config->email : old('email'), ['class' => 'form-control', 'placeholder' => 'Email' ]); !!}
+          @php
+          $__f4 = ['name' => 'email', 'value' => 'Email' . ':*'];
+          @endphp
+          <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+          @php
+          $__f5 = ['name' => 'email', 'value' => $config != null ? $config->email : old('email'), 'options' => ['class' => 'form-control', 'placeholder' => 'Email' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
           @if($errors->has('email'))
           <span class="text-danger">
             {{ $errors->first('email') }}
@@ -41,8 +56,14 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('telefone', 'Telefone' . ':*') !!}
-          {!! Form::text('telefone', $config != null ? $config->telefone : old('telefone'), ['class' => 'form-control', 'placeholder' => 'Telefone', 'data-mask="00 00000-0000"', 'data-mask-reverse="true"' ]); !!}
+          @php
+          $__f6 = ['name' => 'telefone', 'value' => 'Telefone' . ':*'];
+          @endphp
+          <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+          @php
+          $__f7 = ['name' => 'telefone', 'value' => $config != null ? $config->telefone : old('telefone'), 'options' => ['class' => 'form-control', 'placeholder' => 'Telefone', 'data-mask="00 00000-0000"', 'data-mask-reverse="true"' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
           @if($errors->has('telefone'))
           <span class="text-danger">
             {{ $errors->first('telefone') }}
@@ -56,8 +77,14 @@
 
       <div class="col-md-5">
         <div class="form-group">
-          {!! Form::label('rua', 'Rua' . ':*') !!}
-          {!! Form::text('rua', $config != null ? $config->rua : old('rua'), ['class' => 'form-control', 'placeholder' => 'Rua' ]); !!}
+          @php
+          $__f8 = ['name' => 'rua', 'value' => 'Rua' . ':*'];
+          @endphp
+          <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+          @php
+          $__f9 = ['name' => 'rua', 'value' => $config != null ? $config->rua : old('rua'), 'options' => ['class' => 'form-control', 'placeholder' => 'Rua' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
           @if($errors->has('rua'))
           <span class="text-danger">
             {{ $errors->first('rua') }}
@@ -68,8 +95,14 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('numero', 'Nº' . ':*') !!}
-          {!! Form::text('numero', $config != null ? $config->numero : old('numero'), ['class' => 'form-control', 'placeholder' => 'Nº' ]); !!}
+          @php
+          $__f10 = ['name' => 'numero', 'value' => 'Nº' . ':*'];
+          @endphp
+          <x-form.label :name="$__f10['name']" :value="$__f10['value']" />
+          @php
+          $__f11 = ['name' => 'numero', 'value' => $config != null ? $config->numero : old('numero'), 'options' => ['class' => 'form-control', 'placeholder' => 'Nº' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f11['name']" :value="$__f11['value']" :options="$__f11['options']" />
           @if($errors->has('numero'))
           <span class="text-danger">
             {{ $errors->first('numero') }}
@@ -80,8 +113,14 @@
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('bairro', 'Bairro' . ':*') !!}
-          {!! Form::text('bairro', $config != null ? $config->bairro : old('bairro'), ['class' => 'form-control', 'placeholder' => 'Bairro' ]); !!}
+          @php
+          $__f12 = ['name' => 'bairro', 'value' => 'Bairro' . ':*'];
+          @endphp
+          <x-form.label :name="$__f12['name']" :value="$__f12['value']" />
+          @php
+          $__f13 = ['name' => 'bairro', 'value' => $config != null ? $config->bairro : old('bairro'), 'options' => ['class' => 'form-control', 'placeholder' => 'Bairro' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f13['name']" :value="$__f13['value']" :options="$__f13['options']" />
           @if($errors->has('bairro'))
           <span class="text-danger">
             {{ $errors->first('bairro') }}
@@ -94,8 +133,14 @@
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('cidade', 'Cidade' . ':*') !!}
-          {!! Form::text('cidade', $config != null ? $config->cidade : old('cidade'), ['class' => 'form-control', 'placeholder' => 'Cidade' ]); !!}
+          @php
+          $__f14 = ['name' => 'cidade', 'value' => 'Cidade' . ':*'];
+          @endphp
+          <x-form.label :name="$__f14['name']" :value="$__f14['value']" />
+          @php
+          $__f15 = ['name' => 'cidade', 'value' => $config != null ? $config->cidade : old('cidade'), 'options' => ['class' => 'form-control', 'placeholder' => 'Cidade' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f15['name']" :value="$__f15['value']" :options="$__f15['options']" />
           @if($errors->has('cidade'))
           <span class="text-danger">
             {{ $errors->first('cidade') }}
@@ -107,8 +152,14 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('cep', 'CEP' . ':*') !!}
-          {!! Form::text('cep', $config != null ? $config->cep : old('cep'), ['class' => 'form-control', 'placeholder' => 'CEP', 'data-mask="00000-000"', 'data-mask-reverse="true"' ]); !!}
+          @php
+          $__f16 = ['name' => 'cep', 'value' => 'CEP' . ':*'];
+          @endphp
+          <x-form.label :name="$__f16['name']" :value="$__f16['value']" />
+          @php
+          $__f17 = ['name' => 'cep', 'value' => $config != null ? $config->cep : old('cep'), 'options' => ['class' => 'form-control', 'placeholder' => 'CEP', 'data-mask="00000-000"', 'data-mask-reverse="true"' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f17['name']" :value="$__f17['value']" :options="$__f17['options']" />
           @if($errors->has('cep'))
           <span class="text-danger">
             {{ $errors->first('cep') }}
@@ -119,8 +170,14 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('latitude', 'Latitude' . ':*') !!}
-          {!! Form::text('latitude', $config != null ? $config->latitude : old('latitude'), ['class' => 'form-control', 'placeholder' => 'Latitude' ]); !!}
+          @php
+          $__f18 = ['name' => 'latitude', 'value' => 'Latitude' . ':*'];
+          @endphp
+          <x-form.label :name="$__f18['name']" :value="$__f18['value']" />
+          @php
+          $__f19 = ['name' => 'latitude', 'value' => $config != null ? $config->latitude : old('latitude'), 'options' => ['class' => 'form-control', 'placeholder' => 'Latitude' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f19['name']" :value="$__f19['value']" :options="$__f19['options']" />
           @if($errors->has('latitude'))
           <span class="text-danger">
             {{ $errors->first('latitude') }}
@@ -131,8 +188,14 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('longitude', 'Longitude' . ':*') !!}
-          {!! Form::text('longitude', $config != null ? $config->longitude : old('longitude'), ['class' => 'form-control', 'placeholder' => 'Longitude' ]); !!}
+          @php
+          $__f20 = ['name' => 'longitude', 'value' => 'Longitude' . ':*'];
+          @endphp
+          <x-form.label :name="$__f20['name']" :value="$__f20['value']" />
+          @php
+          $__f21 = ['name' => 'longitude', 'value' => $config != null ? $config->longitude : old('longitude'), 'options' => ['class' => 'form-control', 'placeholder' => 'Longitude' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f21['name']" :value="$__f21['value']" :options="$__f21['options']" />
           @if($errors->has('longitude'))
           <span class="text-danger">
             {{ $errors->first('longitude') }}
@@ -143,8 +206,14 @@
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('frete_gratis_valor', 'Frete gratis a partir de' . ':*') !!}
-          {!! Form::text('frete_gratis_valor', $config != null ? $config->frete_gratis_valor : old('frete_gratis_valor'), ['class' => 'form-control', 'placeholder' => 'Frete gratis a partir de', 'data-mask="0000000,00"', 'data-mask-reverse="true"' ]); !!}
+          @php
+          $__f22 = ['name' => 'frete_gratis_valor', 'value' => 'Frete gratis a partir de' . ':*'];
+          @endphp
+          <x-form.label :name="$__f22['name']" :value="$__f22['value']" />
+          @php
+          $__f23 = ['name' => 'frete_gratis_valor', 'value' => $config != null ? $config->frete_gratis_valor : old('frete_gratis_valor'), 'options' => ['class' => 'form-control', 'placeholder' => 'Frete gratis a partir de', 'data-mask="0000000,00"', 'data-mask-reverse="true"' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f23['name']" :value="$__f23['value']" :options="$__f23['options']" />
           @if($errors->has('frete_gratis_valor'))
           <span class="text-danger">
             {{ $errors->first('frete_gratis_valor') }}
@@ -157,8 +226,14 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('link_facebook', 'Link facebook' . ':*') !!}
-          {!! Form::text('link_facebook', $config != null ? $config->link_facebook : old('link_facebook'), ['class' => 'form-control', 'placeholder' => 'Link facebook' ]); !!}
+          @php
+          $__f24 = ['name' => 'link_facebook', 'value' => 'Link facebook' . ':*'];
+          @endphp
+          <x-form.label :name="$__f24['name']" :value="$__f24['value']" />
+          @php
+          $__f25 = ['name' => 'link_facebook', 'value' => $config != null ? $config->link_facebook : old('link_facebook'), 'options' => ['class' => 'form-control', 'placeholder' => 'Link facebook' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f25['name']" :value="$__f25['value']" :options="$__f25['options']" />
           @if($errors->has('link_facebook'))
           <span class="text-danger">
             {{ $errors->first('link_facebook') }}
@@ -169,8 +244,14 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('link_twiter', 'Link twiter' . ':*') !!}
-          {!! Form::text('link_twiter', $config != null ? $config->link_twiter : old('link_twiter'), ['class' => 'form-control', 'placeholder' => 'Link twiter' ]); !!}
+          @php
+          $__f26 = ['name' => 'link_twiter', 'value' => 'Link twiter' . ':*'];
+          @endphp
+          <x-form.label :name="$__f26['name']" :value="$__f26['value']" />
+          @php
+          $__f27 = ['name' => 'link_twiter', 'value' => $config != null ? $config->link_twiter : old('link_twiter'), 'options' => ['class' => 'form-control', 'placeholder' => 'Link twiter' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f27['name']" :value="$__f27['value']" :options="$__f27['options']" />
           @if($errors->has('link_twiter'))
           <span class="text-danger">
             {{ $errors->first('link_twiter') }}
@@ -181,8 +262,14 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          {!! Form::label('link_instagram', 'Link instagram' . ':*') !!}
-          {!! Form::text('link_instagram', $config != null ? $config->link_instagram : old('link_instagram'), ['class' => 'form-control', 'placeholder' => 'Link instagram' ]); !!}
+          @php
+          $__f28 = ['name' => 'link_instagram', 'value' => 'Link instagram' . ':*'];
+          @endphp
+          <x-form.label :name="$__f28['name']" :value="$__f28['value']" />
+          @php
+          $__f29 = ['name' => 'link_instagram', 'value' => $config != null ? $config->link_instagram : old('link_instagram'), 'options' => ['class' => 'form-control', 'placeholder' => 'Link instagram' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f29['name']" :value="$__f29['value']" :options="$__f29['options']" />
           @if($errors->has('link_instagram'))
           <span class="text-danger">
             {{ $errors->first('link_instagram') }}
@@ -195,8 +282,14 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          {!! Form::label('mercadopago_public_key', 'Mercado pago public key' . ':*') !!}
-          {!! Form::text('mercadopago_public_key', $config != null ? $config->mercadopago_public_key : old('mercadopago_public_key'), ['class' => 'form-control', 'placeholder' => 'Mercado pago public key' ]); !!}
+          @php
+          $__f30 = ['name' => 'mercadopago_public_key', 'value' => 'Mercado pago public key' . ':*'];
+          @endphp
+          <x-form.label :name="$__f30['name']" :value="$__f30['value']" />
+          @php
+          $__f31 = ['name' => 'mercadopago_public_key', 'value' => $config != null ? $config->mercadopago_public_key : old('mercadopago_public_key'), 'options' => ['class' => 'form-control', 'placeholder' => 'Mercado pago public key' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f31['name']" :value="$__f31['value']" :options="$__f31['options']" />
           @if($errors->has('mercadopago_public_key'))
           <span class="text-danger">
             {{ $errors->first('mercadopago_public_key') }}
@@ -207,8 +300,14 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          {!! Form::label('mercadopago_access_token', 'Mercado pago access token' . ':*') !!}
-          {!! Form::text('mercadopago_access_token', $config != null ? $config->mercadopago_access_token : old('mercadopago_access_token'), ['class' => 'form-control', 'placeholder' => 'Mercado pago access token' ]); !!}
+          @php
+          $__f32 = ['name' => 'mercadopago_access_token', 'value' => 'Mercado pago access token' . ':*'];
+          @endphp
+          <x-form.label :name="$__f32['name']" :value="$__f32['value']" />
+          @php
+          $__f33 = ['name' => 'mercadopago_access_token', 'value' => $config != null ? $config->mercadopago_access_token : old('mercadopago_access_token'), 'options' => ['class' => 'form-control', 'placeholder' => 'Mercado pago access token' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f33['name']" :value="$__f33['value']" :options="$__f33['options']" />
           @if($errors->has('mercadopago_access_token'))
           <span class="text-danger">
             {{ $errors->first('mercadopago_access_token') }}
@@ -221,8 +320,14 @@
 
       <div class="col-md-10">
         <div class="form-group">
-          {!! Form::label('funcionamento', 'Descreva o funcionamento' . ':*') !!}
-          {!! Form::text('funcionamento', $config != null ? $config->funcionamento : old('funcionamento'), ['class' => 'form-control', 'placeholder' => 'Descreva o funcionamento' ]); !!}
+          @php
+          $__f34 = ['name' => 'funcionamento', 'value' => 'Descreva o funcionamento' . ':*'];
+          @endphp
+          <x-form.label :name="$__f34['name']" :value="$__f34['value']" />
+          @php
+          $__f35 = ['name' => 'funcionamento', 'value' => $config != null ? $config->funcionamento : old('funcionamento'), 'options' => ['class' => 'form-control', 'placeholder' => 'Descreva o funcionamento' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f35['name']" :value="$__f35['value']" :options="$__f35['options']" />
           @if($errors->has('funcionamento'))
           <span class="text-danger">
             {{ $errors->first('funcionamento') }}
@@ -234,15 +339,27 @@
       <div class="clearfix"></div>
       <div class="col-md-12">
         <div class="form-group">
-          {!! Form::label('politica_privacidade', 'Politica de privacidade') !!}
-          {!! Form::textarea('politica_privacidade', $config != null ? $config->politica_privacidade : old('politica_privacidade'), ['class' => 'form-control', 'rows' => 3, 'id' => 'politica_privacidade']); !!}
+          @php
+          $__f36 = ['name' => 'politica_privacidade', 'value' => 'Politica de privacidade'];
+          @endphp
+          <x-form.label :name="$__f36['name']" :value="$__f36['value']" />
+          @php
+          $__f37 = ['name' => 'politica_privacidade', 'value' => $config != null ? $config->politica_privacidade : old('politica_privacidade'), 'options' => ['class' => 'form-control', 'rows' => 3, 'id' => 'politica_privacidade']];
+          @endphp
+          <x-form.textarea :name="$__f37['name']" :value="$__f37['value']" :options="$__f37['options']" />
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          {!! Form::label('mensagem_agradecimento', 'Mensagem de agradecimento' . ':') !!}
-          {!! Form::textarea('mensagem_agradecimento', $config != null ? $config->mensagem_agradecimento : old('mensagem_agradecimento'), ['class' => 'form-control', 'id' => 'mensagem_agradecimento']); !!}
+          @php
+          $__f38 = ['name' => 'mensagem_agradecimento', 'value' => 'Mensagem de agradecimento' . ':'];
+          @endphp
+          <x-form.label :name="$__f38['name']" :value="$__f38['value']" />
+          @php
+          $__f39 = ['name' => 'mensagem_agradecimento', 'value' => $config != null ? $config->mensagem_agradecimento : old('mensagem_agradecimento'), 'options' => ['class' => 'form-control', 'id' => 'mensagem_agradecimento']];
+          @endphp
+          <x-form.textarea :name="$__f39['name']" :value="$__f39['value']" :options="$__f39['options']" />
         </div>
         @if($errors->has('mensagem_agradecimento'))
         <span class="text-danger">
@@ -255,10 +372,16 @@
 
       <div class="col-md-5">
         <div class="form-group">
-          {!! Form::label('token', 'Api token' . ':*') !!}
+          @php
+          $__f40 = ['name' => 'token', 'value' => 'Api token' . ':*'];
+          @endphp
+          <x-form.label :name="$__f40['name']" :value="$__f40['value']" />
           <div class="input-group">
 
-            {!! Form::text('token', $config != null ? $config->token : old('token'), ['class' => 'form-control', 'placeholder' => 'Api Token', 'id' => 'token', 'readonly' ]); !!}
+            @php
+            $__f41 = ['name' => 'token', 'value' => $config != null ? $config->token : old('token'), 'options' => ['class' => 'form-control', 'placeholder' => 'Api Token', 'id' => 'token', 'readonly' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f41['name']" :value="$__f41['value']" :options="$__f41['options']" />
             <span class="input-group-btn">
               <button type="button" id="btn_token" class="btn btn-default bg-white btn-flat add_new_customer" data-name=""><i class="fa fa-code text-danger fa-lg"></i></button>
             </span>
@@ -274,7 +397,10 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('cor_fundo', 'Cor de destaque' . '*:') !!}
+          @php
+          $__f42 = ['name' => 'cor_fundo', 'value' => 'Cor de destaque' . '*:'];
+          @endphp
+          <x-form.label :name="$__f42['name']" :value="$__f42['value']" />
           <input class="form-control" value="{{$config != null ? $config->cor_fundo : old('cor_fundo')}}" type="color" name="cor_fundo">
 
         </div>
@@ -282,7 +408,10 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          {!! Form::label('cor_btn', 'Cor Botão' . '*:') !!}
+          @php
+          $__f43 = ['name' => 'cor_btn', 'value' => 'Cor Botão' . '*:'];
+          @endphp
+          <x-form.label :name="$__f43['name']" :value="$__f43['value']" />
           <input class="form-control" value="{{$config != null ? $config->cor_btn : old('cor_btn')}}" type="color" name="cor_btn">
 
         </div>
@@ -290,8 +419,14 @@
 
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::label('timer_carrossel', 'Tempo carrossel segundos' . ':*') !!}
-          {!! Form::text('timer_carrossel', $config != null ? $config->timer_carrossel : old('timer_carrossel'), ['class' => 'form-control', 'placeholder' => 'Tempo carrossel segundos', 'data-mask="000"', 'data-mask-reverse="true"' ]); !!}
+          @php
+          $__f44 = ['name' => 'timer_carrossel', 'value' => 'Tempo carrossel segundos' . ':*'];
+          @endphp
+          <x-form.label :name="$__f44['name']" :value="$__f44['value']" />
+          @php
+          $__f45 = ['name' => 'timer_carrossel', 'value' => $config != null ? $config->timer_carrossel : old('timer_carrossel'), 'options' => ['class' => 'form-control', 'placeholder' => 'Tempo carrossel segundos', 'data-mask="000"', 'data-mask-reverse="true"' ]];
+          @endphp
+          <x-form.input type="text" :name="$__f45['name']" :value="$__f45['value']" :options="$__f45['options']" />
           @if($errors->has('timer_carrossel'))
           <span class="text-danger">
             {{ $errors->first('timer_carrossel') }}
@@ -344,7 +479,7 @@
       <button type="submit" class="btn btn-primary pull-right" id="submit_button">@lang( 'messages.save' )</button>
     </div>
   </div>
-  {!! Form::close() !!}
+  <x-form.close />
   @stop
 
   @section('javascript')

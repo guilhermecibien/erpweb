@@ -17,22 +17,36 @@
 
 <!-- Main content -->
 <section class="content">
-{!! Form::open(['url' => action('InvoiceLayoutController@store'), 'method' => 'post', 'id' => 'add_invoice_layout_form', 'files' => true]) !!}
+@php
+$__f1 = ['options' => ['url' => action('InvoiceLayoutController@store'), 'method' => 'post', 'id' => 'add_invoice_layout_form', 'files' => true]];
+@endphp
+<x-form.open :options="$__f1['options']" />
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
 
         <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('name', __('invoice.layout_name') . ':*') !!}
-              {!! Form::text('name', null, ['class' => 'form-control', 'required',
-              'placeholder' => __('invoice.layout_name')]); !!}
+            @php
+            $__f2 = ['name' => 'name', 'value' => __('invoice.layout_name') . ':*'];
+            @endphp
+            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+              @php
+              $__f3 = ['name' => 'name', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __('invoice.layout_name')]];
+              @endphp
+              <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('design', __('lang_v1.design') . ':*') !!}
-              {!! Form::select('design', $designs, 'classic', ['class' => 'form-control']); !!}
+            @php
+            $__f4 = ['name' => 'design', 'value' => __('lang_v1.design') . ':*'];
+            @endphp
+            <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+              @php
+              $__f5 = ['name' => 'design', 'list' => $designs, 'selected' => 'classic', 'options' => ['class' => 'form-control']];
+              @endphp
+              <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
               <span class="help-block">
                 @lang('lang_v1.used_for_browser_based_printing')
               </span>
@@ -68,8 +82,14 @@
         <!-- Logo -->
         <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('logo', __('invoice.invoice_logo') . ':') !!}
-            {!! Form::file('logo', ['accept' => 'image/*']); !!}
+            @php
+            $__f6 = ['name' => 'logo', 'value' => __('invoice.invoice_logo') . ':'];
+            @endphp
+            <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+            @php
+            $__f7 = ['name' => 'logo', 'options' => ['accept' => 'image/*']];
+            @endphp
+            <x-form.input type="file" :name="$__f7['name']" :options="$__f7['options']" />
             <span class="help-block">@lang('lang_v1.invoice_logo_help', ['max_size' => '1 MB'])</span>
           </div>
         </div>
@@ -77,52 +97,85 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_logo', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_logo')</label>
+                @php
+                $__f8 = ['name' => 'show_logo', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f8['name']" :value="$__f8['value']" :checked="$__f8['checked']" :options="$__f8['options']" /> @lang('invoice.show_logo')</label>
               </div>
           </div>
         </div>
         <div class="col-sm-12">
           <div class="form-group">
-            {!! Form::label('header_text', __('invoice.header_text') . ':' ) !!}
-            {!! Form::textarea('header_text','', ['class' => 'form-control',
-              'placeholder' => __('invoice.header_text'), 'rows' => 3]); !!}
+            @php
+            $__f9 = ['name' => 'header_text', 'value' => __('invoice.header_text') . ':'];
+            @endphp
+            <x-form.label :name="$__f9['name']" :value="$__f9['value']" />
+            @php
+            $__f10 = ['name' => 'header_text', 'value' => '', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.header_text'), 'rows' => 3]];
+            @endphp
+            <x-form.textarea :name="$__f10['name']" :value="$__f10['value']" :options="$__f10['options']" />
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('sub_heading_line1', __('lang_v1.sub_heading_line', ['_number_' => 1]) . ':' ) !!}
-            {!! Form::text('sub_heading_line1', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 1]) ]); !!}
+            @php
+            $__f11 = ['name' => 'sub_heading_line1', 'value' => __('lang_v1.sub_heading_line', ['_number_' => 1]) . ':'];
+            @endphp
+            <x-form.label :name="$__f11['name']" :value="$__f11['value']" />
+            @php
+            $__f12 = ['name' => 'sub_heading_line1', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 1]) ]];
+            @endphp
+            <x-form.input type="text" :name="$__f12['name']" :value="$__f12['value']" :options="$__f12['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('sub_heading_line2', __('lang_v1.sub_heading_line', ['_number_' => 2]) . ':' ) !!}
-            {!! Form::text('sub_heading_line2', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 2]) ]); !!}
+            @php
+            $__f13 = ['name' => 'sub_heading_line2', 'value' => __('lang_v1.sub_heading_line', ['_number_' => 2]) . ':'];
+            @endphp
+            <x-form.label :name="$__f13['name']" :value="$__f13['value']" />
+            @php
+            $__f14 = ['name' => 'sub_heading_line2', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 2]) ]];
+            @endphp
+            <x-form.input type="text" :name="$__f14['name']" :value="$__f14['value']" :options="$__f14['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('sub_heading_line3', __('lang_v1.sub_heading_line', ['_number_' => 3]) . ':' ) !!}
-            {!! Form::text('sub_heading_line3', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 3]) ]); !!}
+            @php
+            $__f15 = ['name' => 'sub_heading_line3', 'value' => __('lang_v1.sub_heading_line', ['_number_' => 3]) . ':'];
+            @endphp
+            <x-form.label :name="$__f15['name']" :value="$__f15['value']" />
+            @php
+            $__f16 = ['name' => 'sub_heading_line3', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 3]) ]];
+            @endphp
+            <x-form.input type="text" :name="$__f16['name']" :value="$__f16['value']" :options="$__f16['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('sub_heading_line4', __('lang_v1.sub_heading_line', ['_number_' => 4]) . ':' ) !!}
-            {!! Form::text('sub_heading_line4', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 4]) ]); !!}
+            @php
+            $__f17 = ['name' => 'sub_heading_line4', 'value' => __('lang_v1.sub_heading_line', ['_number_' => 4]) . ':'];
+            @endphp
+            <x-form.label :name="$__f17['name']" :value="$__f17['value']" />
+            @php
+            $__f18 = ['name' => 'sub_heading_line4', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 4]) ]];
+            @endphp
+            <x-form.input type="text" :name="$__f18['name']" :value="$__f18['value']" :options="$__f18['options']" />
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('sub_heading_line5', __('lang_v1.sub_heading_line', ['_number_' => 5]) . ':' ) !!}
-            {!! Form::text('sub_heading_line5', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 5]) ]); !!}
+            @php
+            $__f19 = ['name' => 'sub_heading_line5', 'value' => __('lang_v1.sub_heading_line', ['_number_' => 5]) . ':'];
+            @endphp
+            <x-form.label :name="$__f19['name']" :value="$__f19['value']" />
+            @php
+            $__f20 = ['name' => 'sub_heading_line5', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.sub_heading_line', ['_number_' => 5]) ]];
+            @endphp
+            <x-form.input type="text" :name="$__f20['name']" :value="$__f20['value']" :options="$__f20['options']" />
           </div>
         </div>
 
@@ -134,86 +187,139 @@
     <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('invoice_heading', __('invoice.invoice_heading') . ':' ) !!}
-            {!! Form::text('invoice_heading', 'Invoice', ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_heading') ]); !!}
+            @php
+            $__f21 = ['name' => 'invoice_heading', 'value' => __('invoice.invoice_heading') . ':'];
+            @endphp
+            <x-form.label :name="$__f21['name']" :value="$__f21['value']" />
+            @php
+            $__f22 = ['name' => 'invoice_heading', 'value' => 'Invoice', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.invoice_heading') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f22['name']" :value="$__f22['value']" :options="$__f22['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('invoice_heading_not_paid', __('invoice.invoice_heading_not_paid') . ':' ) !!}
-            {!! Form::text('invoice_heading_not_paid', null, ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_heading_not_paid') ]); !!}
+            @php
+            $__f23 = ['name' => 'invoice_heading_not_paid', 'value' => __('invoice.invoice_heading_not_paid') . ':'];
+            @endphp
+            <x-form.label :name="$__f23['name']" :value="$__f23['value']" />
+            @php
+            $__f24 = ['name' => 'invoice_heading_not_paid', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.invoice_heading_not_paid') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f24['name']" :value="$__f24['value']" :options="$__f24['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('invoice_heading_paid', __('invoice.invoice_heading_paid') . ':' ) !!}
-            {!! Form::text('invoice_heading_paid', null, ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_heading_paid') ]); !!}
+            @php
+            $__f25 = ['name' => 'invoice_heading_paid', 'value' => __('invoice.invoice_heading_paid') . ':'];
+            @endphp
+            <x-form.label :name="$__f25['name']" :value="$__f25['value']" />
+            @php
+            $__f26 = ['name' => 'invoice_heading_paid', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.invoice_heading_paid') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f26['name']" :value="$__f26['value']" :options="$__f26['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('quotation_heading', __('lang_v1.quotation_heading') . ':' ) !!}
+            @php
+            $__f27 = ['name' => 'quotation_heading', 'value' => __('lang_v1.quotation_heading') . ':'];
+            @endphp
+            <x-form.label :name="$__f27['name']" :value="$__f27['value']" />
             @show_tooltip(__('lang_v1.tooltip_quotation_heading'))
-            {!! Form::text('quotation_heading', 'Quotation', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.quotation_heading') ]); !!}
+            @php
+            $__f28 = ['name' => 'quotation_heading', 'value' => 'Quotation', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.quotation_heading') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f28['name']" :value="$__f28['value']" :options="$__f28['options']" />
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('invoice_no_prefix', __('invoice.invoice_no_prefix') . ':' ) !!}
-            {!! Form::text('invoice_no_prefix', 'Invoice No.', ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_no_prefix') ]); !!}
+            @php
+            $__f29 = ['name' => 'invoice_no_prefix', 'value' => __('invoice.invoice_no_prefix') . ':'];
+            @endphp
+            <x-form.label :name="$__f29['name']" :value="$__f29['value']" />
+            @php
+            $__f30 = ['name' => 'invoice_no_prefix', 'value' => 'Invoice No.', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.invoice_no_prefix') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f30['name']" :value="$__f30['value']" :options="$__f30['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('quotation_no_prefix', __('lang_v1.quotation_no_prefix') . ':' ) !!}
-            {!! Form::text('quotation_no_prefix', 'Quotation No.', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.quotation_no_prefix') ]); !!}
+            @php
+            $__f31 = ['name' => 'quotation_no_prefix', 'value' => __('lang_v1.quotation_no_prefix') . ':'];
+            @endphp
+            <x-form.label :name="$__f31['name']" :value="$__f31['value']" />
+            @php
+            $__f32 = ['name' => 'quotation_no_prefix', 'value' => 'Quotation No.', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.quotation_no_prefix') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f32['name']" :value="$__f32['value']" :options="$__f32['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('date_label', __('lang_v1.date_label') . ':' ) !!}
-            {!! Form::text('date_label', 'Date', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.date_label') ]); !!}
+            @php
+            $__f33 = ['name' => 'date_label', 'value' => __('lang_v1.date_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f33['name']" :value="$__f33['value']" />
+            @php
+            $__f34 = ['name' => 'date_label', 'value' => 'Date', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.date_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f34['name']" :value="$__f34['value']" :options="$__f34['options']" />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('due_date_label', __('lang_v1.due_date_label') . ':' ) !!}
-            {!! Form::text('common_settings[due_date_label]', 'Due Date', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.due_date_label'), 'id' => 'due_date_label' ]); !!}
+            @php
+            $__f35 = ['name' => 'due_date_label', 'value' => __('lang_v1.due_date_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f35['name']" :value="$__f35['value']" />
+            @php
+            $__f36 = ['name' => 'common_settings[due_date_label]', 'value' => 'Due Date', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.due_date_label'), 'id' => 'due_date_label' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f36['name']" :value="$__f36['value']" :options="$__f36['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('common_settings[show_due_date]', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_due_date')</label>
+                @php
+                $__f37 = ['name' => 'common_settings[show_due_date]', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f37['name']" :value="$__f37['value']" :checked="$__f37['checked']" :options="$__f37['options']" /> @lang('lang_v1.show_due_date')</label>
               </div>
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('date_time_format', __('lang_v1.date_time_format') . ':' ) !!}
-            {!! Form::text('date_time_format', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.date_time_format') ]); !!} 
+            @php
+            $__f38 = ['name' => 'date_time_format', 'value' => __('lang_v1.date_time_format') . ':'];
+            @endphp
+            <x-form.label :name="$__f38['name']" :value="$__f38['value']" />
+            @php
+            $__f39 = ['name' => 'date_time_format', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.date_time_format') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f39['name']" :value="$__f39['value']" :options="$__f39['options']" /> 
               <p class="help-block">{!! __('lang_v1.date_time_format_help') !!}</p>
           </div>
         </div>
         
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('sales_person_label', __('lang_v1.sales_person_label') . ':' ) !!}
-            {!! Form::text('sales_person_label', null, ['class' => 'form-control',
-            'placeholder' => __('lang_v1.sales_person_label') ]); !!}
+            @php
+            $__f40 = ['name' => 'sales_person_label', 'value' => __('lang_v1.sales_person_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f40['name']" :value="$__f40['value']" />
+            @php
+            $__f41 = ['name' => 'sales_person_label', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.sales_person_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f41['name']" :value="$__f41['value']" :options="$__f41['options']" />
           </div>
         </div>
         <div class="clearfix"></div>
@@ -222,7 +328,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_business_name', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_business_name')</label>
+                @php
+                $__f42 = ['name' => 'show_business_name', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f42['name']" :value="$__f42['value']" :checked="$__f42['checked']" :options="$__f42['options']" /> @lang('invoice.show_business_name')</label>
               </div>
           </div>
         </div>
@@ -230,7 +339,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_location_name', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_location_name')</label>
+                @php
+                $__f43 = ['name' => 'show_location_name', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f43['name']" :value="$__f43['value']" :checked="$__f43['checked']" :options="$__f43['options']" /> @lang('invoice.show_location_name')</label>
               </div>
           </div>
         </div>
@@ -239,7 +351,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_sales_person', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_sales_person')</label>
+                @php
+                $__f44 = ['name' => 'show_sales_person', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f44['name']" :value="$__f44['value']" :checked="$__f44['checked']" :options="$__f44['options']" /> @lang('lang_v1.show_sales_person')</label>
               </div>
           </div>
         </div>
@@ -252,38 +367,59 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_customer', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_customer')</label>
+                @php
+                $__f45 = ['name' => 'show_customer', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f45['name']" :value="$__f45['value']" :checked="$__f45['checked']" :options="$__f45['options']" /> @lang('invoice.show_customer')</label>
               </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('customer_label', __('invoice.customer_label') . ':' ) !!}
-            {!! Form::text('customer_label', 'Customer', ['class' => 'form-control',
-              'placeholder' => __('invoice.customer_label') ]); !!}
+            @php
+            $__f46 = ['name' => 'customer_label', 'value' => __('invoice.customer_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f46['name']" :value="$__f46['value']" />
+            @php
+            $__f47 = ['name' => 'customer_label', 'value' => 'Customer', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.customer_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f47['name']" :value="$__f47['value']" :options="$__f47['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_client_id', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_client_id')</label>
+                @php
+                $__f48 = ['name' => 'show_client_id', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f48['name']" :value="$__f48['value']" :checked="$__f48['checked']" :options="$__f48['options']" /> @lang('lang_v1.show_client_id')</label>
               </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('client_id_label', __('lang_v1.client_id_label') . ':' ) !!}
-            {!! Form::text('client_id_label', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.client_id_label') ]); !!}
+            @php
+            $__f49 = ['name' => 'client_id_label', 'value' => __('lang_v1.client_id_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f49['name']" :value="$__f49['value']" />
+            @php
+            $__f50 = ['name' => 'client_id_label', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.client_id_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f50['name']" :value="$__f50['value']" :options="$__f50['options']" />
           </div>
         </div>
         
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('client_tax_label', __('lang_v1.client_tax_label') . ':' ) !!}
-            {!! Form::text('client_tax_label', null, ['class' => 'form-control',
-            'placeholder' => __('lang_v1.client_tax_label') ]); !!}
+            @php
+            $__f51 = ['name' => 'client_tax_label', 'value' => __('lang_v1.client_tax_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f51['name']" :value="$__f51['value']" />
+            @php
+            $__f52 = ['name' => 'client_tax_label', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.client_tax_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f52['name']" :value="$__f52['value']" :options="$__f52['options']" />
           </div>
         </div>
 
@@ -291,7 +427,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_reward_point', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_reward_point')</label>
+                @php
+                $__f53 = ['name' => 'show_reward_point', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f53['name']" :value="$__f53['value']" :checked="$__f53['checked']" :options="$__f53['options']" /> @lang('lang_v1.show_reward_point')</label>
               </div>
           </div>
         </div>
@@ -300,7 +439,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('contact_custom_fields[]', 'custom_field1', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['contact']['custom_field_1'] ?? __('lang_v1.contact_custom_field1') }}</label>
+              @php
+              $__f54 = ['name' => 'contact_custom_fields[]', 'value' => 'custom_field1', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f54['name']" :value="$__f54['value']" :checked="$__f54['checked']" :options="$__f54['options']" /> {{ $custom_labels['contact']['custom_field_1'] ?? __('lang_v1.contact_custom_field1') }}</label>
           </div>
         </div>
       </div>
@@ -309,7 +451,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('contact_custom_fields[]', 'custom_field2', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['contact']['custom_field_2'] ?? __('lang_v1.contact_custom_field2') }}</label>
+              @php
+              $__f55 = ['name' => 'contact_custom_fields[]', 'value' => 'custom_field2', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f55['name']" :value="$__f55['value']" :checked="$__f55['checked']" :options="$__f55['options']" /> {{ $custom_labels['contact']['custom_field_2'] ?? __('lang_v1.contact_custom_field2') }}</label>
           </div>
         </div>
       </div>
@@ -318,7 +463,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('contact_custom_fields[]', 'custom_field3', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['contact']['custom_field_3'] ?? __('lang_v1.contact_custom_field3') }}</label>
+              @php
+              $__f56 = ['name' => 'contact_custom_fields[]', 'value' => 'custom_field3', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f56['name']" :value="$__f56['value']" :checked="$__f56['checked']" :options="$__f56['options']" /> {{ $custom_labels['contact']['custom_field_3'] ?? __('lang_v1.contact_custom_field3') }}</label>
           </div>
         </div>
       </div>
@@ -326,7 +474,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('contact_custom_fields[]', 'custom_field4', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['contact']['custom_field_4'] ?? __('lang_v1.contact_custom_field4') }}</label>
+              @php
+              $__f57 = ['name' => 'contact_custom_fields[]', 'value' => 'custom_field4', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f57['name']" :value="$__f57['value']" :checked="$__f57['checked']" :options="$__f57['options']" /> {{ $custom_labels['contact']['custom_field_4'] ?? __('lang_v1.contact_custom_field4') }}</label>
           </div>
         </div>
       </div>
@@ -340,7 +491,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_landmark', 1, true, ['class' => 'input-icheck']); !!} @lang('business.landmark')</label>
+                @php
+                $__f58 = ['name' => 'show_landmark', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f58['name']" :value="$__f58['value']" :checked="$__f58['checked']" :options="$__f58['options']" /> @lang('business.landmark')</label>
               </div>
           </div>
         </div>
@@ -348,7 +502,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_city', 1, true, ['class' => 'input-icheck']); !!} @lang('business.city')</label>
+                @php
+                $__f59 = ['name' => 'show_city', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f59['name']" :value="$__f59['value']" :checked="$__f59['checked']" :options="$__f59['options']" /> @lang('business.city')</label>
               </div>
           </div>
         </div>
@@ -356,7 +513,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_state', 1, true, ['class' => 'input-icheck']); !!} @lang('business.state')</label>
+                @php
+                $__f60 = ['name' => 'show_state', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f60['name']" :value="$__f60['value']" :checked="$__f60['checked']" :options="$__f60['options']" /> @lang('business.state')</label>
               </div>
           </div>
         </div>
@@ -364,7 +524,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_country', 1, true, ['class' => 'input-icheck']); !!} @lang('business.country')</label>
+                @php
+                $__f61 = ['name' => 'show_country', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f61['name']" :value="$__f61['value']" :checked="$__f61['checked']" :options="$__f61['options']" /> @lang('business.country')</label>
               </div>
           </div>
         </div>
@@ -373,7 +536,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_zip_code', 1, true, ['class' => 'input-icheck']); !!} @lang('business.zip_code')</label>
+                @php
+                $__f62 = ['name' => 'show_zip_code', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f62['name']" :value="$__f62['value']" :checked="$__f62['checked']" :options="$__f62['options']" /> @lang('business.zip_code')</label>
               </div>
           </div>
         </div>
@@ -381,7 +547,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('location_custom_fields[]', 'custom_field1', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['location']['custom_field_1'] ?? __('lang_v1.location_custom_field1') }}</label>
+              @php
+              $__f63 = ['name' => 'location_custom_fields[]', 'value' => 'custom_field1', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f63['name']" :value="$__f63['value']" :checked="$__f63['checked']" :options="$__f63['options']" /> {{ $custom_labels['location']['custom_field_1'] ?? __('lang_v1.location_custom_field1') }}</label>
           </div>
         </div>
       </div>
@@ -390,7 +559,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('location_custom_fields[]', 'custom_field2', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['location']['custom_field_2'] ?? __('lang_v1.location_custom_field2') }}</label>
+              @php
+              $__f64 = ['name' => 'location_custom_fields[]', 'value' => 'custom_field2', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f64['name']" :value="$__f64['value']" :checked="$__f64['checked']" :options="$__f64['options']" /> {{ $custom_labels['location']['custom_field_2'] ?? __('lang_v1.location_custom_field2') }}</label>
           </div>
         </div>
       </div>
@@ -399,7 +571,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('location_custom_fields[]', 'custom_field3', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['location']['custom_field_3'] ?? __('lang_v1.location_custom_field3') }}</label>
+              @php
+              $__f65 = ['name' => 'location_custom_fields[]', 'value' => 'custom_field3', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f65['name']" :value="$__f65['value']" :checked="$__f65['checked']" :options="$__f65['options']" /> {{ $custom_labels['location']['custom_field_3'] ?? __('lang_v1.location_custom_field3') }}</label>
           </div>
         </div>
       </div>
@@ -408,7 +583,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('location_custom_fields[]', 'custom_field4', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['location']['custom_field_4'] ?? __('lang_v1.location_custom_field4') }}</label>
+              @php
+              $__f66 = ['name' => 'location_custom_fields[]', 'value' => 'custom_field4', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f66['name']" :value="$__f66['value']" :checked="$__f66['checked']" :options="$__f66['options']" /> {{ $custom_labels['location']['custom_field_4'] ?? __('lang_v1.location_custom_field4') }}</label>
           </div>
         </div>
       </div>
@@ -423,7 +601,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_mobile_number', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_mobile_number')</label>
+                @php
+                $__f67 = ['name' => 'show_mobile_number', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f67['name']" :value="$__f67['value']" :checked="$__f67['checked']" :options="$__f67['options']" /> @lang('invoice.show_mobile_number')</label>
               </div>
           </div>
         </div>
@@ -431,7 +612,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_alternate_number', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_alternate_number')</label>
+                @php
+                $__f68 = ['name' => 'show_alternate_number', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f68['name']" :value="$__f68['value']" :checked="$__f68['checked']" :options="$__f68['options']" /> @lang('invoice.show_alternate_number')</label>
               </div>
           </div>
         </div>
@@ -439,7 +623,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_email', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_email')</label>
+                @php
+                $__f69 = ['name' => 'show_email', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f69['name']" :value="$__f69['value']" :checked="$__f69['checked']" :options="$__f69['options']" /> @lang('invoice.show_email')</label>
               </div>
           </div>
         </div>
@@ -450,7 +637,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_tax_1', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_tax_1')</label>
+                @php
+                $__f70 = ['name' => 'show_tax_1', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f70['name']" :value="$__f70['value']" :checked="$__f70['checked']" :options="$__f70['options']" /> @lang('invoice.show_tax_1')</label>
               </div>
           </div>
         </div>
@@ -458,7 +648,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_tax_2', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_tax_2')</label>
+                @php
+                $__f71 = ['name' => 'show_tax_2', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f71['name']" :value="$__f71['value']" :checked="$__f71['checked']" :options="$__f71['options']" /> @lang('invoice.show_tax_2')</label>
               </div>
           </div>
         </div>
@@ -471,44 +664,74 @@
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('table_product_label', __('lang_v1.product_label') . ':' ) !!}
-            {!! Form::text('table_product_label', 'Product', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.product_label') ]); !!}
+            @php
+            $__f72 = ['name' => 'table_product_label', 'value' => __('lang_v1.product_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f72['name']" :value="$__f72['value']" />
+            @php
+            $__f73 = ['name' => 'table_product_label', 'value' => 'Product', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.product_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f73['name']" :value="$__f73['value']" :options="$__f73['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('table_qty_label', 'Etiqueta de quantidade:' ) !!}
-            {!! Form::text('table_qty_label', 'Quantity', ['class' => 'form-control',
-              'placeholder' => 'Etiqueta de quantidade' ]); !!}
+            @php
+            $__f74 = ['name' => 'table_qty_label', 'value' => 'Etiqueta de quantidade:'];
+            @endphp
+            <x-form.label :name="$__f74['name']" :value="$__f74['value']" />
+            @php
+            $__f75 = ['name' => 'table_qty_label', 'value' => 'Quantity', 'options' => ['class' => 'form-control', 'placeholder' => 'Etiqueta de quantidade' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f75['name']" :value="$__f75['value']" :options="$__f75['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('table_unit_price_label', 'Etiqueta de valor unitário' . ':' ) !!}
-            {!! Form::text('table_unit_price_label', 'Unit Price', ['class' => 'form-control',
-              'placeholder' => 'Etiqueta de valor unitário' ]); !!}
+            @php
+            $__f76 = ['name' => 'table_unit_price_label', 'value' => 'Etiqueta de valor unitário' . ':'];
+            @endphp
+            <x-form.label :name="$__f76['name']" :value="$__f76['value']" />
+            @php
+            $__f77 = ['name' => 'table_unit_price_label', 'value' => 'Unit Price', 'options' => ['class' => 'form-control', 'placeholder' => 'Etiqueta de valor unitário' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f77['name']" :value="$__f77['value']" :options="$__f77['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('table_subtotal_label', 'Rótulo de subtotal' . ':' ) !!}
-            {!! Form::text('table_subtotal_label', 'Subtotal', ['class' => 'form-control',
-              'placeholder' => 'Rótulo de subtotal' ]); !!}
+            @php
+            $__f78 = ['name' => 'table_subtotal_label', 'value' => 'Rótulo de subtotal' . ':'];
+            @endphp
+            <x-form.label :name="$__f78['name']" :value="$__f78['value']" />
+            @php
+            $__f79 = ['name' => 'table_subtotal_label', 'value' => 'Subtotal', 'options' => ['class' => 'form-control', 'placeholder' => 'Rótulo de subtotal' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f79['name']" :value="$__f79['value']" :options="$__f79['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('cat_code_label', 'HSN da categoria' . ':' ) !!}
-            {!! Form::text('cat_code_label', 'HSN', ['class' => 'form-control',
-              'placeholder' => 'HSN' ]); !!}
+            @php
+            $__f80 = ['name' => 'cat_code_label', 'value' => 'HSN da categoria' . ':'];
+            @endphp
+            <x-form.label :name="$__f80['name']" :value="$__f80['value']" />
+            @php
+            $__f81 = ['name' => 'cat_code_label', 'value' => 'HSN', 'options' => ['class' => 'form-control', 'placeholder' => 'HSN' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f81['name']" :value="$__f81['value']" :options="$__f81['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('total_quantity_label', __('lang_v1.total_quantity_label') . ':' ) !!}
-            {!! Form::text('common_settings[total_quantity_label]', 'Total Quantity', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.total_quantity_label'), 'id' => 'total_quantity_label' ]); !!}
+            @php
+            $__f82 = ['name' => 'total_quantity_label', 'value' => __('lang_v1.total_quantity_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f82['name']" :value="$__f82['value']" />
+            @php
+            $__f83 = ['name' => 'common_settings[total_quantity_label]', 'value' => 'Total Quantity', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.total_quantity_label'), 'id' => 'total_quantity_label' ]];
+            @endphp
+            <x-form.input type="text" :name="$__f83['name']" :value="$__f83['value']" :options="$__f83['options']" />
           </div>
         </div>
         
@@ -519,7 +742,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_brand', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_brand')</label>
+                @php
+                $__f84 = ['name' => 'show_brand', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f84['name']" :value="$__f84['value']" :checked="$__f84['checked']" :options="$__f84['options']" /> @lang('lang_v1.show_brand')</label>
               </div>
           </div>
         </div>
@@ -527,7 +753,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_sku', 1, true, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_sku')</label>
+                @php
+                $__f85 = ['name' => 'show_sku', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f85['name']" :value="$__f85['value']" :checked="$__f85['checked']" :options="$__f85['options']" /> @lang('lang_v1.show_sku')</label>
               </div>
           </div>
         </div>
@@ -535,7 +764,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_cat_code', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_cat_code')</label>
+                @php
+                $__f86 = ['name' => 'show_cat_code', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f86['name']" :value="$__f86['value']" :checked="$__f86['checked']" :options="$__f86['options']" /> @lang('lang_v1.show_cat_code')</label>
               </div>
           </div>
         </div>
@@ -546,7 +778,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_sale_description', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_sale_description')</label>
+                @php
+                $__f87 = ['name' => 'show_sale_description', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f87['name']" :value="$__f87['value']" :checked="$__f87['checked']" :options="$__f87['options']" /> @lang('lang_v1.show_sale_description')</label>
             </div>
             <p class="help-block">@lang('lang_v1.product_imei_or_sn')</p>
           </div>
@@ -556,7 +791,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('product_custom_fields[]', 'product_custom_field1', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['product']['custom_field_1'] ?? __('lang_v1.product_custom_field1') }}</label>
+              @php
+              $__f88 = ['name' => 'product_custom_fields[]', 'value' => 'product_custom_field1', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f88['name']" :value="$__f88['value']" :checked="$__f88['checked']" :options="$__f88['options']" /> {{ $custom_labels['product']['custom_field_1'] ?? __('lang_v1.product_custom_field1') }}</label>
           </div>
         </div>
       </div>
@@ -565,7 +803,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('product_custom_fields[]', 'product_custom_field2', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['product']['custom_field_2'] ?? __('lang_v1.product_custom_field2') }}</label>
+              @php
+              $__f89 = ['name' => 'product_custom_fields[]', 'value' => 'product_custom_field2', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f89['name']" :value="$__f89['value']" :checked="$__f89['checked']" :options="$__f89['options']" /> {{ $custom_labels['product']['custom_field_2'] ?? __('lang_v1.product_custom_field2') }}</label>
           </div>
         </div>
       </div>
@@ -574,7 +815,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('product_custom_fields[]', 'product_custom_field3', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['product']['custom_field_3'] ?? __('lang_v1.product_custom_field3') }}</label>
+              @php
+              $__f90 = ['name' => 'product_custom_fields[]', 'value' => 'product_custom_field3', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f90['name']" :value="$__f90['value']" :checked="$__f90['checked']" :options="$__f90['options']" /> {{ $custom_labels['product']['custom_field_3'] ?? __('lang_v1.product_custom_field3') }}</label>
           </div>
         </div>
       </div>
@@ -583,7 +827,10 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              {!! Form::checkbox('product_custom_fields[]', 'product_custom_field4', false, ['class' => 'input-icheck']); !!} {{ $custom_labels['product']['custom_field_4'] ?? __('lang_v1.product_custom_field4') }}</label>
+              @php
+              $__f91 = ['name' => 'product_custom_fields[]', 'value' => 'product_custom_field4', 'checked' => false, 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f91['name']" :value="$__f91['value']" :checked="$__f91['checked']" :options="$__f91['options']" /> {{ $custom_labels['product']['custom_field_4'] ?? __('lang_v1.product_custom_field4') }}</label>
           </div>
         </div>
       </div>
@@ -593,7 +840,10 @@
             <div class="form-group">
               <div class="checkbox">
                 <label>
-                  {!! Form::checkbox('show_expiry', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_product_expiry')</label>
+                  @php
+                  $__f92 = ['name' => 'show_expiry', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                  @endphp
+                  <x-form.checkbox :name="$__f92['name']" :value="$__f92['value']" :checked="$__f92['checked']" :options="$__f92['options']" /> @lang('lang_v1.show_product_expiry')</label>
                 </div>
             </div>
           </div>
@@ -603,7 +853,10 @@
             <div class="form-group">
               <div class="checkbox">
                 <label>
-                  {!! Form::checkbox('show_lot', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_lot_number')</label>
+                  @php
+                  $__f93 = ['name' => 'show_lot', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                  @endphp
+                  <x-form.checkbox :name="$__f93['name']" :value="$__f93['value']" :checked="$__f93['checked']" :options="$__f93['options']" /> @lang('lang_v1.show_lot_number')</label>
                 </div>
             </div>
           </div>
@@ -613,7 +866,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_image', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_product_image')</label>
+                @php
+                $__f94 = ['name' => 'show_image', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f94['name']" :value="$__f94['value']" :checked="$__f94['checked']" :options="$__f94['options']" /> @lang('lang_v1.show_product_image')</label>
               </div>
           </div>
         </div>
@@ -623,7 +879,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('common_settings[show_warranty_name]', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_warranty_name')</label>
+                @php
+                $__f95 = ['name' => 'common_settings[show_warranty_name]', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f95['name']" :value="$__f95['value']" :checked="$__f95['checked']" :options="$__f95['options']" /> @lang('lang_v1.show_warranty_name')</label>
               </div>
           </div>
         </div>
@@ -631,7 +890,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('common_settings[show_warranty_exp_date]', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_warranty_exp_date')</label>
+                @php
+                $__f96 = ['name' => 'common_settings[show_warranty_exp_date]', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f96['name']" :value="$__f96['value']" :checked="$__f96['checked']" :options="$__f96['options']" /> @lang('lang_v1.show_warranty_exp_date')</label>
               </div>
           </div>
         </div>
@@ -639,7 +901,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('common_settings[show_warranty_description]', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_warranty_description')</label>
+                @php
+                $__f97 = ['name' => 'common_settings[show_warranty_description]', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f97['name']" :value="$__f97['value']" :checked="$__f97['checked']" :options="$__f97['options']" /> @lang('lang_v1.show_warranty_description')</label>
               </div>
           </div>
         </div>
@@ -652,53 +917,88 @@
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('sub_total_label', __('invoice.sub_total_label') . ':' ) !!}
-            {!! Form::text('sub_total_label', 'Subtotal', ['class' => 'form-control',
-              'placeholder' => __('invoice.sub_total_label') ]); !!}
+            @php
+            $__f98 = ['name' => 'sub_total_label', 'value' => __('invoice.sub_total_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f98['name']" :value="$__f98['value']" />
+            @php
+            $__f99 = ['name' => 'sub_total_label', 'value' => 'Subtotal', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.sub_total_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f99['name']" :value="$__f99['value']" :options="$__f99['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('discount_label', __('invoice.discount_label') . ':' ) !!}
-            {!! Form::text('discount_label', 'Discount', ['class' => 'form-control',
-              'placeholder' => __('invoice.discount_label') ]); !!}
+            @php
+            $__f100 = ['name' => 'discount_label', 'value' => __('invoice.discount_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f100['name']" :value="$__f100['value']" />
+            @php
+            $__f101 = ['name' => 'discount_label', 'value' => 'Discount', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.discount_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f101['name']" :value="$__f101['value']" :options="$__f101['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('tax_label', __('invoice.tax_label') . ':' ) !!}
-            {!! Form::text('tax_label', 'Tax', ['class' => 'form-control',
-              'placeholder' => __('invoice.tax_label') ]); !!}
+            @php
+            $__f102 = ['name' => 'tax_label', 'value' => __('invoice.tax_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f102['name']" :value="$__f102['value']" />
+            @php
+            $__f103 = ['name' => 'tax_label', 'value' => 'Tax', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.tax_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f103['name']" :value="$__f103['value']" :options="$__f103['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('total_label', __('invoice.total_label') . ':' ) !!}
-            {!! Form::text('total_label', 'Total', ['class' => 'form-control',
-              'placeholder' => __('invoice.total_label') ]); !!}
+            @php
+            $__f104 = ['name' => 'total_label', 'value' => __('invoice.total_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f104['name']" :value="$__f104['value']" />
+            @php
+            $__f105 = ['name' => 'total_label', 'value' => 'Total', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.total_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f105['name']" :value="$__f105['value']" :options="$__f105['options']" />
           </div>
         </div>
         
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('round_off_label', __('lang_v1.round_off_label') . ':' ) !!}
-            {!! Form::text('round_off_label', 'Round off', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.round_off_label') ]); !!}
+            @php
+            $__f106 = ['name' => 'round_off_label', 'value' => __('lang_v1.round_off_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f106['name']" :value="$__f106['value']" />
+            @php
+            $__f107 = ['name' => 'round_off_label', 'value' => 'Round off', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.round_off_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f107['name']" :value="$__f107['value']" :options="$__f107['options']" />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('total_due_label', __('invoice.total_due_label') . ' (' . __('lang_v1.current_sale') . '):' ) !!}
-            {!! Form::text('total_due_label', 'Total Due', ['class' => 'form-control',
-              'placeholder' => __('invoice.total_due_label') ]); !!}
+            @php
+            $__f108 = ['name' => 'total_due_label', 'value' => __('invoice.total_due_label') . ' (' . __('lang_v1.current_sale') . '):'];
+            @endphp
+            <x-form.label :name="$__f108['name']" :value="$__f108['value']" />
+            @php
+            $__f109 = ['name' => 'total_due_label', 'value' => 'Total Due', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.total_due_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f109['name']" :value="$__f109['value']" :options="$__f109['options']" />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('paid_label', __('invoice.paid_label') . ':' ) !!}
-            {!! Form::text('paid_label', 'Total Paid', ['class' => 'form-control',
-              'placeholder' => __('invoice.paid_label') ]); !!}
+            @php
+            $__f110 = ['name' => 'paid_label', 'value' => __('invoice.paid_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f110['name']" :value="$__f110['value']" />
+            @php
+            $__f111 = ['name' => 'paid_label', 'value' => 'Total Paid', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.paid_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f111['name']" :value="$__f111['value']" :options="$__f111['options']" />
           </div>
         </div>
 
@@ -706,7 +1006,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_payments', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_payments')</label>
+                @php
+                $__f112 = ['name' => 'show_payments', 'value' => 1, 'checked' => true, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f112['name']" :value="$__f112['value']" :checked="$__f112['checked']" :options="$__f112['options']" /> @lang('invoice.show_payments')</label>
               </div>
           </div>
         </div>
@@ -715,32 +1018,48 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_barcode', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_barcode')</label>
+                @php
+                $__f113 = ['name' => 'show_barcode', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f113['name']" :value="$__f113['value']" :checked="$__f113['checked']" :options="$__f113['options']" /> @lang('invoice.show_barcode')</label>
               </div>
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('prev_bal_label', __('invoice.total_due_label') . ' (' . __('lang_v1.all_sales') . '):' ) !!}
-            {!! Form::text('prev_bal_label', 'All Balance Due', ['class' => 'form-control',
-              'placeholder' => __('invoice.total_due_label') ]); !!}
+            @php
+            $__f114 = ['name' => 'prev_bal_label', 'value' => __('invoice.total_due_label') . ' (' . __('lang_v1.all_sales') . '):'];
+            @endphp
+            <x-form.label :name="$__f114['name']" :value="$__f114['value']" />
+            @php
+            $__f115 = ['name' => 'prev_bal_label', 'value' => 'All Balance Due', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.total_due_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f115['name']" :value="$__f115['value']" :options="$__f115['options']" />
           </div>
         </div>
         <div class="col-sm-5">
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_previous_bal', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_previous_bal_due')</label>
+                @php
+                $__f116 = ['name' => 'show_previous_bal', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f116['name']" :value="$__f116['value']" :checked="$__f116['checked']" :options="$__f116['options']" /> @lang('lang_v1.show_previous_bal_due')</label>
                 @show_tooltip(__('lang_v1.previous_bal_due_help'))
               </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('change_return_label', __('lang_v1.change_return_label') . ':' ) !!} @show_tooltip(__('lang_v1.change_return_help'))
-            {!! Form::text('change_return_label', 'Change Return', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.change_return_label') ]); !!}
+            @php
+            $__f117 = ['name' => 'change_return_label', 'value' => __('lang_v1.change_return_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f117['name']" :value="$__f117['value']" /> @show_tooltip(__('lang_v1.change_return_help'))
+            @php
+            $__f118 = ['name' => 'change_return_label', 'value' => 'Change Return', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.change_return_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f118['name']" :value="$__f118['value']" :options="$__f118['options']" />
           </div>
         </div>
 
@@ -748,7 +1067,10 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('common_settings[hide_price]', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.hide_all_prices')</label>
+                @php
+                $__f119 = ['name' => 'common_settings[hide_price]', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f119['name']" :value="$__f119['value']" :checked="$__f119['checked']" :options="$__f119['options']" /> @lang('lang_v1.hide_all_prices')</label>
               </div>
           </div>
         </div>
@@ -761,9 +1083,14 @@
       <div class="row">
         <div class="col-sm-6 hide">
           <div class="form-group">
-            {!! Form::label('highlight_color', __('invoice.highlight_color') . ':' ) !!}
-            {!! Form::text('highlight_color', '#000000', ['class' => 'form-control',
-              'placeholder' => __('invoice.highlight_color') ]); !!}
+            @php
+            $__f120 = ['name' => 'highlight_color', 'value' => __('invoice.highlight_color') . ':'];
+            @endphp
+            <x-form.label :name="$__f120['name']" :value="$__f120['value']" />
+            @php
+            $__f121 = ['name' => 'highlight_color', 'value' => '#000000', 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.highlight_color') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f121['name']" :value="$__f121['value']" :options="$__f121['options']" />
           </div>
         </div>
         
@@ -774,9 +1101,14 @@
 
         <div class="col-sm-12">
           <div class="form-group">
-            {!! Form::label('footer_text', __('invoice.footer_text') . ':' ) !!}
-              {!! Form::textarea('footer_text', null, ['class' => 'form-control',
-              'placeholder' => __('invoice.footer_text'), 'rows' => 3]); !!}
+            @php
+            $__f122 = ['name' => 'footer_text', 'value' => __('invoice.footer_text') . ':'];
+            @endphp
+            <x-form.label :name="$__f122['name']" :value="$__f122['value']" />
+              @php
+              $__f123 = ['name' => 'footer_text', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __('invoice.footer_text'), 'rows' => 3]];
+              @endphp
+              <x-form.textarea :name="$__f123['name']" :value="$__f123['value']" :options="$__f123['options']" />
           </div>
         </div>
         <div class="col-sm-6">
@@ -784,7 +1116,10 @@
             <br>
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('is_default', 1, false, ['class' => 'input-icheck']); !!} @lang('barcode.set_as_default')</label>
+                @php
+                $__f124 = ['name' => 'is_default', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck']];
+                @endphp
+                <x-form.checkbox :name="$__f124['name']" :value="$__f124['value']" :checked="$__f124['checked']" :options="$__f124['options']" /> @lang('barcode.set_as_default')</label>
             </div>
           </div>
         </div>
@@ -812,24 +1147,40 @@
         
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('cn_heading', __('lang_v1.cn_heading') . ':' ) !!}
-            {!! Form::text('cn_heading', 'Credit Note', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.cn_heading') ]); !!}
+            @php
+            $__f125 = ['name' => 'cn_heading', 'value' => __('lang_v1.cn_heading') . ':'];
+            @endphp
+            <x-form.label :name="$__f125['name']" :value="$__f125['value']" />
+            @php
+            $__f126 = ['name' => 'cn_heading', 'value' => 'Credit Note', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.cn_heading') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f126['name']" :value="$__f126['value']" :options="$__f126['options']" />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('cn_no_label', __('lang_v1.cn_no_label') . ':' ) !!}
-            {!! Form::text('cn_no_label', 'Ref. No.', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.cn_no_label') ]); !!}
+            @php
+            $__f127 = ['name' => 'cn_no_label', 'value' => __('lang_v1.cn_no_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f127['name']" :value="$__f127['value']" />
+            @php
+            $__f128 = ['name' => 'cn_no_label', 'value' => 'Ref. No.', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.cn_no_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f128['name']" :value="$__f128['value']" :options="$__f128['options']" />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('cn_amount_label', __('lang_v1.cn_amount_label') . ':' ) !!}
-            {!! Form::text('cn_amount_label', 'Credit Amount', ['class' => 'form-control', 'placeholder' => __('lang_v1.cn_amount_label') ]); !!}
+            @php
+            $__f129 = ['name' => 'cn_amount_label', 'value' => __('lang_v1.cn_amount_label') . ':'];
+            @endphp
+            <x-form.label :name="$__f129['name']" :value="$__f129['value']" />
+            @php
+            $__f130 = ['name' => 'cn_amount_label', 'value' => 'Credit Amount', 'options' => ['class' => 'form-control', 'placeholder' => __('lang_v1.cn_amount_label') ]];
+            @endphp
+            <x-form.input type="text" :name="$__f130['name']" :value="$__f130['value']" :options="$__f130['options']" />
           </div>
         </div>
 
@@ -843,7 +1194,7 @@
     </div>
   </div>
 
-  {!! Form::close() !!}
+  <x-form.close />
 </section>
 <!-- /.content -->
 @endsection

@@ -93,6 +93,7 @@ const files = [
     "accounting.min.js",
     "decimal.min.js",
     "fullcalendar/fullcalendar.min.js",
+    "chartjs/chart.min.js",
     // window.tinyMCEPreInit (setado em javascripts.blade.php, antes deste
     // bundle carregar) substitui a autodetecção de base path que TinyMCE faria
     // olhando a src de um <script src="tinymce*.js"> -- não existe aqui dentro

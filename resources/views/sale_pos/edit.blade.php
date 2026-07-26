@@ -17,7 +17,10 @@
 	$is_discount_enabled = $pos_settings['disable_discount'] != 1 ? true : false;
 	$is_rp_enabled = session('business.enable_rp') == 1 ? true : false;
 	@endphp
-	{!! Form::open(['url' => action('SellPosController@update', [$transaction->id]), 'method' => 'post', 'id' => 'edit_pos_sell_form' ]) !!}
+	@php
+	$__f1 = ['options' => ['url' => action('SellPosController@update', [$transaction->id]), 'method' => 'post', 'id' => 'edit_pos_sell_form' ]];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
 	{{ method_field('PUT') }}
 	<div class="row mb-12">
 		<div class="col-md-12">
@@ -28,9 +31,15 @@
 				<div class="@if(empty($pos_settings['hide_product_suggestion'])) col-md-7 @else col-md-10 col-md-offset-1 @endif no-padding pr-12">
 					<div class="box box-solid mb-12">
 						<div class="box-body pb-0">
-							{!! Form::hidden('location_id', $transaction->location_id, ['id' => 'location_id', 'data-receipt_printer_type' => !empty($location_printer_type) ? $location_printer_type : 'browser', 'data-default_accounts' => $transaction->location->default_payment_accounts]); !!}
+							@php
+							$__f2 = ['name' => 'location_id', 'value' => $transaction->location_id, 'options' => ['id' => 'location_id', 'data-receipt_printer_type' => !empty($location_printer_type) ? $location_printer_type : 'browser', 'data-default_accounts' => $transaction->location->default_payment_accounts]];
+							@endphp
+							<x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
 							<!-- sub_type -->
-							{!! Form::hidden('sub_type', isset($sub_type) ? $sub_type : null) !!}
+							@php
+							$__f3 = ['name' => 'sub_type', 'value' => isset($sub_type) ? $sub_type : null];
+							@endphp
+							<x-form.input type="hidden" :name="$__f3['name']" :value="$__f3['value']" />
 							<input type="hidden" id="item_addition_method" value="{{$business_details->item_addition_method}}">
 							@include('sale_pos.partials.pos_form_edit')
 
@@ -57,7 +66,7 @@
 		</div>
 	</div>
 	@include('sale_pos.partials.pos_form_actions', ['edit' => true])
-	{!! Form::close() !!}
+	<x-form.close />
 </section>
 
 <!-- This will be printed -->

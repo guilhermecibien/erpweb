@@ -15,7 +15,10 @@
 
 <!-- Main content -->
 <section class="content no-print">
-	{!! Form::open(['url' => '#', 'method' => 'post', 'id' => 'preview_setting_form', 'onsubmit' => 'return false']) !!}
+	@php
+	$__f1 = ['options' => ['url' => '#', 'method' => 'post', 'id' => 'preview_setting_form', 'onsubmit' => 'return false']];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
 	@component('components.widget', ['class' => 'box-primary', 'title' => __('product.add_product_for_labels')])
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
@@ -24,7 +27,10 @@
 						<span class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</span>
-						{!! Form::text('search_product', null, ['class' => 'form-control', 'id' => 'search_product_for_label', 'placeholder' => __('lang_v1.enter_product_name_to_print_labels'), 'autofocus']); !!}
+						@php
+						$__f2 = ['name' => 'search_product', 'value' => null, 'options' => ['class' => 'form-control', 'id' => 'search_product_for_label', 'placeholder' => __('lang_v1.enter_product_name_to_print_labels'), 'autofocus']];
+						@endphp
+						<x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
 					</div>
 				</div>
 			</div>
@@ -75,12 +81,18 @@
 
 			<div class="col-sm-3" id="price_type_div">
 				<div class="form-group">
-					{!! Form::label('print[price_type]', @trans( 'barcode.show_price' ) . ':') !!}
+					@php
+					$__f3 = ['name' => 'print[price_type]', 'value' => @trans( 'barcode.show_price' ) . ':'];
+					@endphp
+					<x-form.label :name="$__f3['name']" :value="$__f3['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-info"></i>
 						</span>
-						{!! Form::select('print[price_type]', ['inclusive' => __('product.inc_of_tax'), 'exclusive' => __('product.exc_of_tax')], 'inclusive', ['class' => 'form-control']); !!}
+						@php
+						$__f4 = ['name' => 'print[price_type]', 'list' => ['inclusive' => __('product.inc_of_tax'), 'exclusive' => __('product.exc_of_tax')], 'selected' => 'inclusive', 'options' => ['class' => 'form-control']];
+						@endphp
+						<x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
 					</div>
 				</div>
 			</div>
@@ -99,12 +111,18 @@
 
 			<div class="col-sm-4">
 				<div class="form-group">
-					{!! Form::label('price_type', @trans( 'barcode.barcode_setting' ) . ':') !!}
+					@php
+					$__f5 = ['name' => 'price_type', 'value' => @trans( 'barcode.barcode_setting' ) . ':'];
+					@endphp
+					<x-form.label :name="$__f5['name']" :value="$__f5['value']" />
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-cog"></i>
 						</span>
-						{!! Form::select('barcode_setting', $barcode_settings, null, ['class' => 'form-control']); !!}
+						@php
+						$__f6 = ['name' => 'barcode_setting', 'list' => $barcode_settings, 'selected' => null, 'options' => ['class' => 'form-control']];
+						@endphp
+						<x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
 					</div>
 				</div>
 			</div>
@@ -116,7 +134,7 @@
 			</div>
 		</div>
 	@endcomponent
-	{!! Form::close() !!}
+	<x-form.close />
 
 	<div class="col-sm-8 hide display_label_div">
 		<h3 class="box-title">@lang( 'barcode.preview' )</h3>

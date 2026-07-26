@@ -9,8 +9,10 @@
         <div class="checkbox">
           <br>
           <label>
-            {!! Form::checkbox('enabled_modules[]', $k,  in_array($k, $enabled_modules), 
-            ['class' => 'input-icheck']); !!} {{$v['name']}}
+            @php
+            $__f1 = ['name' => 'enabled_modules[]', 'value' => $k, 'checked' => in_array($k, $enabled_modules), 'options' => ['class' => 'input-icheck']];
+            @endphp
+            <x-form.checkbox :name="$__f1['name']" :value="$__f1['value']" :checked="$__f1['checked']" :options="$__f1['options']" /> {{$v['name']}}
           </label>
           @if(!empty($v['tooltip'])) @show_tooltip($v['tooltip']) @endif
         </div>

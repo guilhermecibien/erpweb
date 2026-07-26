@@ -1,7 +1,10 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
 
-    {!! Form::open(['url' => action('Restaurant\TableController@store'), 'method' => 'post', 'id' => 'table_add_form' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('Restaurant\TableController@store'), 'method' => 'post', 'id' => 'table_add_form' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -18,18 +21,36 @@
         @php $default_location = null; @endphp
       @endif
       <div class="form-group">
-        {!! Form::label('location_id', __('purchase.business_location').':*') !!}
-        {!! Form::select('location_id', $business_locations, $default_location, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+        @php
+        $__f2 = ['name' => 'location_id', 'value' => __('purchase.business_location').':*'];
+        @endphp
+        <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+        @php
+        $__f3 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => $default_location, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']];
+        @endphp
+        <x-form.select :name="$__f3['name']" :list="$__f3['list']" :selected="$__f3['selected']" :options="$__f3['options']" />
       </div>
       
       <div class="form-group">
-        {!! Form::label('name', 'Nome da mesa' . ':*') !!}
-          {!! Form::text('name', null, ['class' => 'form-control', 'required', 'placeholder' => __( 'Nome da mesa' ) ]); !!}
+        @php
+        $__f4 = ['name' => 'name', 'value' => 'Nome da mesa' . ':*'];
+        @endphp
+        <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+          @php
+          $__f5 = ['name' => 'name', 'value' => null, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __( 'Nome da mesa' ) ]];
+          @endphp
+          <x-form.input type="text" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
       </div>
 
       <div class="form-group">
-        {!! Form::label('description', 'Descrição breve' . ':') !!}
-          {!! Form::text('description', null, ['class' => 'form-control','placeholder' => __( 'Descrição breve' )]); !!}
+        @php
+        $__f6 = ['name' => 'description', 'value' => 'Descrição breve' . ':'];
+        @endphp
+        <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+          @php
+          $__f7 = ['name' => 'description', 'value' => null, 'options' => ['class' => 'form-control','placeholder' => __( 'Descrição breve' )]];
+          @endphp
+          <x-form.input type="text" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
       </div>
     </div>
 
@@ -38,7 +59,7 @@
       <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'messages.close' )</button>
     </div>
 
-    {!! Form::close() !!}
+    <x-form.close />
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

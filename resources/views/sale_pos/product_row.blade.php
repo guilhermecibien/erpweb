@@ -229,7 +229,10 @@
 		<td>
 			<div class="form-group">
 				<div class="input-group">
-					{!! Form::select("products[" . $row_count . "][res_service_staff_id]", $waiters, !empty($product->res_service_staff_id) ? $product->res_service_staff_id : null, ['class' => 'form-control select2 order_line_service_staff', 'placeholder' => __('restaurant.select_service_staff'), 'required' => (!empty($pos_settings['is_service_staff_required']) && $pos_settings['is_service_staff_required'] == 1) ? true : false ]); !!}
+					@php
+					$__f1 = ['name' => "products[" . $row_count . "][res_service_staff_id]", 'list' => $waiters, 'selected' => !empty($product->res_service_staff_id) ? $product->res_service_staff_id : null, 'options' => ['class' => 'form-control select2 order_line_service_staff', 'placeholder' => __('restaurant.select_service_staff'), 'required' => (!empty($pos_settings['is_service_staff_required']) && $pos_settings['is_service_staff_required'] == 1) ? true : false ]];
+					@endphp
+					<x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
 				</div>
 			</div>
 		</td>

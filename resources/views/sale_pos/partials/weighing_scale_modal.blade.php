@@ -9,8 +9,14 @@
 				<div class="row">
 					<div class="col-xs-12">
 				        <div class="form-group">
-				            {!! Form::label('weighing_scale_barcode', __('lang_v1.weighing_scale_barcode') . ':' ) !!} @show_tooltip(__('lang_v1.weighing_scale_barcode_help'))
-				            {!! Form::text('weighing_scale_barcode', null, ['class' => 'form-control']); !!}
+				            @php
+				            $__f1 = ['name' => 'weighing_scale_barcode', 'value' => __('lang_v1.weighing_scale_barcode') . ':'];
+				            @endphp
+				            <x-form.label :name="$__f1['name']" :value="$__f1['value']" /> @show_tooltip(__('lang_v1.weighing_scale_barcode_help'))
+				            @php
+				            $__f2 = ['name' => 'weighing_scale_barcode', 'value' => null, 'options' => ['class' => 'form-control']];
+				            @endphp
+				            <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
 				        </div>
 				    </div>
 				</div>

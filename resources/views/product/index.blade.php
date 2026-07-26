@@ -21,46 +21,88 @@
     @component('components.filters', ['title' => __('report.filters'), 'closed' => true])
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('type', 'Tipo de produto' . ':') !!}
-                {!! Form::select('type', ['single' => __('lang_v1.single'), 'variable' => __('lang_v1.variable')], null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_type', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f1 = ['name' => 'type', 'value' => 'Tipo de produto' . ':'];
+                @endphp
+                <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                @php
+                $__f2 = ['name' => 'type', 'list' => ['single' => __('lang_v1.single'), 'variable' => __('lang_v1.variable')], 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_type', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('category_id', __('product.category') . ':') !!}
-                {!! Form::select('category_id', $categories, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_category_id', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f3 = ['name' => 'category_id', 'value' => __('product.category') . ':'];
+                @endphp
+                <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+                @php
+                $__f4 = ['name' => 'category_id', 'list' => $categories, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_category_id', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('unit_id', __('product.unit') . ':') !!}
-                {!! Form::select('unit_id', $units, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_unit_id', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f5 = ['name' => 'unit_id', 'value' => __('product.unit') . ':'];
+                @endphp
+                <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
+                @php
+                $__f6 = ['name' => 'unit_id', 'list' => $units, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_unit_id', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('tax_id', __('product.tax') . ':') !!}
-                {!! Form::select('tax_id', $taxes, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_tax_id', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f7 = ['name' => 'tax_id', 'value' => __('product.tax') . ':'];
+                @endphp
+                <x-form.label :name="$__f7['name']" :value="$__f7['value']" />
+                @php
+                $__f8 = ['name' => 'tax_id', 'list' => $taxes, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_tax_id', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f8['name']" :list="$__f8['list']" :selected="$__f8['selected']" :options="$__f8['options']" />
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('brand_id', __('product.brand') . ':') !!}
-                {!! Form::select('brand_id', $brands, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_brand_id', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f9 = ['name' => 'brand_id', 'value' => __('product.brand') . ':'];
+                @endphp
+                <x-form.label :name="$__f9['name']" :value="$__f9['value']" />
+                @php
+                $__f10 = ['name' => 'brand_id', 'list' => $brands, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'product_list_filter_brand_id', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f10['name']" :list="$__f10['list']" :selected="$__f10['selected']" :options="$__f10['options']" />
             </div>
         </div>
         <div class="col-md-3" id="location_filter">
             <div class="form-group">
-                {!! Form::label('location_id',  __('purchase.business_location') . ':') !!}
-                {!! Form::select('location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f11 = ['name' => 'location_id', 'value' => __('purchase.business_location') . ':'];
+                @endphp
+                <x-form.label :name="$__f11['name']" :value="$__f11['value']" />
+                @php
+                $__f12 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f12['name']" :list="$__f12['list']" :selected="$__f12['selected']" :options="$__f12['options']" />
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                {!! Form::label('active_state', 'Status' . ':') !!}
+                @php
+                $__f13 = ['name' => 'active_state', 'value' => 'Status' . ':'];
+                @endphp
+                <x-form.label :name="$__f13['name']" :value="$__f13['value']" />
 
-                {!! Form::select('active_state', ['active' => 'Ativo', 'inactive' => 'Inativo'], null, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'active_state', 'placeholder' => __('lang_v1.all')]); !!}
+                @php
+                $__f14 = ['name' => 'active_state', 'list' => ['active' => 'Ativo', 'inactive' => 'Inativo'], 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => 'active_state', 'placeholder' => __('lang_v1.all')]];
+                @endphp
+                <x-form.select :name="$__f14['name']" :list="$__f14['list']" :selected="$__f14['selected']" :options="$__f14['options']" />
             </div>
         </div>
 
@@ -77,7 +119,10 @@
           <div class="form-group">
             <br>
             <label>
-              {!! Form::checkbox('not_for_selling', 1, false, ['class' => 'input-icheck', 'id' => 'not_for_selling']); !!} <strong>@lang('lang_v1.not_for_selling')</strong>
+              @php
+              $__f15 = ['name' => 'not_for_selling', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck', 'id' => 'not_for_selling']];
+              @endphp
+              <x-form.checkbox :name="$__f15['name']" :value="$__f15['value']" :checked="$__f15['checked']" :options="$__f15['options']" /> <strong>@lang('lang_v1.not_for_selling')</strong>
             </label>
           </div>
         </div>
@@ -86,7 +131,10 @@
           <div class="form-group">
             <br>
             <label>
-              {!! Form::checkbox('ecommerce', 1, false, ['class' => 'input-icheck', 'id' => 'ecommerce']); !!} <strong>Ecommerce</strong>
+              @php
+              $__f16 = ['name' => 'ecommerce', 'value' => 1, 'checked' => false, 'options' => ['class' => 'input-icheck', 'id' => 'ecommerce']];
+              @endphp
+              <x-form.checkbox :name="$__f16['name']" :value="$__f16['value']" :checked="$__f16['checked']" :options="$__f16['options']" /> <strong>Ecommerce</strong>
             </label>
           </div>
         </div>

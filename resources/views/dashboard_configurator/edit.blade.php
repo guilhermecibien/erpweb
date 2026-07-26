@@ -10,9 +10,10 @@
 
 <section class="content">
 
-	{!! Form::open([
-		'url' => action('DashboardConfiguratorController@update', 
-		['id' => $dashboard->id]), 'method' => 'put'])!!}
+	@php
+	$__f1 = ['options' => [ 'url' => action('DashboardConfiguratorController@update', ['id' => $dashboard->id]), 'method' => 'put']];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
 		@csrf
 		<input type="hidden" name="configuration" 
 			id="configuration_input" 
@@ -49,7 +50,7 @@
 				@lang('messages.save')
 			</button>
 		</div>
-	{!! Form::close() !!}
+	<x-form.close />
 	
 </section>
 

@@ -20,9 +20,15 @@
     @component('components.filters', ['title' => __('report.filters')])
     <div class="col-md-3">
         <div class="form-group">
-            {!! Form::label('sell_list_filter_location_id',  __('purchase.business_location') . ':') !!}
+            @php
+            $__f1 = ['name' => 'sell_list_filter_location_id', 'value' => __('purchase.business_location') . ':'];
+            @endphp
+            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
 
-            {!! Form::select('sell_list_filter_location_id', $business_locations, null, ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all') ]); !!}
+            @php
+            $__f2 = ['name' => 'sell_list_filter_location_id', 'list' => $business_locations, 'selected' => null, 'options' => ['class' => 'form-control select2', 'style' => 'width:100%', 'placeholder' => __('lang_v1.all') ]];
+            @endphp
+            <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
         </div>
     </div>
     @endcomponent

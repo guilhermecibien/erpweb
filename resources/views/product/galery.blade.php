@@ -29,8 +29,14 @@
 
 						<div class="form-group">
 							<input type="hidden" value="{{$product->id}}" name="id">
-							{!! Form::label('image', 'Imagem' . ':') !!}
-							{!! Form::file('image', ['id' => 'upload_image', 'accept' => 'image/*']); !!}
+							@php
+							$__f1 = ['name' => 'image', 'value' => 'Imagem' . ':'];
+							@endphp
+							<x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+							@php
+							$__f2 = ['name' => 'image', 'options' => ['id' => 'upload_image', 'accept' => 'image/*']];
+							@endphp
+							<x-form.input type="file" :name="$__f2['name']" :options="$__f2['options']" />
 							<small><p class="help-block">@lang('purchase.max_file_size', ['size' => (config('constants.document_size_limit') / 1000000)]) <br> @lang('lang_v1.aspect_ratio_should_be_1_1')</p></small>
 						</div>
 					</div>

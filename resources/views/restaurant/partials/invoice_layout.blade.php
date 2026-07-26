@@ -28,7 +28,10 @@
 				<div class="form-group">
 					<div class="checkbox">
 						<label>
-							{!! Form::checkbox('module_info[tables][show_table]', 1, $default['show_table'], ['class' => 'input-icheck']); !!} @lang('restaurant.show_table')
+							@php
+							$__f1 = ['name' => 'module_info[tables][show_table]', 'value' => 1, 'checked' => $default['show_table'], 'options' => ['class' => 'input-icheck']];
+							@endphp
+							<x-form.checkbox :name="$__f1['name']" :value="$__f1['value']" :checked="$__f1['checked']" :options="$__f1['options']" /> @lang('restaurant.show_table')
 						</label>
 					</div>
 				</div>
@@ -36,8 +39,14 @@
 
 			<div class="col-sm-3">
 				<div class="form-group">
-					{!! Form::label('module_info[tables][table_label]', __('restaurant.table_label') . ':' ) !!}
-					{!! Form::text('module_info[tables][table_label]', $default['table_label'], ['class' => 'form-control', 'placeholder' => __('restaurant.table_label') ]); !!}
+					@php
+					$__f2 = ['name' => 'module_info[tables][table_label]', 'value' => __('restaurant.table_label') . ':'];
+					@endphp
+					<x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+					@php
+					$__f3 = ['name' => 'module_info[tables][table_label]', 'value' => $default['table_label'], 'options' => ['class' => 'form-control', 'placeholder' => __('restaurant.table_label') ]];
+					@endphp
+					<x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
 				</div>
 			</div>
 		@endif
@@ -46,7 +55,10 @@
 				<div class="form-group">
 					<div class="checkbox">
 						<label>
-							{!! Form::checkbox('module_info[service_staff][show_service_staff]', 1, $default['show_service_staff'], ['class' => 'input-icheck']); !!} @lang('restaurant.show_service_staff')
+							@php
+							$__f4 = ['name' => 'module_info[service_staff][show_service_staff]', 'value' => 1, 'checked' => $default['show_service_staff'], 'options' => ['class' => 'input-icheck']];
+							@endphp
+							<x-form.checkbox :name="$__f4['name']" :value="$__f4['value']" :checked="$__f4['checked']" :options="$__f4['options']" /> @lang('restaurant.show_service_staff')
 						</label>
 					</div>
 				</div>
@@ -54,8 +66,14 @@
 
 			<div class="col-sm-3">
 				<div class="form-group">
-					{!! Form::label('module_info[service_staff][service_staff_label]', __('restaurant.service_staff_label') . ':' ) !!}
-					{!! Form::text('module_info[service_staff][service_staff_label]', $default['service_staff_label'], ['class' => 'form-control', 'placeholder' => __('restaurant.service_staff_label') ]); !!}
+					@php
+					$__f5 = ['name' => 'module_info[service_staff][service_staff_label]', 'value' => __('restaurant.service_staff_label') . ':'];
+					@endphp
+					<x-form.label :name="$__f5['name']" :value="$__f5['value']" />
+					@php
+					$__f6 = ['name' => 'module_info[service_staff][service_staff_label]', 'value' => $default['service_staff_label'], 'options' => ['class' => 'form-control', 'placeholder' => __('restaurant.service_staff_label') ]];
+					@endphp
+					<x-form.input type="text" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
 				</div>
 			</div>
 		@endif

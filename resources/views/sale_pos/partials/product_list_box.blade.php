@@ -24,7 +24,10 @@
 
 	@if(!empty($brands))
 		&nbsp;
-		{!! Form::select('size', $brands, null, ['id' => 'product_brand', 'class' => 'select2', 'name' => null, 'style' => 'width:45% !important']) !!}
+		@php
+		$__f1 = ['name' => 'size', 'list' => $brands, 'selected' => null, 'options' => ['id' => 'product_brand', 'class' => 'select2', 'name' => null, 'style' => 'width:45% !important']];
+		@endphp
+		<x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
 		
 	@endif
 

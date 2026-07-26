@@ -1,7 +1,10 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
 
-    {!! Form::open(['url' => action('DiscountController@update', [$discount->id]), 'method' => 'put', 'id' => 'discount_form' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('DiscountController@update', [$discount->id]), 'method' => 'put', 'id' => 'discount_form' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -12,56 +15,110 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            {!! Form::label('name', __( 'unit.name' ) . ':*') !!}
-              {!! Form::text('name', $discount->name, ['class' => 'form-control', 'required', 'placeholder' => __( 'unit.name' ) ]); !!}
+            @php
+            $__f2 = ['name' => 'name', 'value' => __( 'unit.name' ) . ':*'];
+            @endphp
+            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+              @php
+              $__f3 = ['name' => 'name', 'value' => $discount->name, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __( 'unit.name' ) ]];
+              @endphp
+              <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            {!! Form::label('brand_id', __('product.brand') . ':') !!}
-              {!! Form::select('brand_id', $brands, $discount->brand_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']); !!}
+            @php
+            $__f4 = ['name' => 'brand_id', 'value' => __('product.brand') . ':'];
+            @endphp
+            <x-form.label :name="$__f4['name']" :value="$__f4['value']" />
+              @php
+              $__f5 = ['name' => 'brand_id', 'list' => $brands, 'selected' => $discount->brand_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']];
+              @endphp
+              <x-form.select :name="$__f5['name']" :list="$__f5['list']" :selected="$__f5['selected']" :options="$__f5['options']" />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('category_id', __('product.category') . ':') !!}
-              {!! Form::select('category_id', $categories, $discount->category_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']); !!}
+            @php
+            $__f6 = ['name' => 'category_id', 'value' => __('product.category') . ':'];
+            @endphp
+            <x-form.label :name="$__f6['name']" :value="$__f6['value']" />
+              @php
+              $__f7 = ['name' => 'category_id', 'list' => $categories, 'selected' => $discount->category_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2']];
+              @endphp
+              <x-form.select :name="$__f7['name']" :list="$__f7['list']" :selected="$__f7['selected']" :options="$__f7['options']" />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('location_id', __('sale.location') . ':*') !!}
-              {!! Form::select('location_id', $locations, $discount->location_id, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']); !!}
+            @php
+            $__f8 = ['name' => 'location_id', 'value' => __('sale.location') . ':*'];
+            @endphp
+            <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+              @php
+              $__f9 = ['name' => 'location_id', 'list' => $locations, 'selected' => $discount->location_id, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']];
+              @endphp
+              <x-form.select :name="$__f9['name']" :list="$__f9['list']" :selected="$__f9['selected']" :options="$__f9['options']" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            {!! Form::label('priority', __( 'lang_v1.priority' ) . ':') !!}
-              {!! Form::text('priority', $discount->priority, ['class' => 'form-control input_number', 'required', 'placeholder' => __( 'lang_v1.priority' ) ]); !!}
+            @php
+            $__f10 = ['name' => 'priority', 'value' => __( 'lang_v1.priority' ) . ':'];
+            @endphp
+            <x-form.label :name="$__f10['name']" :value="$__f10['value']" />
+              @php
+              $__f11 = ['name' => 'priority', 'value' => $discount->priority, 'options' => ['class' => 'form-control input_number', 'required', 'placeholder' => __( 'lang_v1.priority' ) ]];
+              @endphp
+              <x-form.input type="text" :name="$__f11['name']" :value="$__f11['value']" :options="$__f11['options']" />
           </div>
         </div>
          <div class="col-sm-6">
           <div class="form-group">
-            {!! Form::label('discount_type', __('sale.discount_type') . ':*') !!}
-              {!! Form::select('discount_type', ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], $discount->discount_type, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']); !!}
+            @php
+            $__f12 = ['name' => 'discount_type', 'value' => __('sale.discount_type') . ':*'];
+            @endphp
+            <x-form.label :name="$__f12['name']" :value="$__f12['value']" />
+              @php
+              $__f13 = ['name' => 'discount_type', 'list' => ['fixed' => __('lang_v1.fixed'), 'percentage' => __('lang_v1.percentage')], 'selected' => $discount->discount_type, 'options' => ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2', 'required']];
+              @endphp
+              <x-form.select :name="$__f13['name']" :list="$__f13['list']" :selected="$__f13['selected']" :options="$__f13['options']" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            {!! Form::label('discount_amount', __( 'sale.discount_amount' ) . ':*') !!}
-              {!! Form::text('discount_amount', $discount->discount_amount, ['class' => 'form-control input_number', 'required', 'placeholder' => __( 'sale.discount_amount' ) ]); !!}
+            @php
+            $__f14 = ['name' => 'discount_amount', 'value' => __( 'sale.discount_amount' ) . ':*'];
+            @endphp
+            <x-form.label :name="$__f14['name']" :value="$__f14['value']" />
+              @php
+              $__f15 = ['name' => 'discount_amount', 'value' => $discount->discount_amount, 'options' => ['class' => 'form-control input_number', 'required', 'placeholder' => __( 'sale.discount_amount' ) ]];
+              @endphp
+              <x-form.input type="text" :name="$__f15['name']" :value="$__f15['value']" :options="$__f15['options']" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            {!! Form::label('starts_at', __( 'lang_v1.starts_at' ) . ':') !!}
-              {!! Form::text('starts_at', $starts_at, ['class' => 'form-control discount_date', 'required', 'placeholder' => __( 'lang_v1.starts_at' ), 'readonly' ]); !!}
+            @php
+            $__f16 = ['name' => 'starts_at', 'value' => __( 'lang_v1.starts_at' ) . ':'];
+            @endphp
+            <x-form.label :name="$__f16['name']" :value="$__f16['value']" />
+              @php
+              $__f17 = ['name' => 'starts_at', 'value' => $starts_at, 'options' => ['class' => 'form-control discount_date', 'required', 'placeholder' => __( 'lang_v1.starts_at' ), 'readonly' ]];
+              @endphp
+              <x-form.input type="text" :name="$__f17['name']" :value="$__f17['value']" :options="$__f17['options']" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            {!! Form::label('ends_at', __( 'lang_v1.ends_at' ) . ':') !!}
-              {!! Form::text('ends_at', $ends_at, ['class' => 'form-control discount_date', 'required', 'placeholder' => __( 'lang_v1.ends_at' ), 'readonly' ]); !!}
+            @php
+            $__f18 = ['name' => 'ends_at', 'value' => __( 'lang_v1.ends_at' ) . ':'];
+            @endphp
+            <x-form.label :name="$__f18['name']" :value="$__f18['value']" />
+              @php
+              $__f19 = ['name' => 'ends_at', 'value' => $ends_at, 'options' => ['class' => 'form-control discount_date', 'required', 'placeholder' => __( 'lang_v1.ends_at' ), 'readonly' ]];
+              @endphp
+              <x-form.input type="text" :name="$__f19['name']" :value="$__f19['value']" :options="$__f19['options']" />
           </div>
         </div>
 
@@ -69,7 +126,10 @@
           <div class="form-group">
             <br>
             <label>
-              {!! Form::checkbox('applicable_in_spg', 1, !empty($discount->applicable_in_spg), ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.applicable_in_cpg')</strong>
+              @php
+              $__f20 = ['name' => 'applicable_in_spg', 'value' => 1, 'checked' => !empty($discount->applicable_in_spg), 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f20['name']" :value="$__f20['value']" :checked="$__f20['checked']" :options="$__f20['options']" /> <strong>@lang('lang_v1.applicable_in_cpg')</strong>
             </label>
           </div>
         </div>
@@ -77,7 +137,10 @@
           <div class="form-group">
             <br>
             <label>
-              {!! Form::checkbox('applicable_in_cg', 1, !empty($discount->applicable_in_cg), ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.applicable_in_cg')</strong>
+              @php
+              $__f21 = ['name' => 'applicable_in_cg', 'value' => 1, 'checked' => !empty($discount->applicable_in_cg), 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f21['name']" :value="$__f21['value']" :checked="$__f21['checked']" :options="$__f21['options']" /> <strong>@lang('lang_v1.applicable_in_cg')</strong>
             </label>
           </div>
         </div>
@@ -85,7 +148,10 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>
-              {!! Form::checkbox('is_active', 1, !empty($discount->is_active), ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.is_active')</strong>
+              @php
+              $__f22 = ['name' => 'is_active', 'value' => 1, 'checked' => !empty($discount->is_active), 'options' => ['class' => 'input-icheck']];
+              @endphp
+              <x-form.checkbox :name="$__f22['name']" :value="$__f22['value']" :checked="$__f22['checked']" :options="$__f22['options']" /> <strong>@lang('lang_v1.is_active')</strong>
             </label>
           </div>
         </div>
@@ -98,7 +164,7 @@
       <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'messages.close' )</button>
     </div>
 
-    {!! Form::close() !!}
+    <x-form.close />
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

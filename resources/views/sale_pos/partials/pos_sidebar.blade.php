@@ -30,13 +30,19 @@
 
 	@if(!empty($brands))
 		<div class="@if($featured_product_exist) col-sm-4 @else col-md-6 @endif" id="product_brand_div">
-			{!! Form::select('size', $brands, null, ['id' => 'product_brand', 'class' => 'select2', 'name' => null, 'style' => 'width:100% !important']) !!}
+			@php
+			$__f1 = ['name' => 'size', 'list' => $brands, 'selected' => null, 'options' => ['id' => 'product_brand', 'class' => 'select2', 'name' => null, 'style' => 'width:100% !important']];
+			@endphp
+			<x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" />
 		</div>
 	@endif
 
 	<!-- used in repair : filter for service/product -->
 	<div class="col-md-6 hide" id="product_service_div">
-		{!! Form::select('is_enabled_stock', ['' => __('messages.all'), 'product' => __('sale.product'), 'service' => __('lang_v1.service')], null, ['id' => 'is_enabled_stock', 'class' => 'select2', 'name' => null, 'style' => 'width:100% !important']) !!}
+		@php
+		$__f2 = ['name' => 'is_enabled_stock', 'list' => ['' => __('messages.all'), 'product' => __('sale.product'), 'service' => __('lang_v1.service')], 'selected' => null, 'options' => ['id' => 'is_enabled_stock', 'class' => 'select2', 'name' => null, 'style' => 'width:100% !important']];
+		@endphp
+		<x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 	</div>
 
 	@if($featured_product_exist)

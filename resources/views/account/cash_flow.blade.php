@@ -20,25 +20,43 @@
                 <div class="box-body">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            {!! Form::label('account_id', __('account.account') . ':') !!}
-                            {!! Form::select('account_id', $accounts, '', ['class' => 'form-control', 'placeholder' => __('messages.all')]) !!}
+                            @php
+                            $__f1 = ['name' => 'account_id', 'value' => __('account.account') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f1['name']" :value="$__f1['value']" />
+                            @php
+                            $__f2 = ['name' => 'account_id', 'list' => $accounts, 'selected' => '', 'options' => ['class' => 'form-control', 'placeholder' => __('messages.all')]];
+                            @endphp
+                            <x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            {!! Form::label('transaction_date_range', __('report.date_range') . ':') !!}
+                            @php
+                            $__f3 = ['name' => 'transaction_date_range', 'value' => __('report.date_range') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                {!! Form::text('transaction_date_range', null, ['class' => 'form-control', 'readonly', 'placeholder' => __('report.date_range')]) !!}
+                                @php
+                                $__f4 = ['name' => 'transaction_date_range', 'value' => null, 'options' => ['class' => 'form-control', 'readonly', 'placeholder' => __('report.date_range')]];
+                                @endphp
+                                <x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            {!! Form::label('transaction_type', __('account.transaction_type') . ':') !!}
+                            @php
+                            $__f5 = ['name' => 'transaction_type', 'value' => __('account.transaction_type') . ':'];
+                            @endphp
+                            <x-form.label :name="$__f5['name']" :value="$__f5['value']" />
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fas fa-exchange-alt"></i></span>
-                                {!! Form::select('transaction_type', ['' => __('messages.all'),'debit' => __('account.debit'), 'credit' => __('account.credit')], '', ['class' => 'form-control']) !!}
+                                @php
+                                $__f6 = ['name' => 'transaction_type', 'list' => ['' => __('messages.all'),'debit' => __('account.debit'), 'credit' => __('account.credit')], 'selected' => '', 'options' => ['class' => 'form-control']];
+                                @endphp
+                                <x-form.select :name="$__f6['name']" :list="$__f6['list']" :selected="$__f6['selected']" :options="$__f6['options']" />
                             </div>
                         </div>
                     </div>

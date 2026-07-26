@@ -14,9 +14,15 @@
 	
 	<div class="col-sm-3">
 		<div class="form-group">
-			{!! Form::label('location_id', 'Atribuição de estoque em'.':*') !!}
+			@php
+			$__f1 = ['name' => 'location_id', 'value' => 'Atribuição de estoque em'.':*'];
+			@endphp
+			<x-form.label :name="$__f1['name']" :value="$__f1['value']" />
 			@show_tooltip(__('tooltip.purchase_location'))
-			{!! Form::select('location_id', $business_locations, $default_location, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+			@php
+			$__f2 = ['name' => 'location_id', 'list' => $business_locations, 'selected' => $default_location, 'options' => ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']];
+			@endphp
+			<x-form.select :name="$__f2['name']" :list="$__f2['list']" :selected="$__f2['selected']" :options="$__f2['options']" />
 		</div>
 	</div>
 
@@ -109,8 +115,14 @@
 											<div class="row">
 												<div class="col-sm-3">
 													<div class="form-group">
-														{!! Form::label('perc_venda', '% de acrescimo para valor de venda, sobre o valor de compra' . ':') !!}
-														{!! Form::text('perc_venda', $lucro, ['id' => 'perc_venda', 'class' => 'form-control']); !!}
+														@php
+														$__f3 = ['name' => 'perc_venda', 'value' => '% de acrescimo para valor de venda, sobre o valor de compra' . ':'];
+														@endphp
+														<x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+														@php
+														$__f4 = ['name' => 'perc_venda', 'value' => $lucro, 'options' => ['id' => 'perc_venda', 'class' => 'form-control']];
+														@endphp
+														<x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 													</div>
 												</div>
 											</div>

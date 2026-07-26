@@ -5,11 +5,16 @@
 <div class="login-form col-md-12 col-xs-12 right-col-content-register">
     
     <p class="form-header text-white">@lang('business.register_and_get_started_in_minutes')</p>
-    {!! Form::open(['url' => route('business.postRegister'), 'method' => 'post', 
-                            'id' => 'business_register_form','files' => true ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => route('business.postRegister'), 'method' => 'post', 'id' => 'business_register_form','files' => true ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
         @include('business.partials.register_form')
-        {!! Form::hidden('package_id', $package_id); !!}
-    {!! Form::close() !!}
+        @php
+        $__f2 = ['name' => 'package_id', 'value' => $package_id];
+        @endphp
+        <x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" />
+    <x-form.close />
 </div>
 @stop
 @section('javascript')

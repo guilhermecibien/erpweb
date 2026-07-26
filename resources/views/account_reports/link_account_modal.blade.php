@@ -1,7 +1,10 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
 
-    {!! Form::open(['url' => action('AccountReportsController@postLinkAccount'), 'method' => 'post', 'id' => 'link_account_form' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('AccountReportsController@postLinkAccount'), 'method' => 'post', 'id' => 'link_account_form' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -10,9 +13,18 @@
 
     <div class="modal-body">
         <div class="form-group">
-            {!! Form::hidden('transaction_payment_id', $payment->id); !!}
-            {!! Form::label('account_id', __( 'account.account' ) .":") !!}
-            {!! Form::select('account_id', $accounts, $payment->account_id, ['class' => 'form-control', 'required']); !!}
+            @php
+            $__f2 = ['name' => 'transaction_payment_id', 'value' => $payment->id];
+            @endphp
+            <x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" />
+            @php
+            $__f3 = ['name' => 'account_id', 'value' => __( 'account.account' ) .":"];
+            @endphp
+            <x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+            @php
+            $__f4 = ['name' => 'account_id', 'list' => $accounts, 'selected' => $payment->account_id, 'options' => ['class' => 'form-control', 'required']];
+            @endphp
+            <x-form.select :name="$__f4['name']" :list="$__f4['list']" :selected="$__f4['selected']" :options="$__f4['options']" />
         </div>
     </div>
 
@@ -21,7 +33,7 @@
       <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'messages.close' )</button>
     </div>
 
-    {!! Form::close() !!}
+    <x-form.close />
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

@@ -10,8 +10,14 @@
 
 <!-- Main content -->
 <section class="content">
-	{!! Form::open(['url' => action('PurchaseReturnController@store'), 'method' => 'post', 'id' => 'purchase_return_form' ]) !!}
-	{!! Form::hidden('transaction_id', $purchase->id); !!}
+	@php
+	$__f1 = ['options' => ['url' => action('PurchaseReturnController@store'), 'method' => 'post', 'id' => 'purchase_return_form' ]];
+	@endphp
+	<x-form.open :options="$__f1['options']" />
+	@php
+	$__f2 = ['name' => 'transaction_id', 'value' => $purchase->id];
+	@endphp
+	<x-form.input type="hidden" :name="$__f2['name']" :value="$__f2['value']" />
 
 	@component('components.widget', ['class' => 'box-primary', 'title' => __('lang_v1.parent_purchase')])
 		<div class="row">
@@ -30,8 +36,14 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="form-group">
-					{!! Form::label('ref_no', __('purchase.ref_no').':') !!}
-					{!! Form::text('ref_no', !empty($purchase->return_parent->ref_no) ? $purchase->return_parent->ref_no : null, ['class' => 'form-control']); !!}
+					@php
+					$__f3 = ['name' => 'ref_no', 'value' => __('purchase.ref_no').':'];
+					@endphp
+					<x-form.label :name="$__f3['name']" :value="$__f3['value']" />
+					@php
+					$__f4 = ['name' => 'ref_no', 'value' => !empty($purchase->return_parent->ref_no) ? $purchase->return_parent->ref_no : null, 'options' => ['class' => 'form-control']];
+					@endphp
+					<x-form.input type="text" :name="$__f4['name']" :value="$__f4['value']" :options="$__f4['options']" />
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -121,9 +133,18 @@
 						$tax_percent = $purchase->tax->amount;
 					}
 				@endphp
-				{!! Form::hidden('tax_id', $purchase->tax_id); !!}
-				{!! Form::hidden('tax_amount', 0, ['id' => 'tax_amount']); !!}
-				{!! Form::hidden('tax_percent', $tax_percent, ['id' => 'tax_percent']); !!}
+				@php
+				$__f5 = ['name' => 'tax_id', 'value' => $purchase->tax_id];
+				@endphp
+				<x-form.input type="hidden" :name="$__f5['name']" :value="$__f5['value']" />
+				@php
+				$__f6 = ['name' => 'tax_amount', 'value' => 0, 'options' => ['id' => 'tax_amount']];
+				@endphp
+				<x-form.input type="hidden" :name="$__f6['name']" :value="$__f6['value']" :options="$__f6['options']" />
+				@php
+				$__f7 = ['name' => 'tax_percent', 'value' => $tax_percent, 'options' => ['id' => 'tax_percent']];
+				@endphp
+				<x-form.input type="hidden" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
 			</div>
 		</div>
 		<div class="row">
@@ -140,7 +161,7 @@
 		</div>
 	@endcomponent
 
-	{!! Form::close() !!}
+	<x-form.close />
 
 </section>
 @stop

@@ -50,7 +50,10 @@
 	<td class="{{$hide_tax}}">
 		<input type="hidden" name="products[{{$row_count}}][item_tax]" class="form-control item_tax">
 		
-		{!! Form::select("products[$row_count][tax_id]", $tax_dropdown['tax_rates'], $tax_id, ['placeholder' => 'Select', 'class' => 'form-control tax_id'], $tax_dropdown['attributes']); !!}
+		@php
+		$__f1 = ['name' => "products[$row_count][tax_id]", 'list' => $tax_dropdown['tax_rates'], 'selected' => $tax_id, 'options' => ['placeholder' => 'Select', 'class' => 'form-control tax_id'], 'optionsAttributes' => $tax_dropdown['attributes']];
+		@endphp
+		<x-form.select :name="$__f1['name']" :list="$__f1['list']" :selected="$__f1['selected']" :options="$__f1['options']" :options-attributes="$__f1['optionsAttributes']" />
 	</td>
 	<td class="{{$hide_tax}}">
 		<input type="text" name="products[{{$row_count}}][unit_price_inc_tax]" class="form-control pos_unit_price_inc_tax input_number" value="{{@num_format($unit_price_inc_tax)}}">
@@ -60,7 +63,10 @@
 	</td>
 	@if(session('business.enable_lot_number'))
         <td>
-            {!! Form::text('products[' . $row_count . '][lot_number]', null, ['class' => 'form-control input-sm']); !!}
+            @php
+            $__f2 = ['name' => 'products[' . $row_count . '][lot_number]', 'value' => null, 'options' => ['class' => 'form-control input-sm']];
+            @endphp
+            <x-form.input type="text" :name="$__f2['name']" :value="$__f2['value']" :options="$__f2['options']" />
         </td>
     @endif
 
@@ -70,7 +76,10 @@
                 <span class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </span>
-                {!! Form::text('products[' . $row_count . '][exp_date]', null, ['class' => 'form-control input-sm expiry_datepicker', 'readonly']); !!}
+                @php
+                $__f3 = ['name' => 'products[' . $row_count . '][exp_date]', 'value' => null, 'options' => ['class' => 'form-control input-sm expiry_datepicker', 'readonly']];
+                @endphp
+                <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
             </div>
         </td>
     @endif

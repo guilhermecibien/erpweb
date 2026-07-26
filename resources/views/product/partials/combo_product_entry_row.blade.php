@@ -16,7 +16,10 @@
 				<input type="hidden" name="composition_variation_id[]" value="{{ $variation->id }}">
 		</td>
 		<td class="text-center">
-			{!! Form::text('quantity[]', @num_format($quantity), ['class' => 'form-control col-sm-12 input-sm quantity input_number mousetrap', 'required', 'style '=> "width: 77px"]); !!}
+			@php
+			$__f1 = ['name' => 'quantity[]', 'value' => number_format($quantity, 2, ',', '.'), 'options' => ['class' => 'form-control col-sm-12 input-sm quantity input_number mousetrap', 'required', 'style '=> "width: 77px"]];
+			@endphp
+			<x-form.input type="text" :name="$__f1['name']" :value="$__f1['value']" :options="$__f1['options']" />
 
 			@if(!empty($sub_units))
                 <br>

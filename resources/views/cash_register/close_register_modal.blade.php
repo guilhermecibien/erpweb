@@ -1,6 +1,9 @@
 <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
-    {!! Form::open(['url' => action('CashRegisterController@postCloseRegister'), 'method' => 'post' ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('CashRegisterController@postCloseRegister'), 'method' => 'post' ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h3 class="modal-title">@lang( 'cash_register.current_register' ) ( {{ \Carbon::createFromFormat('Y-m-d H:i:s', $register_details->open_time)->format('jS M, Y h:i A') }} - {{ \Carbon::now()->format('jS M, Y h:i A') }})</h3>
@@ -163,26 +166,50 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('closing_amount', __( 'cash_register.total_cash' ) . ':*') !!}
-              {!! Form::text('closing_amount', @num_format($register_details->cash_in_hand + $register_details->total_cash - $register_details->total_cash_refund), ['class' => 'form-control input_number', 'required', 'placeholder' => __( 'cash_register.total_cash' ) ]); !!}
+            @php
+            $__f2 = ['name' => 'closing_amount', 'value' => __( 'cash_register.total_cash' ) . ':*'];
+            @endphp
+            <x-form.label :name="$__f2['name']" :value="$__f2['value']" />
+              @php
+              $__f3 = ['name' => 'closing_amount', 'value' => number_format($register_details->cash_in_hand + $register_details->total_cash - $register_details->total_cash_refund, 2, ',', '.'), 'options' => ['class' => 'form-control input_number', 'required', 'placeholder' => __( 'cash_register.total_cash' ) ]];
+              @endphp
+              <x-form.input type="text" :name="$__f3['name']" :value="$__f3['value']" :options="$__f3['options']" />
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('total_card_slips', __( 'cash_register.total_card_slips' ) . ':*') !!} @show_tooltip(__('tooltip.total_card_slips'))
-              {!! Form::number('total_card_slips', $register_details->total_card_slips, ['class' => 'form-control', 'required', 'placeholder' => __( 'cash_register.total_card_slips' ), 'min' => 0 ]); !!}
+            @php
+            $__f4 = ['name' => 'total_card_slips', 'value' => __( 'cash_register.total_card_slips' ) . ':*'];
+            @endphp
+            <x-form.label :name="$__f4['name']" :value="$__f4['value']" /> @show_tooltip(__('tooltip.total_card_slips'))
+              @php
+              $__f5 = ['name' => 'total_card_slips', 'value' => $register_details->total_card_slips, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __( 'cash_register.total_card_slips' ), 'min' => 0 ]];
+              @endphp
+              <x-form.input type="number" :name="$__f5['name']" :value="$__f5['value']" :options="$__f5['options']" />
           </div>
         </div> 
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('total_cheques', __( 'cash_register.total_cheques' ) . ':*') !!} @show_tooltip(__('tooltip.total_cheques'))
-              {!! Form::number('total_cheques', $register_details->total_cheques, ['class' => 'form-control', 'required', 'placeholder' => __( 'cash_register.total_cheques' ), 'min' => 0 ]); !!}
+            @php
+            $__f6 = ['name' => 'total_cheques', 'value' => __( 'cash_register.total_cheques' ) . ':*'];
+            @endphp
+            <x-form.label :name="$__f6['name']" :value="$__f6['value']" /> @show_tooltip(__('tooltip.total_cheques'))
+              @php
+              $__f7 = ['name' => 'total_cheques', 'value' => $register_details->total_cheques, 'options' => ['class' => 'form-control', 'required', 'placeholder' => __( 'cash_register.total_cheques' ), 'min' => 0 ]];
+              @endphp
+              <x-form.input type="number" :name="$__f7['name']" :value="$__f7['value']" :options="$__f7['options']" />
           </div>
         </div> 
         <div class="col-sm-12">
           <div class="form-group">
-            {!! Form::label('closing_note', __( 'cash_register.closing_note' ) . ':') !!}
-              {!! Form::textarea('closing_note', null, ['class' => 'form-control', 'placeholder' => __( 'cash_register.closing_note' ), 'rows' => 3 ]); !!}
+            @php
+            $__f8 = ['name' => 'closing_note', 'value' => __( 'cash_register.closing_note' ) . ':'];
+            @endphp
+            <x-form.label :name="$__f8['name']" :value="$__f8['value']" />
+              @php
+              $__f9 = ['name' => 'closing_note', 'value' => null, 'options' => ['class' => 'form-control', 'placeholder' => __( 'cash_register.closing_note' ), 'rows' => 3 ]];
+              @endphp
+              <x-form.textarea :name="$__f9['name']" :value="$__f9['value']" :options="$__f9['options']" />
           </div>
         </div>
       </div> 
@@ -191,6 +218,6 @@
       <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'messages.cancel' )</button>
       <button type="submit" class="btn btn-primary">@lang( 'cash_register.close_register' )</button>
     </div>
-    {!! Form::close() !!}
+    <x-form.close />
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

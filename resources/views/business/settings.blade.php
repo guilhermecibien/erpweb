@@ -12,8 +12,10 @@
 
 <!-- Main content -->
 <section class="content">
-    {!! Form::open(['url' => action('BusinessController@postBusinessSettings'), 'method' => 'post', 'id' => 'bussiness_edit_form',
-    'files' => true ]) !!}
+    @php
+    $__f1 = ['options' => ['url' => action('BusinessController@postBusinessSettings'), 'method' => 'post', 'id' => 'bussiness_edit_form', 'files' => true ]];
+    @endphp
+    <x-form.open :options="$__f1['options']" />
     <div class="row">
         <div class="col-xs-12">
          <!--  <pos-tab-container> -->
@@ -86,7 +88,7 @@
             <button class="btn btn-danger pull-right" type="submit">@lang('business.update_settings')</button>
         </div>
     </div>
-    {!! Form::close() !!}
+    <x-form.close />
 </section>
 <!-- /.content -->
 @stop
