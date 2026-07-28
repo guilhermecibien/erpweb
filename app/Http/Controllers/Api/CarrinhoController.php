@@ -13,6 +13,9 @@ use App\Models\CupomDesconto;
 use App\Models\CidadeFreteGratis;
 use App\Models\ItemPedidoEcommerce;
 use Illuminate\Support\Str;
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Payment\PaymentClient;
+use MercadoPago\Exceptions\MPApiException;
 
 class CarrinhoController extends Controller
 {
@@ -135,47 +138,44 @@ class CarrinhoController extends Controller
 
 		$pedido = PedidoEcommerce::find($data['pedido_id']);
 
-		\MercadoPago\SDK::setAccessToken($config->mercadopago_access_token);
-		$payment = new \MercadoPago\Payment();
+		MercadoPagoConfig::setAccessToken($config->mercadopago_access_token);
+		$client = new PaymentClient();
 
-		$payment->transaction_amount = $pedido->valor_total;
-		$payment->description = $data['description'];
-		$payment->token = $data['id'];
-		$payment->installments = (int)$data['installments'];
-		$payment->payment_method_id = $data['paymentMethodId'];
+		$paymentRequest = [
+			"transaction_amount" => $pedido->valor_total,
+			"description" => $data['description'],
+			"token" => $data['id'],
+			"installments" => (int)$data['installments'],
+			"payment_method_id" => $data['paymentMethodId'],
+			"payer" => [
+				"email" => $data['email'],
+				"identification" => [
+					"type" => $data['docType'] ?? 'CPF',
+					"number" => $data['docNumber']
+				]
+			]
+		];
 
-		$payer = new \MercadoPago\Payer();
-		$payer->email = $data['email'];
-		$payer->identification = array(
-			"type" => $data['docType'] ?? 'CPF',
-			"number" => $data['docNumber']
-		);
-
-		$payment->payer = $payer;
-
-		$payment->save();
-
-		if($payment->error){
-
-			$error = $this->trataErros($payment->error);
+		try {
+			$payment = $client->create($paymentRequest);
+		} catch (MPApiException $e) {
+			$error = $this->trataErros($e);
 			return response()->json($error, 401);
-
-		}else{
-			$pedido->transacao_id = $payment->id;
-			$pedido->status_pagamento = $payment->status;
-			$pedido->forma_pagamento = 'Cartão';
-			$pedido->status_detalhe = $payment->status_detail;
-
-			$pedido->status = 1;
-			$pedido->save();
-
-			$dataSuccess = [
-				'id' => $payment->id,
-				'status' => $payment->status
-			];
-			return response()->json($dataSuccess, 200);
 		}
 
+		$pedido->transacao_id = $payment->id;
+		$pedido->status_pagamento = $payment->status;
+		$pedido->forma_pagamento = 'Cartão';
+		$pedido->status_detalhe = $payment->status_detail;
+
+		$pedido->status = 1;
+		$pedido->save();
+
+		$dataSuccess = [
+			'id' => $payment->id,
+			'status' => $payment->status
+		];
+		return response()->json($dataSuccess, 200);
 	}
 
 	public function processarPagamentoPix(Request $request){
@@ -187,61 +187,59 @@ class CarrinhoController extends Controller
 
 		$pedido = PedidoEcommerce::find($data['pedido_id']);
 
-		\MercadoPago\SDK::setAccessToken($config->mercadopago_access_token);
-		$payment = new \MercadoPago\Payment();
-
-		$payment->transaction_amount = $pedido->valor_total;
-		$payment->description = $data['description'];
-		$payment->payment_method_id = "pix";
+		MercadoPagoConfig::setAccessToken($config->mercadopago_access_token);
+		$client = new PaymentClient();
 
 		$cep = str_replace("-", "", $config->cep);
-		$payment->payer = array(
-			"email" => $data['payerEmail'],
-			"first_name" => $data['payerFirstName'],
-			"last_name" => $data['payerLastName'],
-			"identification" => array(
-				"type" => $data['docType'] ?? 'CPF',
-				"number" => $data['docNumber']
-			),
-			"address"=>  array(
-				"zip_code" => $cep,
-				"street_name" => $config->rua,
-				"street_number" => $config->numero,
-				"neighborhood" => $config->bairro,
-				"city" => $config->cidade,
-				"federal_unit" => $config->uf
-			)
-		);
+		$paymentRequest = [
+			"transaction_amount" => $pedido->valor_total,
+			"description" => $data['description'],
+			"payment_method_id" => "pix",
+			"payer" => [
+				"email" => $data['payerEmail'],
+				"first_name" => $data['payerFirstName'],
+				"last_name" => $data['payerLastName'],
+				"identification" => [
+					"type" => $data['docType'] ?? 'CPF',
+					"number" => $data['docNumber']
+				],
+				"address" => [
+					"zip_code" => $cep,
+					"street_name" => $config->rua,
+					"street_number" => $config->numero,
+					"neighborhood" => $config->bairro,
+					"city" => $config->cidade,
+					"federal_unit" => $config->uf
+				]
+			]
+		];
 
-		$payment->save();
-
-		if($payment->error){
-
-			$error = $this->trataErros($payment->error);
+		try {
+			$payment = $client->create($paymentRequest);
+		} catch (MPApiException $e) {
+			$error = $this->trataErros($e);
 			return response()->json($error, 401);
-
-		}else{
-			$pedido->transacao_id = $payment->id;
-			$pedido->status_pagamento = $payment->status;
-			$pedido->forma_pagamento = 'PIX';
-			$pedido->status_detalhe = $payment->status_detail;
-			$pedido->link_boleto = '';
-
-			$pedido->qr_code_base64 = $payment->point_of_interaction->transaction_data->qr_code_base64;
-			$pedido->qr_code = $payment->point_of_interaction->transaction_data->qr_code;
-
-
-			$pedido->status = 1; //criado;
-			$pedido->save();
-			$dataSuccess = [
-				'id' => $payment->id,
-				'status' => $payment->status,
-				'qr_code_base64' => $pedido->qr_code_base64,
-				'qr_code' => $pedido->qr_code,
-			];
-
-			return response()->json($dataSuccess, 200);
 		}
+
+		$pedido->transacao_id = $payment->id;
+		$pedido->status_pagamento = $payment->status;
+		$pedido->forma_pagamento = 'PIX';
+		$pedido->status_detalhe = $payment->status_detail;
+		$pedido->link_boleto = '';
+
+		$pedido->qr_code_base64 = $payment->point_of_interaction->transaction_data->qr_code_base64;
+		$pedido->qr_code = $payment->point_of_interaction->transaction_data->qr_code;
+
+		$pedido->status = 1; //criado;
+		$pedido->save();
+		$dataSuccess = [
+			'id' => $payment->id,
+			'status' => $payment->status,
+			'qr_code_base64' => $pedido->qr_code_base64,
+			'qr_code' => $pedido->qr_code,
+		];
+
+		return response()->json($dataSuccess, 200);
 	}
 
 	public function processarPagamentoBoleto(Request $request){
@@ -253,64 +251,63 @@ class CarrinhoController extends Controller
 
 		$pedido = PedidoEcommerce::find($data['pedido_id']);
 
-		\MercadoPago\SDK::setAccessToken($config->mercadopago_access_token);
-		$payment = new \MercadoPago\Payment();
-
-		$payment->transaction_amount = $pedido->valor_total;
-		$payment->description = $data['description'];
-		$payment->payment_method_id = "bolbradesco";
+		MercadoPagoConfig::setAccessToken($config->mercadopago_access_token);
+		$client = new PaymentClient();
 
 		$cep = str_replace("-", "", $config->cep);
-		$payment->payer = array(
-			"email" => $data['payerEmail'],
-			"first_name" => $data['payerFirstName'],
-			"last_name" => $data['payerLastName'],
-			"identification" => array(
-				"type" => $data['docType'] ?? 'CPF',
-				"number" => $data['docNumber']
-			),
-			"address"=>  array(
-				"zip_code" => $cep,
-				"street_name" => $config->rua,
-				"street_number" => $config->numero,
-				"neighborhood" => $config->bairro,
-				"city" => $config->cidade,
-				"federal_unit" => $config->uf
-			)
-		);
+		$paymentRequest = [
+			"transaction_amount" => $pedido->valor_total,
+			"description" => $data['description'],
+			"payment_method_id" => "bolbradesco",
+			"payer" => [
+				"email" => $data['payerEmail'],
+				"first_name" => $data['payerFirstName'],
+				"last_name" => $data['payerLastName'],
+				"identification" => [
+					"type" => $data['docType'] ?? 'CPF',
+					"number" => $data['docNumber']
+				],
+				"address" => [
+					"zip_code" => $cep,
+					"street_name" => $config->rua,
+					"street_number" => $config->numero,
+					"neighborhood" => $config->bairro,
+					"city" => $config->cidade,
+					"federal_unit" => $config->uf
+				]
+			]
+		];
 
-		$payment->save();
-
-		if($payment->error){
-
-			$error = $this->trataErros($payment->error);
+		try {
+			$payment = $client->create($paymentRequest);
+		} catch (MPApiException $e) {
+			$error = $this->trataErros($e);
 			return response()->json($error, 401);
-
-		}else{
-			$pedido->transacao_id = $payment->id;
-			$pedido->status_pagamento = $payment->status;
-			$pedido->forma_pagamento = 'Boleto';
-			$pedido->status_detalhe = $payment->status_detail;
-			$pedido->link_boleto = $payment->transaction_details->external_resource_url;
-
-			$pedido->status = 1; //criado;
-			$pedido->save();
-			$dataSuccess = [
-				'id' => $payment->id,
-				'status' => $payment->status
-			];
-			return response()->json($dataSuccess, 200);
 		}
+
+		$pedido->transacao_id = $payment->id;
+		$pedido->status_pagamento = $payment->status;
+		$pedido->forma_pagamento = 'Boleto';
+		$pedido->status_detalhe = $payment->status_detail;
+		$pedido->link_boleto = $payment->transaction_details->external_resource_url;
+
+		$pedido->status = 1; //criado;
+		$pedido->save();
+		$dataSuccess = [
+			'id' => $payment->id,
+			'status' => $payment->status
+		];
+		return response()->json($dataSuccess, 200);
 	}
 
-	private function trataErros($error){
+	private function trataErros(MPApiException $error){
+		$causes = $error->getApiResponse()->getContent()['cause'] ?? [];
 
-		foreach($error->causes as $e){
-			if($e->code == 4033){
+		foreach($causes as $c){
+			if(($c['code'] ?? null) == 4033){
 				return "Parcelas inválidas";
 			}
 		}
-		// return $error;
 		return "Erro desconhecido!";
 	}
 
@@ -323,11 +320,11 @@ class CarrinhoController extends Controller
 		where('business_id', $request->business_id)
 		->first();
 
-		\MercadoPago\SDK::setAccessToken($config->mercadopago_access_token);
+		MercadoPagoConfig::setAccessToken($config->mercadopago_access_token);
 
 		if($pedido){
-			$payStatus = \MercadoPago\Payment::find_by_id($pedido->transacao_id);
-			$payStatus->status = "approved";
+			$client = new PaymentClient();
+			$payStatus = $client->get((int)$pedido->transacao_id);
 			if($payStatus->status == "approved"){
 				$pedido->status_pagamento = "approved";
 				$pedido->status = 2; // confirmado o pagamento;

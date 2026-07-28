@@ -14,6 +14,9 @@ use App\Models\Transportadora;
 use App\Models\TransactionPayment;
 use App\Models\BusinessLocation;
 use Yajra\DataTables\Facades\DataTables;
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Payment\PaymentClient;
+use MercadoPago\Exceptions\MPApiException;
 
 class PedidoEcommerceController extends Controller
 {
@@ -554,7 +557,8 @@ class PedidoEcommerceController extends Controller
 		where('business_id', $business_id)
 		->first();
 
-		\MercadoPago\SDK::setAccessToken($config->mercadopago_access_token);
+		MercadoPagoConfig::setAccessToken($config->mercadopago_access_token);
+		$client = new PaymentClient();
 
 		$pedidos = PedidoEcommerce::
 		where('business_id', $business_id)
@@ -565,7 +569,11 @@ class PedidoEcommerceController extends Controller
 
 		$pedidosAlterados = [];
 		foreach($pedidos as $pedido){
-			$payStatus = \MercadoPago\Payment::find_by_id($pedido->transacao_id);
+			try {
+				$payStatus = $client->get((int)$pedido->transacao_id);
+			} catch (MPApiException $e) {
+				continue;
+			}
 
 			if($payStatus->status == "approved"){
 				$pedido->status_pagamento = "approved";

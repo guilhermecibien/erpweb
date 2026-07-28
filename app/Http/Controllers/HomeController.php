@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\BusinessLocation;
 
-use App\Charts\CommonChart;
 use App\Models\Currency;
 use App\Models\Transaction;
 use App\Utils\BusinessUtil;
@@ -12,7 +11,6 @@ use App\Utils\BusinessUtil;
 use App\Utils\ModuleUtil;
 use App\Utils\TransactionUtil;
 use App\Models\VariationLocationDetails;
-use Datatables;
 use DB;
 use Illuminate\Http\Request;
 
@@ -54,7 +52,6 @@ class HomeController extends Controller
             return view('home.index');
         }
 
-
         $fy = $this->businessUtil->getCurrentFinancialYear($business_id);
         $date_filters['this_fy'] = $fy;
         $date_filters['this_month']['start'] = date('Y-m-01');
@@ -62,7 +59,39 @@ class HomeController extends Controller
         $date_filters['this_week']['start'] = date('Y-m-d', strtotime('monday this week'));
         $date_filters['this_week']['end'] = date('Y-m-d', strtotime('sunday this week'));
 
+        $all_locations = BusinessLocation::forDropdown($business_id)->toArray();
+
+        //Get Dashboard widgets from module
+        $module_widgets = $this->moduleUtil->getModuleData('dashboard_widget');
+
+        $widgets = [];
+
+        foreach ($module_widgets as $widget_array) {
+            if (!empty($widget_array['position'])) {
+                $widgets[$widget_array['position']][] = $widget_array['widget'];
+            }
+        }
+
+        return view('home.index', compact('date_filters', 'widgets', 'all_locations'));
+    }
+
+    /**
+     * Returns chart data (sells last 30 days and sells current financial year)
+     * as plain JSON for the dashboard's Vue charts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getDashboardCharts()
+    {
+        if (!request()->ajax() || !auth()->user()->can('dashboard.data')) {
+            abort(403);
+        }
+
+        $business_id = request()->session()->get('user.business_id');
+        $fy = $this->businessUtil->getCurrentFinancialYear($business_id);
         $currency = Currency::where('id', request()->session()->get('business.currency_id'))->first();
+        $all_locations = BusinessLocation::forDropdown($business_id)->toArray();
+
         //Chart for sells last 30 days
         $sells_last_30_days = $this->transactionUtil->getSellsLast30Days($business_id);
         $labels = [];
@@ -82,7 +111,6 @@ class HomeController extends Controller
         }
 
         //Get sell for indivisual locations
-        $all_locations = BusinessLocation::forDropdown($business_id)->toArray();
         $location_sells = [];
         $sells_by_location = $this->transactionUtil->getSellsLast30Days($business_id, true);
         foreach ($all_locations as $loc_id => $loc_name) {
@@ -92,7 +120,7 @@ class HomeController extends Controller
                     return $item->date == $date &&
                         $item->location_id == $loc_id;
                 });
-                
+
                 if (!empty($sell)) {
                     $values[] = (float) $sell->total_sells;
                 } else {
@@ -103,50 +131,36 @@ class HomeController extends Controller
             $location_sells[$loc_id]['values'] = $values;
         }
 
-        $sells_chart_1 = new CommonChart;
-
-        $sells_chart_1->labels($labels)
-                        ->options($this->__chartOptions(__(
-                            'home.total_sells',
-                            ['currency' => $currency->code]
-                            )));
-
-        if (!empty($location_sells)) {
-            foreach ($location_sells as $location_sell) {
-                $sells_chart_1->dataset($location_sell['loc_label'], 'line', $location_sell['values']);
-            }
+        $last_30_days_datasets = [];
+        foreach ($location_sells as $location_sell) {
+            $last_30_days_datasets[] = ['label' => $location_sell['loc_label'], 'data' => $location_sell['values']];
         }
-
         if (count($all_locations) > 1) {
-            $sells_chart_1->dataset(__('report.all_locations'), 'line', $all_sell_values);
+            $last_30_days_datasets[] = ['label' => __('report.all_locations'), 'data' => $all_sell_values];
         }
 
         //Chart for sells this financial year
         $sells_this_fy = $this->transactionUtil->getSellsCurrentFy($business_id, $fy['start'], $fy['end']);
 
+        $fy_labels = [];
+        $fy_values = [];
 
-        $labels = [];
-        $values = [];
-
-        $months = [];
         $date = strtotime($fy['start']);
-        $last   = date('m-Y', strtotime($fy['end']));
+        $last = date('m-Y', strtotime($fy['end']));
 
         $fy_months = [];
         do {
             $month_year = date('m-Y', $date);
             $fy_months[] = $month_year;
 
-            $month_number = date('m', $date);
-
-            $labels[] = \Carbon::createFromFormat('m-Y', $month_year)
+            $fy_labels[] = \Carbon::createFromFormat('m-Y', $month_year)
                             ->format('M-Y');
             $date = strtotime('+1 month', $date);
 
             if (!empty($sells_this_fy[$month_year])) {
-                $values[] = (float) $sells_this_fy[$month_year];
+                $fy_values[] = (float) $sells_this_fy[$month_year];
             } else {
-                $values[] = 0;
+                $fy_values[] = 0;
             }
         } while ($month_year != $last);
 
@@ -160,7 +174,7 @@ class HomeController extends Controller
                     return $item->yearmonth == $month &&
                         $item->location_id == $loc_id;
                 });
-                
+
                 if (!empty($sell)) {
                     $values_data[] = (float) $sell->total_sells;
                 } else {
@@ -171,33 +185,30 @@ class HomeController extends Controller
             $fy_sells_by_location_data[$loc_id]['values'] = $values_data;
         }
 
-        $sells_chart_2 = new CommonChart;
-        $sells_chart_2->labels($labels)
-                    ->options($this->__chartOptions(__(
-                        'home.total_sells',
-                        ['currency' => $currency->code]
-                            )));
-        if (!empty($fy_sells_by_location_data)) {
-            foreach ($fy_sells_by_location_data as $location_sell) {
-                $sells_chart_2->dataset($location_sell['loc_label'], 'line', $location_sell['values']);
-            }
+        $current_fy_datasets = [];
+        foreach ($fy_sells_by_location_data as $location_sell) {
+            $current_fy_datasets[] = ['label' => $location_sell['loc_label'], 'data' => $location_sell['values']];
         }
         if (count($all_locations) > 1) {
-            $sells_chart_2->dataset(__('report.all_locations'), 'line', $values);
+            $current_fy_datasets[] = ['label' => __('report.all_locations'), 'data' => $fy_values];
         }
 
-        //Get Dashboard widgets from module
-        $module_widgets = $this->moduleUtil->getModuleData('dashboard_widget');
+        $title = __('home.total_sells', ['currency' => $currency->code]);
 
-        $widgets = [];
-
-        foreach ($module_widgets as $widget_array) {
-            if (!empty($widget_array['position'])) {
-                $widgets[$widget_array['position']][] = $widget_array['widget'];
-            }
-        }
-
-        return view('home.index', compact('date_filters', 'sells_chart_1', 'sells_chart_2', 'widgets', 'all_locations'));
+        return [
+            'last_30_days' => [
+                'title' => __('home.sells_last_30_days'),
+                'axis_label' => $title,
+                'labels' => $labels,
+                'datasets' => $last_30_days_datasets,
+            ],
+            'current_fy' => [
+                'title' => __('home.sells_current_fy'),
+                'axis_label' => $title,
+                'labels' => $fy_labels,
+                'datasets' => $current_fy_datasets,
+            ],
+        ];
     }
 
     /**
@@ -303,26 +314,19 @@ class HomeController extends Controller
                 'u.short_name as unit'
             )
                     ->groupBy('variation_location_details.id')
-                    ->orderBy('stock', 'asc');
+                    ->orderBy('stock', 'asc')
+                    ->get();
 
-            return Datatables::of($products)
-                ->editColumn('product', function ($row) {
-                    if ($row->type == 'single') {
-                        return $row->product;
-                    } else {
-                        return $row->product . ' - ' . $row->product_variation . ' - ' . $row->variation;
-                    }
-                })
-                ->editColumn('stock', function ($row) {
-                    $stock = $row->stock ? $row->stock : 0 ;
-                    return '<span data-is_quantity="true" class="display_currency" data-currency_symbol=false>'. (float)$stock . '</span> ' . $row->unit;
-                })
-                ->removeColumn('unit')
-                ->removeColumn('type')
-                ->removeColumn('product_variation')
-                ->removeColumn('variation')
-                ->rawColumns([2])
-                ->make(false);
+            return $products->map(function ($row) {
+                return [
+                    'product' => $row->type == 'single'
+                        ? $row->product
+                        : $row->product . ' - ' . $row->product_variation . ' - ' . $row->variation,
+                    'location' => $row->location,
+                    'stock' => (float) ($row->stock ?: 0),
+                    'unit' => $row->unit,
+                ];
+            })->values();
         }
     }
 
@@ -360,34 +364,28 @@ class HomeController extends Controller
                 $query->whereIn('transactions.location_id', $permitted_locations);
             }
 
-            $dues =  $query->select(
+            $dues = $query->select(
                 'transactions.id as id',
                 'c.name as supplier',
                 'ref_no',
                 'final_total',
                 DB::raw('SUM(tp.amount) as total_paid')
             )
-                        ->groupBy('transactions.id');
+                        ->groupBy('transactions.id')
+                        ->get();
 
-            return Datatables::of($dues)
-                ->addColumn('due', function ($row) {
-                    $total_paid = !empty($row->total_paid) ? $row->total_paid : 0;
-                    $due = $row->final_total - $total_paid;
-                    return '<span class="display_currency" data-currency_symbol="true">' .
-                    $due . '</span>';
-                })
-                ->editColumn('ref_no', function ($row) {
-                    if (auth()->user()->can('purchase.view')) {
-                        return  '<a href="#" data-href="' . action('PurchaseController@show', [$row->id]) . '"
-                                    class="btn-modal" data-container=".view_modal">' . $row->ref_no . '</a>';
-                    }
-                    return $row->ref_no;
-                })
-                ->removeColumn('id')
-                ->removeColumn('final_total')
-                ->removeColumn('total_paid')
-                ->rawColumns([1, 2])
-                ->make(false);
+            $can_view = auth()->user()->can('purchase.view');
+
+            return $dues->map(function ($row) use ($can_view) {
+                $total_paid = $row->total_paid ?: 0;
+                return [
+                    'id' => $row->id,
+                    'supplier' => $row->supplier,
+                    'ref_no' => $row->ref_no,
+                    'due' => (float) ($row->final_total - $total_paid),
+                    'can_view' => $can_view,
+                ];
+            })->values();
         }
     }
 
@@ -427,34 +425,28 @@ class HomeController extends Controller
                 $query->whereIn('transactions.location_id', $permitted_locations);
             }
 
-            $dues =  $query->select(
+            $dues = $query->select(
                 'transactions.id as id',
                 'c.name as customer',
                 'transactions.invoice_no',
                 'final_total',
                 DB::raw('SUM(tp.amount) as total_paid')
             )
-                        ->groupBy('transactions.id');
+                        ->groupBy('transactions.id')
+                        ->get();
 
-            return Datatables::of($dues)
-                ->addColumn('due', function ($row) {
-                    $total_paid = !empty($row->total_paid) ? $row->total_paid : 0;
-                    $due = $row->final_total - $total_paid;
-                    return '<span class="display_currency" data-currency_symbol="true">' .
-                    $due . '</span>';
-                })
-                ->editColumn('invoice_no', function ($row) {
-                    if (auth()->user()->can('sell.view')) {
-                        return  '<a href="#" data-href="' . action('SellController@show', [$row->id]) . '"
-                                    class="btn-modal" data-container=".view_modal">' . $row->invoice_no . '</a>';
-                    }
-                    return $row->invoice_no;
-                })
-                ->removeColumn('id')
-                ->removeColumn('final_total')
-                ->removeColumn('total_paid')
-                ->rawColumns([1, 2])
-                ->make(false);
+            $can_view = auth()->user()->can('sell.view');
+
+            return $dues->map(function ($row) use ($can_view) {
+                $total_paid = $row->total_paid ?: 0;
+                return [
+                    'id' => $row->id,
+                    'customer' => $row->customer,
+                    'invoice_no' => $row->invoice_no,
+                    'due' => (float) ($row->final_total - $total_paid),
+                    'can_view' => $can_view,
+                ];
+            })->values();
         }
     }
 
@@ -521,25 +513,6 @@ class HomeController extends Controller
 
         return [
             'total_unread' => $total_unread
-        ];
-    }
-
-    private function __chartOptions($title)
-    {
-        return [
-            'scales' => [
-                'yAxes' => [
-                    [
-                        'scaleLabel' => [
-                            'display' => true,
-                            'labelString' => $title,
-                        ],
-                    ],
-                ],
-            ],
-            'legend' => [
-                'position' => 'top',
-            ],
         ];
     }
 }

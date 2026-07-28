@@ -31,6 +31,7 @@ class SuperadminServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         view::composer('superadmin::layouts.partials.active_subscription', function ($view) {
             $business_id = session()->get('user.business_id');

@@ -23,7 +23,7 @@ Route::middleware(['authh'])->group(function () {
         return view('welcome');
     });
 
-    Auth::routes();
+    Auth::routes(['logout' => false]);
 
     Route::get('/business/register', 'BusinessController@getRegister')->name('business.getRegister');
     Route::post('/business/register', 'BusinessController@postRegister')->name('business.postRegister');
@@ -353,6 +353,7 @@ Route::middleware(['authh', 'auth', 'SetSessionData', 'language', 'timezone', 'A
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home/get-totals', 'HomeController@getTotals');
+    Route::get('/home/dashboard-charts', 'HomeController@getDashboardCharts');
     Route::get('/home/product-stock-alert', 'HomeController@getProductStockAlert');
     Route::get('/home/purchase-payment-dues', 'HomeController@getPurchasePaymentDues');
     Route::get('/home/sales-payment-dues', 'HomeController@getSalesPaymentDues');

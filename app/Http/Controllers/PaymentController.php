@@ -7,6 +7,9 @@ use App\Models\Business;
 use App\Models\PaymentPlan;
 use Modules\Superadmin\Entities\Package;
 use Modules\Superadmin\Entities\Subscription;
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Payment\PaymentClient;
+use MercadoPago\Exceptions\MPApiException;
 
 class PaymentController extends Controller
 {
@@ -35,14 +38,10 @@ class PaymentController extends Controller
     }
 
     public function paymentPix(Request $request){
-        \MercadoPago\SDK::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
-        $payment = new \MercadoPago\Payment();
+        MercadoPagoConfig::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
+        $client = new PaymentClient();
 
         $plano = Package::findOrFail($request->plano_id);
-
-        $payment->transaction_amount = (float)$plano->price;
-        $payment->description = '';
-        $payment->payment_method_id = "pix";
 
         $doc = preg_replace('/[^0-9]/', '', $request->docNumber);
 
@@ -51,24 +50,38 @@ class PaymentController extends Controller
 
         $firstBusiness = Business::first();
 
-        $payment->payer = array(
-            "email" => $request->payerEmail,
-            "first_name" => $request->payerFirstName,
-            "last_name" => $request->payerLastName,
-            "identification" => array(
-                "type" => $request->docType,
-                "number" => $doc
-            ),
-            "address" => array(
-                "zip_code" => $business->cep != "*" ? $business->cep : $firstBusiness->cep,
-                "street_name" => $business->rua != "*" ? $business->rua : $firstBusiness->rua,
-                "street_number" => $business->numero != "*" ? $business->numero : $firstBusiness->numero,
-                "neighborhood" => $business->bairro != "*" ? $business->bairro : $firstBusiness->bairro,
-                "city" => $business->cidade_id != null ? $business->cidade->nome : $firstBusiness->cidade->nome,
-                "federal_unit" => $business->cidade_id != null ? $business->cidade->uf : $firstBusiness->cidade->uf
-            )
-        );
-        $payment->save();
+        $paymentRequest = [
+            "transaction_amount" => (float)$plano->price,
+            "description" => '',
+            "payment_method_id" => "pix",
+            "payer" => [
+                "email" => $request->payerEmail,
+                "first_name" => $request->payerFirstName,
+                "last_name" => $request->payerLastName,
+                "identification" => [
+                    "type" => $request->docType,
+                    "number" => $doc
+                ],
+                "address" => [
+                    "zip_code" => $business->cep != "*" ? $business->cep : $firstBusiness->cep,
+                    "street_name" => $business->rua != "*" ? $business->rua : $firstBusiness->rua,
+                    "street_number" => $business->numero != "*" ? $business->numero : $firstBusiness->numero,
+                    "neighborhood" => $business->bairro != "*" ? $business->bairro : $firstBusiness->bairro,
+                    "city" => $business->cidade_id != null ? $business->cidade->nome : $firstBusiness->cidade->nome,
+                    "federal_unit" => $business->cidade_id != null ? $business->cidade->uf : $firstBusiness->cidade->uf
+                ]
+            ]
+        ];
+
+        try {
+            $payment = $client->create($paymentRequest);
+        } catch (MPApiException $e) {
+            $output = [
+                'success' => 0,
+                'msg' => "Ocorreu um erro no pagamento."
+            ];
+            return redirect()->back()->with('status', $output);
+        }
 
         if($payment->transaction_details){
             $data = [
@@ -160,12 +173,17 @@ class PaymentController extends Controller
     }
 
     public function consultaPix($transacao_id){
-        \MercadoPago\SDK::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
+        MercadoPagoConfig::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
         $paymentPlan = PaymentPlan::where('transacao_id', $transacao_id)
         ->first();
 
         if($paymentPlan){
-            $payStatus = \MercadoPago\Payment::find_by_id($paymentPlan->transacao_id);
+            $client = new PaymentClient();
+            try {
+                $payStatus = $client->get((int)$paymentPlan->transacao_id);
+            } catch (MPApiException $e) {
+                return response()->json($paymentPlan->status);
+            }
 
             // $payStatus->status = "approved";
 
@@ -185,14 +203,10 @@ class PaymentController extends Controller
     }
 
     public function paymentBoleto(Request $request){
-        \MercadoPago\SDK::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
-        $payment = new \MercadoPago\Payment();
+        MercadoPagoConfig::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
+        $client = new PaymentClient();
 
         $plano = Package::findOrFail($request->plano_id);
-
-        $payment->transaction_amount = number_format($plano->price, 2);
-        $payment->description = '';
-        $payment->payment_method_id = "bolbradesco";
 
         $doc = preg_replace('/[^0-9]/', '', $request->docNumber);
 
@@ -201,27 +215,38 @@ class PaymentController extends Controller
 
         $firstBusiness = Business::first();
 
-        $payment->payer = array(
-            "email" => $request->payerEmail,
-            "first_name" => $request->payerFirstName,
-            "last_name" => $request->payerLastName,
-            "identification" => array(
-                "type" => $request->docType,
-                "number" => $doc
-            ),
-            "address" => array(
-                "zip_code" => $business->cep != "*" ? $business->cep : $firstBusiness->cep,
-                "street_name" => $business->rua != "*" ? $business->rua : $firstBusiness->rua,
-                "street_number" => $business->numero != "*" ? $business->numero : $firstBusiness->numero,
-                "neighborhood" => $business->bairro != "*" ? $business->bairro : $firstBusiness->bairro,
-                "city" => $business->cidade_id != null ? $business->cidade->nome : $firstBusiness->cidade->nome,
-                "federal_unit" => $business->cidade_id != null ? $business->cidade->uf : $firstBusiness->cidade->uf
-            )
-        );
-        $payment->save();
+        $paymentRequest = [
+            "transaction_amount" => number_format($plano->price, 2),
+            "description" => '',
+            "payment_method_id" => "bolbradesco",
+            "payer" => [
+                "email" => $request->payerEmail,
+                "first_name" => $request->payerFirstName,
+                "last_name" => $request->payerLastName,
+                "identification" => [
+                    "type" => $request->docType,
+                    "number" => $doc
+                ],
+                "address" => [
+                    "zip_code" => $business->cep != "*" ? $business->cep : $firstBusiness->cep,
+                    "street_name" => $business->rua != "*" ? $business->rua : $firstBusiness->rua,
+                    "street_number" => $business->numero != "*" ? $business->numero : $firstBusiness->numero,
+                    "neighborhood" => $business->bairro != "*" ? $business->bairro : $firstBusiness->bairro,
+                    "city" => $business->cidade_id != null ? $business->cidade->nome : $firstBusiness->cidade->nome,
+                    "federal_unit" => $business->cidade_id != null ? $business->cidade->uf : $firstBusiness->cidade->uf
+                ]
+            ]
+        ];
 
-        // print_r($payment);
-        // die;
+        try {
+            $payment = $client->create($paymentRequest);
+        } catch (MPApiException $e) {
+            $output = [
+                'success' => 0,
+                'msg' => "Ocorreu um erro no pagamento."
+            ];
+            return redirect()->back()->with('status', $output);
+        }
 
         if($payment->transaction_details){
             $data = [
@@ -267,64 +292,63 @@ class PaymentController extends Controller
     }
 
     public function paymentCartao(Request $request){
-        \MercadoPago\SDK::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
-        $payment = new \MercadoPago\Payment();
+        MercadoPagoConfig::setAccessToken(getenv("MERCADOPAGO_ACCESS_TOKEN"));
+        $client = new PaymentClient();
 
         $business_id = request()->session()->get('user.business_id');
         $business = Business::findorfail($business_id);
 
         $plano = Package::findOrFail($request->plano_id);
 
-        $payment->transaction_amount = number_format($plano->price, 2);
-        $payment->token = $request->token;
-        $payment->description = 'Pagamento de plano';
-        $payment->payment_method_id = $request->paymentMethodId;
-        $payment->installments = (int)$request->installments;
-        $payment->token = $request->token;
         $doc = preg_replace('/[^0-9]/', '', $request->docNumber);
 
-        $payer = new \MercadoPago\Payer();
+        $paymentRequest = [
+            "transaction_amount" => number_format($plano->price, 2),
+            "token" => $request->token,
+            "description" => 'Pagamento de plano',
+            "payment_method_id" => $request->paymentMethodId,
+            "installments" => (int)$request->installments,
+            "payer" => [
+                "email" => $request->payerEmail,
+                "identification" => [
+                    "type" => $request->docType,
+                    "number" => $request->docNumber
+                ]
+            ]
+        ];
 
-        $payer->email = $request->payerEmail;
-        $payer->identification = array(
-            "type" => $request->docType,
-            "number" => $request->docNumber
-        );
-        $payment->payer = $payer;
-
-        $payment->save();
-
-        if($payment->error){
+        try {
+            $payment = $client->create($paymentRequest);
+        } catch (MPApiException $e) {
             $output = [
                 'success' => 0,
-                'msg' => $payment->error
+                'msg' => $e->getApiResponse()->getContent()['message'] ?? "Ocorreu um erro no pagamento."
             ];
             return redirect()->back()->with('status', $output);
-        }else{
-
-            $data = [
-                'payerFirstName' => $request->cardholderName,
-                'payerLastName' => '',
-                'payerEmail' => $request->payerEmail,
-                'docNumber' => $doc,
-                'valor' => (float)$plano->price,
-                'transacao_id' => (string)$payment->id,
-                'status' => $payment->status,
-                'forma_pagamento' => 'cartao',
-                'qr_code_base64' => '',
-                'qr_code' => '',
-                'link_boleto' => '',
-                'numero_cartao' => $request->cardNumber,
-                'package_id' => $plano->id,
-                'business_id' => $business_id
-            ];
-            PaymentPlan::create($data);
-            $output = [
-                'success' => 1,
-                'msg' => "Boleto gerado com sucesso."
-            ];
-            return redirect('/payment/finish/' . (string)$payment->id)
-            ->with('status', $output);
         }
+
+        $data = [
+            'payerFirstName' => $request->cardholderName,
+            'payerLastName' => '',
+            'payerEmail' => $request->payerEmail,
+            'docNumber' => $doc,
+            'valor' => (float)$plano->price,
+            'transacao_id' => (string)$payment->id,
+            'status' => $payment->status,
+            'forma_pagamento' => 'cartao',
+            'qr_code_base64' => '',
+            'qr_code' => '',
+            'link_boleto' => '',
+            'numero_cartao' => $request->cardNumber,
+            'package_id' => $plano->id,
+            'business_id' => $business_id
+        ];
+        PaymentPlan::create($data);
+        $output = [
+            'success' => 1,
+            'msg' => "Boleto gerado com sucesso."
+        ];
+        return redirect('/payment/finish/' . (string)$payment->id)
+        ->with('status', $output);
     }
 }

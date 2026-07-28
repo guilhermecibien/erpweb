@@ -9,8 +9,6 @@
         "Modules\\Superadmin\\Providers\\SuperadminServiceProvider"
     ],
     "aliases": {},
-    "files": [
-        "start.php"
-    ],
+    "files": [],
     "requires": []
 }
